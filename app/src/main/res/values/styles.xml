@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"  parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--<item name="android:background">@drawable/actionbar_background</item>-->
+        <item name="android:background">#FFFF00</item>
+    </style>
+
+    <!--Tab Application style-->
+    <style name="RemsmedTheme3" parent="@android:style/Theme">
+        <item name="android:tabWidgetStyle">@style/tabWidgetStyle3</item>
+    </style>
+
+    <!--Tabhost style-->
+    <style name="tabWidgetStyle3" parent="@android:style/Widget.TabWidget">
+        <item name="android:textAppearance">@style/tabWidgetTextStyle3</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:color" state_selected="false">#FFFFFF</item>
+    </style>
+
+    <!--Tab text style-->
+    <style name="tabWidgetTextStyle3"
+        parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@drawable/tab_text_selector</item>
+    </style>
+
+    <!--Color set-->
+    <color name="tab_selected">#FF0000</color>
+    <color name="tab_unselected">#FFFFFF</color>
+    <color name="text_tab_selected">#FFFFFF</color>
+    <color name="text_tab_unselected">#000000</color>
+</resources>

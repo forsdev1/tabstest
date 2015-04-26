@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="49">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:id="@+id/logoImg_id"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/logo"
+            android:layout_column="47"
+            android:layout_weight=".2"
+            android:layout_row="0"
+            android:layout_rowWeight="60"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp"
+            android:layout_alignParentRight="false"
+            android:layout_centerInParent="true" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/logoMsgImg_id"
+            android:background="@drawable/menu8_48_msg"
+            android:layout_column="48"
+            android:layout_weight="0"
+            android:layout_row="0"
+            android:src="@drawable/menu8_48_msg"
+            android:layout_alignParentLeft="false"
+            android:layout_marginLeft="50dp"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_alignParentBottom="false"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="150dp">
+
+        <include layout="@layout/patient_data_layout" android:id="@+id/patient_data_layout_id"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="APRIL 13"
+            android:id="@+id/dateTextView_id"
+            android:layout_weight="100"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="10dp" />
+    </FrameLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/prescription_list_id"
+        android:layout_weight="0" />
+
+
+</LinearLayout>

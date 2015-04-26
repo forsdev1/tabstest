@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:weightSum="1"
+    android:background="@drawable/tab_background_selector">
+    <ImageView android:id="@+id/more_imageView_id"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/tab_more_icon_selector"/>
+
+    <TextView
+        android:id="@+id/tab_more_textView"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:textSize="11sp"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tag="moreTag"
+        android:text="More"
+        android:textColor="@drawable/tab_text_selector"
+        />
+</LinearLayout>
