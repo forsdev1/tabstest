@@ -1,24 +1,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:weightSum="1"
     android:background="@drawable/tab_background_selector">
-    <ImageView android:id="@+id/journal_imageView_id"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/tab_journal_icon_selector"/>
 
-    <TextView
-        android:id="@+id/tab_journal_textView"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:textSize="11sp"
-        android:singleLine="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="journalTag"
-        android:text="Journal"
-        android:textColor="@drawable/tab_text_selector"
-        />
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView android:id="@+id/journal_imageView_id"
+            android:layout_gravity="center"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/tab_journal_icon_selector"/>
+
+        <TextView
+            android:id="@+id/tab_journal_textView"
+            android:layout_gravity="center_horizontal|bottom"
+            android:textSize="10dp"
+            android:singleLine="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="journalTag"
+            android:text="Journal"
+            android:textColor="@drawable/tab_text_selector"
+            android:layout_marginTop="50dp" />
+    </FrameLayout>
 </LinearLayout>

@@ -13,11 +13,13 @@
         <activity android:name=".JournalActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".MoreActivity" />
+        <activity android:name=".DayActivity" />
+        <activity android:name=".HistoryActivity" />
+        <activity android:name=".ListActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/RemsmedTheme3"
-            >
+            android:theme="@style/RemsmedTheme3" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

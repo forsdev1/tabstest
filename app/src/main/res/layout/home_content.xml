@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#ffffffff"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -48,18 +50,18 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="150dp">
+        android:layout_height="wrap_content">
 
         <include layout="@layout/patient_data_layout" android:id="@+id/patient_data_layout_id"
-            android:layout_height="fill_parent"
+            android:layout_height="145dp"
             android:layout_width="fill_parent" />
     </FrameLayout>
 
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0">
+        android:layout_weight="0"
+        android:background="#fff5f5f5">
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,7 +77,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/prescription_list_id"
-        android:layout_weight="0" />
+        android:layout_weight="0"
+        android:background="#ffffffff" />
 
 
 </LinearLayout>
