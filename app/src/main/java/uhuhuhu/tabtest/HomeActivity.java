@@ -33,37 +33,18 @@ public class HomeActivity extends Activity {
             this.message = message;
         }
 
-        public int getImgResource() {
-            return imgResource;
-        }
-
-        public void setImgResource(int imgResource) {
-            this.imgResource = imgResource;
-        }
-
         public String getTime() {
             return time;
-        }
-
-        public void setTime(String time) {
-            this.time = time;
         }
 
         public String getDescription() {
             return description;
         }
 
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
         public String getMessage() {
             return message;
         }
 
-        public void setMessage(String message) {
-            this.message = message;
-        }
     }
 
     private class PrescriptionsAdapter extends ArrayAdapter<PrescriptionListItem> {
@@ -90,7 +71,7 @@ public class HomeActivity extends Activity {
 
             holder.getImage().setImageResource(prescriptionListItems.get(position).imgResource);
             holder.getTimeText().setText(prescriptionListItems.get(position).getTime());
-            holder.getDefinitionText().setText(prescriptionListItems.get(position).getDescription());
+            holder.getDescriptionText().setText(prescriptionListItems.get(position).getDescription());
             holder.getMsgText().setText(prescriptionListItems.get(position).getMessage());
 
             return convertView;
@@ -119,9 +100,9 @@ public class HomeActivity extends Activity {
                 return this.timeText;
             }
 
-            public TextView getDefinitionText() {
+            public TextView getDescriptionText() {
                 if (this.descText == null) {
-                    this.descText = (TextView) row.findViewById(R.id.presc_spec_id);
+                    this.descText = (TextView) row.findViewById(R.id.presc_desc_id);
                 }
                 return this.descText;
             }
@@ -143,7 +124,6 @@ public class HomeActivity extends Activity {
         setDate("APRIL <b>13</b>");
 
         listView = (ListView) findViewById(R.id.prescription_list_id);
-        //listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_2, prescriptionList);
         listAdapter = new PrescriptionsAdapter();
         listView.setAdapter(listAdapter);
         addPrescription("10:30", "You missed prescription:", "Measurable Pressure", R.drawable.alert_icon1_48);

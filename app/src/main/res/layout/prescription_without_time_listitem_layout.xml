@@ -5,32 +5,16 @@
     android:id="@+id/presc_listitem_layout_id">
 
     <FrameLayout
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:id="@+id/frameLayout4">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/presc_icon_id"
-            android:layout_below="@+id/presc_time_id"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
-    <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
+        android:layout_height="30dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/frameLayout4"
-        android:layout_toEndOf="@+id/frameLayout4">
+        android:id="@+id/presc_wt_layout_id">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Msg time"
-            android:id="@+id/presc_time_id"
+            android:id="@+id/presc_wt_activity_id"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/presc_icon_id"
             android:layout_toEndOf="@+id/presc_icon_id"
@@ -42,23 +26,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Msg description"
-            android:id="@+id/presc_desc_id"
+            android:id="@+id/presc_wt_condition_id"
             android:layout_below="@+id/presc_msg_id"
             android:layout_toRightOf="@+id/presc_icon_id"
             android:layout_toEndOf="@+id/presc_icon_id"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="center_horizontal|bottom"
             android:textColor="#ff000000" />
 
-        <TextView
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/presc_wt_fl_id">
+
+        <Switch
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Message"
-            android:id="@+id/presc_msg_id"
-            android:layout_alignTop="@+id/presc_icon_id"
-            android:layout_toRightOf="@+id/presc_icon_id"
-            android:layout_toEndOf="@+id/presc_icon_id"
-            android:layout_gravity="left|bottom"
-            android:textStyle="bold|italic"
-            android:textColor="#ff000000" />
+            android:id="@+id/presc_wt_switch_id"
+            android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:checked="false" />
     </FrameLayout>
+
 </RelativeLayout>

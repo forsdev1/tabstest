@@ -68,46 +68,40 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="#FFF5F5F5">
+        android:layout_height="fill_parent"
+        android:id="@+id/presc_activity_container_id">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/prescription_datetext_id"
-            android:layout_gravity="center"
-            android:text="Date"
-            android:textColor="#ff000000" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/prl_id_1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="&lt;"
-            android:id="@+id/textView2"
-            android:layout_gravity="left|center_vertical"
-            android:clickable="true"
-            android:textSize="30dp"
-            android:layout_marginLeft="10dp" />
+            <include layout="@layout/presc_daily_layout" android:id="@+id/presc_daily_layout_id"
+                android:layout_height="145dp"
+                android:layout_width="fill_parent" />
+        </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text=">"
-            android:id="@+id/textView3"
-            android:layout_gravity="right|center_vertical"
-            android:textSize="30dp"
-            android:layout_marginRight="10dp" />
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/prl_id_2">
+
+            <include layout="@layout/presc_list_layout" android:id="@+id/presc_list_layout_id"
+                android:layout_height="145dp"
+                android:layout_width="fill_parent"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/prl_id_3">
+
+            <include layout="@layout/presc_history_layout" android:id="@+id/presc_history_layout_id"
+                android:layout_height="145dp"
+                android:layout_width="fill_parent" />
+        </RelativeLayout>
+
     </FrameLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-        <include layout="@layout/presc_data_layout" android:id="@+id/presc_data_layout_id"
-            android:layout_height="145dp"
-            android:layout_width="fill_parent" />
-        </LinearLayout>
 
 </LinearLayout>

@@ -29,8 +29,8 @@
             android:layout_centerInParent="true" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:id="@+id/logoMsgImg_id"
             android:background="@drawable/menu8_48_msg"
             android:layout_column="48"
@@ -70,7 +70,8 @@
             android:id="@+id/dateTextView_id"
             android:layout_weight="100"
             android:layout_gravity="left|center"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:textColor="#ff000000" />
     </FrameLayout>
 
     <ListView

@@ -74,11 +74,12 @@
                 android:layout_alignParentTop="false"
                 android:layout_alignParentRight="false"
                 android:layout_centerVertical="true"
-                android:layout_gravity="bottom|center" />
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="10dp" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="27dp"
+                android:layout_height="27dp"
                 android:id="@+id/h_img_id"
                 android:background="@drawable/h_index_48"
                 android:layout_gravity="left|top"
@@ -98,7 +99,8 @@
                 android:layout_marginRight="15dp"
                 android:textColor="#ffffffff"
                 android:layout_marginLeft="5dp"
-                android:layout_gravity="right|top" />
+                android:layout_gravity="right|top"
+                android:layout_marginTop="-4dp" />
 
         </FrameLayout>
 

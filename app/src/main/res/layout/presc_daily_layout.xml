@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#FFF5F5F5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/prescription_datetext_id"
+            android:layout_gravity="center"
+            android:text="Date"
+            android:textColor="#ff000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="&lt;"
+            android:id="@+id/textView2"
+            android:layout_gravity="left|center_vertical"
+            android:clickable="true"
+            android:textSize="30dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="doLeftClick"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=">"
+            android:id="@+id/textView3"
+            android:layout_gravity="right|center_vertical"
+            android:textSize="30dp"
+            android:layout_marginRight="10dp"
+            android:onClick="doRightClick"/>
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView2" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/presc_listview" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Prescriptions without time"
+                    android:id="@+id/textView4"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/presc_listView_withouttime_id" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
