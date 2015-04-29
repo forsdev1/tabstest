@@ -6,11 +6,20 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/presc_wt_layout_id"
-        android:layout_toLeftOf="@+id/presc_wt_fl_id"
-        android:layout_toStartOf="@+id/presc_wt_fl_id">
+        android:id="@+id/presc_t_layout_id">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Msg description"
+            android:id="@+id/presc_t_activity_id"
+            android:layout_below="@+id/presc_msg_id"
+            android:layout_toRightOf="@+id/presc_icon_id"
+            android:layout_toEndOf="@+id/presc_icon_id"
+            android:layout_gravity="center"
+            android:textColor="#ff000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,38 +30,9 @@
             android:layout_toRightOf="@+id/presc_icon_id"
             android:layout_toEndOf="@+id/presc_icon_id"
             android:textStyle="bold"
-            android:layout_gravity="left|top"
+            android:layout_gravity="left|center_vertical"
             android:textColor="#ff161616" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Msg description"
-            android:id="@+id/presc_t_activity_id"
-            android:layout_below="@+id/presc_msg_id"
-            android:layout_toRightOf="@+id/presc_icon_id"
-            android:layout_toEndOf="@+id/presc_icon_id"
-            android:layout_gravity="center_horizontal|top"
-            android:textColor="#ff000000" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/presc_wt_fl_id">
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/presc_t_switch_id"
-            android:layout_gravity="center"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:checked="false" />
     </FrameLayout>
 
 </RelativeLayout>

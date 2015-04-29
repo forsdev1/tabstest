@@ -32,6 +32,9 @@
     </style>
 
     <!--Color set-->
+    <color name="darkred">#ffb30400</color>
+    <color name="green">#ff04c600</color>
+    <color name="lightblue">#ffefffff</color>
     <color name="red">#FF0000</color>
     <color name="white">#FFFFFF</color>
     <color name="tab_selected">#FF0000</color>

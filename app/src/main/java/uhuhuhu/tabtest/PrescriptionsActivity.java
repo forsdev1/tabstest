@@ -1,19 +1,29 @@
 package uhuhuhu.tabtest;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.kyleduo.switchbutton.Configuration;
+import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.ArrayList;
 
@@ -27,18 +37,22 @@ public class PrescriptionsActivity extends ActionBarActivity {
     private RelativeLayout Layout2 = null;
     private RelativeLayout Layout3 = null;
 
-    private PrescriptionTimedAdapter prescTimeApapter;
-    private PrescriptionNoTimeAdapter prescNoTimeApapter;
+    private LinearLayout dayViewPrescription1 = null;
+    private LinearLayout dayViewPrescription2 = null;
+    private LinearLayout listViewPrescription1 = null;
+    private LinearLayout listViewPrescription2 = null;
 
-    ArrayList<TimedPrescriptionListItem> timedPrescriptionList = new ArrayList<>();
-    ArrayList<NoTimePrescriptionListItem> noTimePrescriptionList = new ArrayList<>();
+    private ArrayList<PrescriptionsWithTime> pwtList = new ArrayList<>();
+    private ArrayList<PrescriptionsWithoutTime> pwotList = new ArrayList<>();
+    private ArrayList<PListWithTime> listpwtList = new ArrayList<>();
+    private ArrayList<PListWithoutTime> listpwotList = new ArrayList<>();
 
-    private class TimedPrescriptionListItem {
-        public String time;
-        public String prescription;
-        public boolean enabled;
+    private class PrescriptionsWithTime {
+        private String time;
+        private String prescription;
+        private boolean enabled;
 
-        public TimedPrescriptionListItem(String time, String prescription, boolean enabled) {
+        private PrescriptionsWithTime(String time, String prescription, boolean enabled) {
             this.time = time;
             this.prescription = prescription;
             this.enabled = enabled;
@@ -48,22 +62,42 @@ public class PrescriptionsActivity extends ActionBarActivity {
             return time;
         }
 
+        public void setTime(String time) {
+            this.time = time;
+        }
+
         public String getPrescription() {
             return prescription;
+        }
+
+        public void setPrescription(String prescription) {
+            this.prescription = prescription;
         }
 
         public boolean isEnabled() {
             return enabled;
         }
-    }
-    private class NoTimePrescriptionListItem {
-        public String condition;
-        public String prescription;
-        public boolean enabled;
 
-        public NoTimePrescriptionListItem(String condition, String prescription, boolean enabled) {
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+    }
+    private class PrescriptionsWithoutTime {
+        private String activity;
+        private String condition;
+        private boolean enabled;
+
+        private PrescriptionsWithoutTime(String activity, String condition, boolean enabled) {
+            this.activity = activity;
             this.condition = condition;
-            this.prescription = prescription;
+            this.enabled = enabled;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
             this.enabled = enabled;
         }
 
@@ -71,137 +105,99 @@ public class PrescriptionsActivity extends ActionBarActivity {
             return condition;
         }
 
-        public String getPrescription() {
-            return prescription;
+        public void setCondition(String condition) {
+            this.condition = condition;
         }
 
-        public boolean isEnabled() {
-            return enabled;
-        }
-    }
-
-
-
-
-
-    private class PrescriptionTimedAdapter extends ArrayAdapter<TimedPrescriptionListItem>{
-        ArrayList<TimedPrescriptionListItem> timedPrescriptionAdapterList = null;
-
-        public PrescriptionTimedAdapter() {
-            super(PrescriptionsActivity.this, R.layout.prescription_timed_listitem_layout, timedPrescriptionList);
-            timedPrescriptionAdapterList = timedPrescriptionList;
+        public String getActivity() {
+            return activity;
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            TimedViewHolder holder;
-            LayoutInflater inflater = getLayoutInflater();
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.prescription_timed_listitem_layout, null, false);
-                holder = new TimedViewHolder(convertView);
-                convertView.setTag(holder);
-            }
-            else {
-                holder = (TimedViewHolder) convertView.getTag();
-            }
-
-            holder.getTimeText().setText(timedPrescriptionAdapterList.get(position).getTime());
-            holder.getDescriptionText().setText(timedPrescriptionAdapterList.get(position).getPrescription());
-            holder.getEnabled().setPressed(timedPrescriptionAdapterList.get(position).isEnabled());
-
-            return convertView;
-        }
-        public class TimedViewHolder {
-            private View row;
-            private TextView timeText = null, descText = null;
-            private Switch enabled = null;
-
-            public TimedViewHolder(View row) {
-                this.row = row;
-            }
-
-            public TextView getTimeText() {
-                if (this.timeText == null) {
-                    this.timeText = (TextView) row.findViewById(R.id.presc_t_time_id);
-                }
-                return this.timeText;
-            }
-
-            public TextView getDescriptionText() {
-                if (this.descText == null) {
-                    this.descText = (TextView) row.findViewById(R.id.presc_t_activity_id);
-                }
-                return this.descText;
-            }
-
-            public Switch getEnabled() {
-                if (this.enabled == null) {
-                    this.enabled = (Switch) row.findViewById(R.id.presc_t_switch_id);
-                }
-                return this.enabled;
-            }
-        }
-    }
-    private class PrescriptionNoTimeAdapter extends ArrayAdapter<NoTimePrescriptionListItem>{
-        ArrayList<NoTimePrescriptionListItem> noTimePrescriptionListAdapter = null;
-
-        public PrescriptionNoTimeAdapter() {
-            super(PrescriptionsActivity.this, R.layout.prescription_without_time_listitem_layout, noTimePrescriptionList);
-            noTimePrescriptionListAdapter = noTimePrescriptionList;
-        }
-
-        @Override
-         public View getView(int position, View convertView, ViewGroup parent) {
-            NoTimeViewHolder holder;
-            LayoutInflater inflater = getLayoutInflater();
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.prescription_without_time_listitem_layout, null, false);
-                holder = new NoTimeViewHolder(convertView);
-                convertView.setTag(holder);
-            }
-            else {
-                holder = (NoTimeViewHolder) convertView.getTag();
-            }
-
-            holder.getActivityText().setText(noTimePrescriptionListAdapter.get(position).getPrescription());
-            holder.getConditionText().setText(noTimePrescriptionListAdapter.get(position).getCondition());
-            holder.getEnabled().setPressed(noTimePrescriptionListAdapter.get(position).isEnabled());
-
-            return convertView;
-        }
-        public class NoTimeViewHolder {
-            private View row;
-            private TextView activityText = null, conditionText = null;
-            private Switch enabled = null;
-
-            public NoTimeViewHolder(View row) {
-                this.row = row;
-            }
-
-            public TextView getActivityText() {
-                if (this.activityText == null) {
-                    this.activityText = (TextView) row.findViewById(R.id.presc_wt_activity_id);
-                }
-                return this.activityText;
-            }
-
-            public TextView getConditionText() {
-                if (this.conditionText == null) {
-                    this.conditionText = (TextView) row.findViewById(R.id.presc_wt_condition_id);
-                }
-                return this.conditionText;
-            }
-
-            public Switch getEnabled() {
-                if (this.enabled == null) {
-                    this.enabled = (Switch) row.findViewById(R.id.presc_wt_switch_id);
-                }
-                return this.enabled;
-            }
+        public void setActivity(String activity) {
+            this.activity = activity;
         }
     }
 
+    private class PListWithTime {
+        private String timeStart;
+        private String timeEnd;
+        private String description;
+        private int progress;
 
+        private PListWithTime(String timeStart, String timeEnd, String description, int progress) {
+            this.timeStart = timeStart;
+            this.timeEnd = timeEnd;
+            this.description = description;
+            this.progress = progress;
+        }
+
+        public String getTimeStart() {
+            return timeStart;
+        }
+
+        public void setTimeStart(String timeStart) {
+            this.timeStart = timeStart;
+        }
+
+        public String getTimeEnd() {
+            return timeEnd;
+        }
+
+        public void setTimeEnd(String timeEnd) {
+            this.timeEnd = timeEnd;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public int getProgress() {
+            return progress;
+        }
+
+        public void setProgress(int progress) {
+            this.progress = progress;
+        }
+    }
+    private class PListWithoutTime {
+        private String activity;
+        private String condition;
+        private int progress;
+
+        private PListWithoutTime(String activity, String condition, int progress) {
+            this.activity = activity;
+            this.condition = condition;
+            this.progress = progress;
+        }
+
+        public String getActivity() {
+            return activity;
+        }
+
+        public void setActivity(String activity) {
+            this.activity = activity;
+        }
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public void setCondition(String condition) {
+            this.condition = condition;
+        }
+
+        public int getProgress() {
+            return progress;
+        }
+
+        public void setProgress(int progress) {
+            this.progress = progress;
+        }
+    }
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -213,7 +209,6 @@ public class PrescriptionsActivity extends ActionBarActivity {
         Layout1 = (RelativeLayout)findViewById(R.id.prl_id_1);
         Layout2 = (RelativeLayout)findViewById(R.id.prl_id_2);
         Layout3 = (RelativeLayout)findViewById(R.id.prl_id_3);
-
         Layout1.setVisibility(View.VISIBLE);
         Layout2.setVisibility(View.GONE);
         Layout3.setVisibility(View.GONE);
@@ -222,130 +217,234 @@ public class PrescriptionsActivity extends ActionBarActivity {
         listButton = (Button) findViewById(R.id.button_list_id);
         historyButton = (Button) findViewById(R.id.button_history_id);
 
+        dailyButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v)
+            {
+                Layout1.setVisibility(View.VISIBLE);
+                Layout2.setVisibility(View.GONE);
+                Layout3.setVisibility(View.GONE);
+                v.setPressed(true);
+            }
+        });
+        listButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v)
+            {
+                Layout1.setVisibility(View.GONE);
+                Layout2.setVisibility(View.VISIBLE);
+                Layout3.setVisibility(View.GONE);
+                v.setPressed(true);
+            }
+        });
+        historyButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v)
+            {
+                Layout1.setVisibility(View.GONE);
+                Layout2.setVisibility(View.GONE);
+                Layout3.setVisibility(View.VISIBLE);
+                v.setPressed(true);
+            }
+        });
 
-        //Set button listeners
-        {
-            dailyButton.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    dailyButton.setPressed(true);
-                    listButton.setPressed(false);
-                    historyButton.setPressed(false);
+        dailyButton.setPressed(true);
+        listButton.setPressed(false);
+        historyButton.setPressed(false);
+        Layout1.setVisibility(View.VISIBLE);
+        Layout2.setVisibility(View.GONE);
+        Layout3.setVisibility(View.GONE);
 
-                    v.performClick();
-                    return true;
-                }
-            });
-            dailyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Layout1.setVisibility(View.VISIBLE);
-                    Layout2.setVisibility(View.GONE);
-                    Layout3.setVisibility(View.GONE);
-                    setDailyLayout();
-                }
-            });
+        ScrollView sv = (ScrollView)findViewById(R.id.scrollView_daily_id);
+        sv.setVerticalScrollBarEnabled(false);
+        sv = (ScrollView)findViewById(R.id.scrollView_list_id);
+        sv.setVerticalScrollBarEnabled(false);
+
+        dayViewPrescription1 = (LinearLayout) findViewById(R.id.presc_t_list_id);
+        dayViewPrescription2 = (LinearLayout) findViewById(R.id.presc_wt_list_id);
+
+        listViewPrescription1 = (LinearLayout) findViewById(R.id.list_t_list_id);
+        listViewPrescription2 = (LinearLayout) findViewById(R.id.list_wt_list_id);
+
+        loadTestDayData();
+        loadTestListData();
+        loadTestHistoryData();
+
+    }
+
+    public void dayPressed(View view) {
+        Layout1.setVisibility(View.VISIBLE);
+        Layout2.setVisibility(View.GONE);
+        Layout3.setVisibility(View.GONE);
+        //view.setPressed(true);
+        view.setSelected(true);
+        listButton.setSelected(false);
+        historyButton.setSelected(false);
+    }
+    public void listPressed(View view) {
+        Layout1.setVisibility(View.GONE);
+        Layout2.setVisibility(View.VISIBLE);
+        Layout3.setVisibility(View.GONE);
+        dailyButton.setSelected(false);
+        view.setPressed(true);
+        view.setSelected(true);
+        historyButton.setSelected(false);
+    }
+    public void historyPressed(View view) {
+        Layout1.setVisibility(View.GONE);
+        Layout2.setVisibility(View.GONE);
+        Layout3.setVisibility(View.VISIBLE);
+        dailyButton.setSelected(false);
+        listButton.setSelected(false);
+        view.setPressed(true);
+        view.setSelected(true);
+    }
+
+    public void loadTestDayData(){
+        addPrescriptionTimedDay("10:30", "Morning walk", true);
+        addPrescriptionTimedDay("10:31", "Blood preasure measurement", false);
+        addPrescriptionTimedDay("10:33", "Some other activity", true);
+        addPrescriptionTimedDay("10:30", "Morning walk", true);
+        addPrescriptionTimedDay("10:31", "Blood preasure measurement", false);
+        addPrescriptionTimedDay("10:33", "Some other activity", true);
+        addPrescriptionTimedDay("10:30", "Morning walk", true);
+        addPrescriptionTimedDay("10:31", "Blood preasure measurement", false);
+        addPrescriptionTimedDay("10:33", "Some other activity", true);
+
+        addPrescriptionConditionedDay("Cycling", "Depends on weather", false);
+        addPrescriptionConditionedDay("Walking", "If it's sunny", true);
+        addPrescriptionConditionedDay("lolling", "-------", true);
+        addPrescriptionConditionedDay("Cycling", "Depends on weather", false);
+        addPrescriptionConditionedDay("Walking", "If it's sunny", true);
+        addPrescriptionConditionedDay("lolling", "-------", true);
+        addPrescriptionConditionedDay("Cycling", "Depends on weather", false);
+        addPrescriptionConditionedDay("Walking", "If it's sunny", true);
+        addPrescriptionConditionedDay("lolling", "-------", true);
+
+        showPrescriptionsDayTime();
+        showPrescriptionsDayConditioned();
+    }
+    public void loadTestListData() {
+        addPrescriptionTimedList("10:30", "12:30", "Morning walk", 40);
+        addPrescriptionTimedList("11:30", "16:30", "Blood pressure measurement", 67);
+        addPrescriptionTimedList("15:30", "19:30", "Enalapril 5mg", 80);
+        addPrescriptionTimedList("10:30", "12:30", "Morning walk", 40);
+        addPrescriptionTimedList("11:30", "16:30", "Blood pressure measurement", 67);
+        addPrescriptionTimedList("15:30", "19:30", "Enalapril 5mg", 80);
+
+        addPrescriptionConditionedList("Cycling", "Depending on weather", 100);
+        addPrescriptionConditionedList("Ketorol", "In case of pain", 40);
+        addPrescriptionConditionedList("Cycling", "Depending on weather", 100);
+        addPrescriptionConditionedList("Ketorol", "In case of pain", 40);
+        addPrescriptionConditionedList("Cycling", "Depending on weather", 100);
+        addPrescriptionConditionedList("Ketorol", "In case of pain", 40);
+
+        showPrescriptionsListTime();
+        showPrescriptionsListConditioned();
+    }
+    public void loadTestHistoryData() {}
 
 
-            listButton.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    dailyButton.setPressed(false);
-                    listButton.setPressed(true);
-                    historyButton.setPressed(false);
+    public void showPrescriptionsDayTime(){
+        for(int i = 0; i < pwtList.size(); ++i){
+            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_timed_listitem_layout, null);
+            TextView t_time = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_time_id);
+            TextView t_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_activity_id);
+            FrameLayout t_fl = (FrameLayout)prescriptionListLayout.findViewById(R.id.presc_t_layout_id);
 
-                    v.performClick();
-                    return true;
-                }
-            });
-            listButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Layout1.setVisibility(View.GONE);
-                    Layout2.setVisibility(View.VISIBLE);
-                    Layout3.setVisibility(View.GONE);
-                    setListLayout();
-                }
-            });
+            Configuration conf = Configuration.getDefault(3);
+            conf.setOnColor(getResources().getColor(R.color.green));
+            conf.setOffColor(getResources().getColor(R.color.darkred));
+            SwitchButton sb = new SwitchButton(t_fl.getContext());
+            sb.setConfiguration(conf);
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams( FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT );
+            lp.gravity = Gravity.CENTER | Gravity.RIGHT;
+            sb.setLayoutParams(lp);
 
+            sb.setChecked(pwtList.get(i).isEnabled());
+            t_time.setText(pwtList.get(i).getTime());
+            t_activity.setText(pwtList.get(i).getPrescription());
+            t_fl.addView(sb);
 
-            historyButton.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    dailyButton.setPressed(false);
-                    listButton.setPressed(false);
-                    historyButton.setPressed(true);
+            if((i % 2) != 0) prescriptionListLayout.setBackgroundColor(getResources().getColor(R.color.lightblue));
 
-                    v.performClick();
-                    return true;
-                }
-            });
-            historyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Layout1.setVisibility(View.GONE);
-                    Layout2.setVisibility(View.GONE);
-                    Layout3.setVisibility(View.VISIBLE);
-                    setHistoryLayout();
-                }
-            });
+            dayViewPrescription1.addView(prescriptionListLayout);
         }
+    }
+    public void showPrescriptionsDayConditioned(){
+        for(int i = 0; i < pwotList.size(); ++i){
+            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_without_time_listitem_layout, null);
+            TextView wt_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_wt_activity_id);
+            TextView wt_condition = (TextView)prescriptionListLayout.findViewById(R.id.presc_wt_condition_id);
+            FrameLayout t_fl = (FrameLayout)prescriptionListLayout.findViewById(R.id.presc_wt_layout_id);
 
-        ListView listView1 = (ListView) findViewById(R.id.presc_listview);
-        ListView listView2 = (ListView) findViewById(R.id.presc_listView_withouttime_id);
+            Configuration conf = Configuration.getDefault(3);
+            conf.setOnColor(getResources().getColor(R.color.green));
+            conf.setOffColor(getResources().getColor(R.color.darkred));
+            SwitchButton sb = new SwitchButton(t_fl.getContext());
+            sb.setConfiguration(conf);
+            FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams( FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT );
+            lp.gravity = Gravity.CENTER | Gravity.RIGHT;
+            sb.setLayoutParams(lp);
 
-        prescTimeApapter = new PrescriptionTimedAdapter();
-        prescNoTimeApapter = new PrescriptionNoTimeAdapter();
+            sb.setChecked(pwotList.get(i).isEnabled());
+            wt_activity.setText(pwotList.get(i).getActivity());
+            wt_condition.setText(pwotList.get(i).getCondition());
+            t_fl.addView(sb);
 
-        listView1.setAdapter(prescTimeApapter);
-        listView2.setAdapter(prescNoTimeApapter);
+            if((i % 2) != 0) prescriptionListLayout.setBackgroundColor(getResources().getColor(R.color.lightblue));
 
-        addPrescriptionTimed("10:30", "Morning walk", true);
-        addPrescriptionTimed("10:31", "Blood preasure measurement", false);
-        addPrescriptionTimed("10:33", "You missed prescription2:", true);
-
-        addPrescriptionConditioned("Cycling", "Depends on weather", false);
-        addPrescriptionConditioned("Walking", "If it's sunny", true);
-        addPrescriptionConditioned("lolling", "-------", true);
-
-        showDefaultConent();
-
-
+            dayViewPrescription2.addView(prescriptionListLayout);
+        }
+    }
+    public void addPrescriptionTimedDay(String time, String prescription, boolean state) {
+        pwtList.add(new PrescriptionsWithTime(time, prescription, state));
+    }
+    public void addPrescriptionConditionedDay(String activity, String condition, boolean state) {
+        pwotList.add(new PrescriptionsWithoutTime(activity, condition, state));
     }
 
-    public void addPrescriptionTimed(String time, String prescription, boolean state) {
-        timedPrescriptionList.add(new TimedPrescriptionListItem(time, prescription, state));
-        prescTimeApapter.notifyDataSetChanged();
+    public void showPrescriptionsListTime(){
+        for(int i = 0; i < listpwtList.size(); ++i){
+            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            TextView t_time = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_time);
+            TextView t_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_activity_id);
+            ProgressBar l_progressBar = (ProgressBar)prescriptionListLayout.findViewById(R.id.list_progressBar_id);
+
+
+            l_progressBar.setProgress(listpwtList.get(i).getProgress());
+            t_time.setText(listpwtList.get(i).getTimeStart() + ", " + listpwtList.get(i).getTimeEnd());
+            t_activity.setText(listpwtList.get(i).getDescription());
+
+            if((i % 2) != 0) prescriptionListLayout.setBackgroundColor(getResources().getColor(R.color.lightblue));
+
+            listViewPrescription1.addView(prescriptionListLayout);
+        }
     }
-    public void addPrescriptionConditioned(String condition, String prescription, boolean state) {
-        noTimePrescriptionList.add(new NoTimePrescriptionListItem(condition, prescription, state));
-        prescNoTimeApapter.notifyDataSetChanged();
+    public void showPrescriptionsListConditioned(){
+        for(int i = 0; i < listpwotList.size(); ++i){
+            View withoutTimePrescriptionList = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            TextView activity = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_activity_id);
+            TextView condition = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_time);
+            ProgressBar l_progressBar = (ProgressBar)withoutTimePrescriptionList.findViewById(R.id.list_progressBar_id);
+
+
+            l_progressBar.setProgress(listpwotList.get(i).getProgress());
+            activity.setText(listpwotList.get(i).getActivity());
+            condition.setText(listpwotList.get(i).getCondition());
+
+            if((i % 2) != 0) withoutTimePrescriptionList.setBackgroundColor(getResources().getColor(R.color.lightblue));
+
+            listViewPrescription2.addView(withoutTimePrescriptionList);
+        }
+    }
+    public void addPrescriptionTimedList(final String timeStart, final String timeEnd, final String prescription, int progress) {
+        listpwtList.add(new PListWithTime(timeStart, timeEnd, prescription, progress));
+    }
+    public void addPrescriptionConditionedList(String activity, String condition, int progress) {
+        listpwotList.add(new PListWithoutTime(activity, condition, progress));
     }
 
-    public void showDefaultConent(){
+    public void showDefaultContent(){
         dailyButton.setPressed(true);
         dailyButton.performClick();
-    }
-
-    public void setDailyLayout() {
-        ViewGroup inclusionViewGroup = (ViewGroup)findViewById(R.id.presc_activity_container_id);
-        View child1 = LayoutInflater.from(this).inflate(
-                R.layout.presc_daily_layout, null);
-        inclusionViewGroup.addView(child1);
-    }
-
-    public void setListLayout() {
-        ViewGroup inclusionViewGroup = (ViewGroup)findViewById(R.id.presc_activity_container_id);
-        View child1 = LayoutInflater.from(this).inflate(
-                R.layout.presc_list_layout, null);
-        inclusionViewGroup.addView(child1);
-    }
-
-    public void setHistoryLayout() {
-        ViewGroup inclusionViewGroup = (ViewGroup)findViewById(R.id.presc_activity_container_id);
-        View child1 = LayoutInflater.from(this).inflate(
-                R.layout.presc_history_layout, null);
-        inclusionViewGroup.addView(child1);
     }
 
     public void doLeftClick(View view) {

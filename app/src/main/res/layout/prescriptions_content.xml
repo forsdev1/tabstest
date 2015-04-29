@@ -76,9 +76,11 @@
             android:layout_height="fill_parent"
             android:id="@+id/prl_id_1">
 
-            <include layout="@layout/presc_daily_layout" android:id="@+id/presc_daily_layout_id"
-                android:layout_height="145dp"
-                android:layout_width="fill_parent" />
+            <include layout="@layout/presc_day_layout" android:id="@+id/presc_daily_layout_id"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -87,8 +89,10 @@
             android:id="@+id/prl_id_2">
 
             <include layout="@layout/presc_list_layout" android:id="@+id/presc_list_layout_id"
-                android:layout_height="145dp"
-                android:layout_width="fill_parent"/>
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -97,8 +101,8 @@
             android:id="@+id/prl_id_3">
 
             <include layout="@layout/presc_history_layout" android:id="@+id/presc_history_layout_id"
-                android:layout_height="145dp"
-                android:layout_width="fill_parent" />
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent" />
         </RelativeLayout>
 
     </FrameLayout>

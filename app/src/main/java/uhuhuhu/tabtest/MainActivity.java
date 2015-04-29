@@ -17,12 +17,14 @@ public class MainActivity extends TabActivity {
         setContentView(R.layout.activity_home);
 
         TabHost tabHost = getTabHost();
+        tabHost.getTabWidget().setStripEnabled(true);
         addTab(tabHost, "Home", R.layout.home_tab, HomeActivity.class);
         addTab(tabHost, "Prescriptions", R.layout.prescriptions_tab, PrescriptionsActivity.class);
         addTab(tabHost, "Measurements", R.layout.measurements_tab, MeasurementsActivity.class);
         addTab(tabHost, "Journal", R.layout.journal_tab, JournalActivity.class);
         addTab(tabHost, "Feedback", R.layout.feedback_tab, FeedbackActivity.class);
         addTab(tabHost, "More", R.layout.more_tab, MoreActivity.class);
+
     }
 
     private void addTab(final TabHost tabHost,

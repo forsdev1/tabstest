@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/presc_listitem_layout_id">
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="45dp"
         android:layout_alignParentTop="true"
-        android:id="@+id/presc_wt_layout_id">
+        android:id="@+id/presc_wt_layout_id"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,27 +35,10 @@
             android:layout_below="@+id/presc_msg_id"
             android:layout_toRightOf="@+id/presc_icon_id"
             android:layout_toEndOf="@+id/presc_icon_id"
-            android:layout_gravity="center_horizontal|bottom"
-            android:textColor="#ff000000" />
+            android:layout_gravity="left|bottom"
+            android:textColor="#ff000000"
+            android:textSize="12dp" />
 
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/presc_wt_fl_id">
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/presc_wt_switch_id"
-            android:layout_gravity="center"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:checked="false" />
     </FrameLayout>
 
 </RelativeLayout>
