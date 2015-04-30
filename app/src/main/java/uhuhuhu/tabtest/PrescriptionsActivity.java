@@ -4,6 +4,8 @@ import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -36,10 +38,12 @@ public class PrescriptionsActivity extends ActionBarActivity {
     private Button dailyButton = null;
     private Button listButton = null;
     private Button historyButton = null;
+    private Button addButton = null;
 
     private RelativeLayout Layout1 = null;
     private RelativeLayout Layout2 = null;
     private RelativeLayout Layout3 = null;
+
 
     private LinearLayout dayViewPrescription1 = null;
     private LinearLayout dayViewPrescription2 = null;
@@ -225,6 +229,8 @@ public class PrescriptionsActivity extends ActionBarActivity {
         dailyButton = (Button) findViewById(R.id.button_daily_id);
         listButton = (Button) findViewById(R.id.button_list_id);
         historyButton = (Button) findViewById(R.id.button_history_id);
+        addButton = (Button) findViewById(R.id.presc_add_button);
+        addButton.setVisibility(View.GONE);
 
         setupDayLayout();
         setupListLayout();
@@ -242,6 +248,8 @@ public class PrescriptionsActivity extends ActionBarActivity {
             Layout1.setVisibility(View.VISIBLE);
             Layout2.setVisibility(View.GONE);
             Layout3.setVisibility(View.GONE);
+
+            addButton.setVisibility(View.GONE);
             return true;
         }
     });
@@ -269,6 +277,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
                 Layout1.setVisibility(View.GONE);
                 Layout2.setVisibility(View.VISIBLE);
                 Layout3.setVisibility(View.GONE);
+                addButton.setVisibility(View.VISIBLE);
                 return true;
             }
         });
@@ -295,6 +304,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
                 Layout1.setVisibility(View.GONE);
                 Layout2.setVisibility(View.GONE);
                 Layout3.setVisibility(View.VISIBLE);
+                addButton.setVisibility(View.GONE);
                 return true;
             }
         });
@@ -440,6 +450,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
         pwotList.add(new PrescriptionsWithoutTime(activity, condition, state));
     }
 
+    public final float[] roundedCorners = new float[] { 10, 10, 10, 10, 10, 10, 10, 10 };
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showPrescriptionsListTime(){
         for(int i = 0; i < listpwtList.size(); ++i){
@@ -449,9 +460,11 @@ public class PrescriptionsActivity extends ActionBarActivity {
             ProgressBar l_progressBar = (ProgressBar)prescriptionListLayout.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwtList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
+            //ShapeDrawable pgDrawable = new ShapeDrawable(new RoundRectShape(roundedCorners, null, null));
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
+            //l_progressBar.setBackgroundDrawable(getDrawable(R.drawable.prescription_progressbar));
             l_progressBar.setProgress(progress);
 
             String timeStart = listpwtList.get(i).getTimeStart();
@@ -473,8 +486,8 @@ public class PrescriptionsActivity extends ActionBarActivity {
             ProgressBar l_progressBar = (ProgressBar)withoutTimePrescriptionList.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwotList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
-            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
+            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.SRC_OVER);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
 
@@ -503,7 +516,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
             ProgressBar l_progressBar = (ProgressBar)prescriptionListLayout.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwtList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
@@ -527,7 +540,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
             ProgressBar l_progressBar = (ProgressBar)withoutTimePrescriptionList.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwotList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
@@ -544,6 +557,10 @@ public class PrescriptionsActivity extends ActionBarActivity {
     public void doLeftClick(View view) {
     }
     public void doRightClick(View view) {
+    }
+
+    public void addPrescriptionItem(View view) {
+
     }
 
     public int getColorForCurrentProgress(int progressPercentage){

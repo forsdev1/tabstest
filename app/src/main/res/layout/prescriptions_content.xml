@@ -20,6 +20,16 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ Add"
+            android:id="@+id/presc_add_button"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/presc_add_button_style"
+            android:textColor="#ff5a5a5a"
+            android:onClick="addPrescriptionItem" />
+
     </FrameLayout>
 
     <RelativeLayout
