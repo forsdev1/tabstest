@@ -50,7 +50,8 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/pat_fl_id">
 
         <include layout="@layout/patient_data_layout" android:id="@+id/patient_data_layout_id"
             android:layout_height="145dp"

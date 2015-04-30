@@ -25,20 +25,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
             </FrameLayout>
-            <TabWidget
-                android:id="@android:id/tabs"
+
+            <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/tab_background_selector"
-                android:gravity="bottom">
+                android:background="#ffe9e9e9">
 
-                <!--<include layout="@layout/prescriptions_tab" android:id="@+id/prescriptions_tab_id"/>-->
-                <!--<include layout="@layout/measurements_tab" android:id="@+id/measurements_tab_id" />-->
-                <!--<include layout="@layout/journal_tab" android:id="@+id/journal_tab_id" />-->
-                <!--<include layout="@layout/feedback_tab" android:id="@+id/feedback_tab_id" />-->
-                <!--<include layout="@layout/more_tab" android:id="@+id/more_tab_id" />-->
-
-            </TabWidget>
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_background_selector"
+                    android:gravity="bottom"
+                    android:layout_margin="1dp">
+                </TabWidget>
+            </RelativeLayout>
 
         </LinearLayout>
     </TabHost>

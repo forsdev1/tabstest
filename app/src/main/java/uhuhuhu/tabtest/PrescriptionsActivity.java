@@ -1,7 +1,10 @@
 package uhuhuhu.tabtest;
 
+import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
@@ -10,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -41,6 +45,8 @@ public class PrescriptionsActivity extends ActionBarActivity {
     private LinearLayout dayViewPrescription2 = null;
     private LinearLayout listViewPrescription1 = null;
     private LinearLayout listViewPrescription2 = null;
+    private LinearLayout historyViewPrescription1 = null;
+    private LinearLayout historyViewPrescription2 = null;
 
     private ArrayList<PrescriptionsWithTime> pwtList = new ArrayList<>();
     private ArrayList<PrescriptionsWithoutTime> pwotList = new ArrayList<>();
@@ -199,6 +205,9 @@ public class PrescriptionsActivity extends ActionBarActivity {
         }
     }
 
+    private static final String[] COUNTRIES = new String[] { "Belgium",
+            "France", "France_", "Italy", "Germany", "Spain" };
+
     public void onCreate(Bundle savedInstanceState) {
 
         //TODO try ViewFlipper;
@@ -217,85 +226,88 @@ public class PrescriptionsActivity extends ActionBarActivity {
         listButton = (Button) findViewById(R.id.button_list_id);
         historyButton = (Button) findViewById(R.id.button_history_id);
 
-        dailyButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                Layout1.setVisibility(View.VISIBLE);
-                Layout2.setVisibility(View.GONE);
-                Layout3.setVisibility(View.GONE);
-                v.setPressed(true);
-            }
-        });
-        listButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                Layout1.setVisibility(View.GONE);
-                Layout2.setVisibility(View.VISIBLE);
-                Layout3.setVisibility(View.GONE);
-                v.setPressed(true);
-            }
-        });
-        historyButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v)
-            {
-                Layout1.setVisibility(View.GONE);
-                Layout2.setVisibility(View.GONE);
-                Layout3.setVisibility(View.VISIBLE);
-                v.setPressed(true);
-            }
-        });
+        setupDayLayout();
+        setupListLayout();
+        setupHistoryLayout();
+    }
+
+    public void setupDayLayout() {
+        dailyButton.setOnTouchListener(new View.OnTouchListener(){
+
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            view.setPressed(true);
+            listButton.setPressed(false);
+            historyButton.setPressed(false);
+            Layout1.setVisibility(View.VISIBLE);
+            Layout2.setVisibility(View.GONE);
+            Layout3.setVisibility(View.GONE);
+            return true;
+        }
+    });
 
         dailyButton.setPressed(true);
-        listButton.setPressed(false);
-        historyButton.setPressed(false);
         Layout1.setVisibility(View.VISIBLE);
         Layout2.setVisibility(View.GONE);
         Layout3.setVisibility(View.GONE);
-
         ScrollView sv = (ScrollView)findViewById(R.id.scrollView_daily_id);
-        sv.setVerticalScrollBarEnabled(false);
-        sv = (ScrollView)findViewById(R.id.scrollView_list_id);
         sv.setVerticalScrollBarEnabled(false);
 
         dayViewPrescription1 = (LinearLayout) findViewById(R.id.presc_t_list_id);
         dayViewPrescription2 = (LinearLayout) findViewById(R.id.presc_wt_list_id);
 
+        loadTestDayData();
+    }
+    public void setupListLayout() {
+        listButton.setOnTouchListener(new View.OnTouchListener(){
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                view.setPressed(true);
+                dailyButton.setPressed(false);
+                historyButton.setPressed(false);
+                Layout1.setVisibility(View.GONE);
+                Layout2.setVisibility(View.VISIBLE);
+                Layout3.setVisibility(View.GONE);
+                return true;
+            }
+        });
+
+        ScrollView sv = (ScrollView)findViewById(R.id.scrollView_list_id);
+        sv.setVerticalScrollBarEnabled(false);
+
         listViewPrescription1 = (LinearLayout) findViewById(R.id.list_t_list_id);
         listViewPrescription2 = (LinearLayout) findViewById(R.id.list_wt_list_id);
 
-        loadTestDayData();
+        historyViewPrescription1 = (LinearLayout) findViewById(R.id.list_t_history_id);
+        historyViewPrescription2 = (LinearLayout) findViewById(R.id.list_wt_history_id);
+
         loadTestListData();
+    }
+    public void setupHistoryLayout() {
+        historyButton.setOnTouchListener(new View.OnTouchListener(){
+
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                view.setPressed(true);
+                dailyButton.setPressed(false);
+                listButton.setPressed(false);
+                Layout1.setVisibility(View.GONE);
+                Layout2.setVisibility(View.GONE);
+                Layout3.setVisibility(View.VISIBLE);
+                return true;
+            }
+        });
+
+        ScrollView sv = (ScrollView)findViewById(R.id.scrollView_history_id);
+        sv.setVerticalScrollBarEnabled(false);
+
+        historyViewPrescription1 = (LinearLayout) findViewById(R.id.list_t_history_id);
+        historyViewPrescription2 = (LinearLayout) findViewById(R.id.list_wt_history_id);
+
         loadTestHistoryData();
-
     }
 
-    public void dayPressed(View view) {
-        Layout1.setVisibility(View.VISIBLE);
-        Layout2.setVisibility(View.GONE);
-        Layout3.setVisibility(View.GONE);
-        //view.setPressed(true);
-        view.setSelected(true);
-        listButton.setSelected(false);
-        historyButton.setSelected(false);
-    }
-    public void listPressed(View view) {
-        Layout1.setVisibility(View.GONE);
-        Layout2.setVisibility(View.VISIBLE);
-        Layout3.setVisibility(View.GONE);
-        dailyButton.setSelected(false);
-        view.setPressed(true);
-        view.setSelected(true);
-        historyButton.setSelected(false);
-    }
-    public void historyPressed(View view) {
-        Layout1.setVisibility(View.GONE);
-        Layout2.setVisibility(View.GONE);
-        Layout3.setVisibility(View.VISIBLE);
-        dailyButton.setSelected(false);
-        listButton.setSelected(false);
-        view.setPressed(true);
-        view.setSelected(true);
-    }
 
     public void loadTestDayData(){
         addPrescriptionTimedDay("10:30", "Morning walk", true);
@@ -323,6 +335,11 @@ public class PrescriptionsActivity extends ActionBarActivity {
     }
     public void loadTestListData() {
         addPrescriptionTimedList("10:30", "12:30", "Morning walk", 40);
+        addPrescriptionTimedList("10:30", "12:30", "Morning walk", 0);
+        addPrescriptionTimedList("10:30", "12:30", "Morning walk", 1);
+        addPrescriptionTimedList("10:30", "12:30", "Morning walk", 3);
+        addPrescriptionTimedList("10:30", "12:30", "Morning walk", 10);
+        addPrescriptionTimedList("10:30", "12:30", "Morning walk", 20);
         addPrescriptionTimedList("11:30", "16:30", "Blood pressure measurement", 67);
         addPrescriptionTimedList("15:30", "19:30", "Enalapril 5mg", 80);
         addPrescriptionTimedList("10:30", "12:30", "Morning walk", 40);
@@ -339,7 +356,29 @@ public class PrescriptionsActivity extends ActionBarActivity {
         showPrescriptionsListTime();
         showPrescriptionsListConditioned();
     }
-    public void loadTestHistoryData() {}
+    public void loadTestHistoryData() {
+//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 40);
+//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 0);
+//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 1);
+//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 3);
+//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 10);
+//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 20);
+//        addPrescriptionHistoryTimedList("11:30", "16:30", "Blood pressure measurement", 67);
+//        addPrescriptionHistoryTimedList("15:30", "19:30", "Enalapril 5mg", 80);
+//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 40);
+//        addPrescriptionHistoryTimedList("11:30", "16:30", "Blood pressure measurement", 67);
+//        addPrescriptionHistoryTimedList("15:30", "19:30", "Enalapril 5mg", 80);
+//
+//        addPrescriptionHistoryConditionedList("Cycling", "Depending on weather", 100);
+//        addPrescriptionHistoryConditionedList("Ketorol", "In case of pain", 40);
+//        addPrescriptionHistoryConditionedList("Cycling", "Depending on weather", 100);
+//        addPrescriptionHistoryConditionedList("Ketorol", "In case of pain", 40);
+//        addPrescriptionHistoryConditionedList("Cycling", "Depending on weather", 100);
+//        addPrescriptionHistoryConditionedList("Ketorol", "In case of pain", 40);
+
+        showPrescriptionsHistoryTime();
+        showPrescriptionsHistoryConditioned();
+    }
 
 
     public void showPrescriptionsDayTime(){
@@ -401,6 +440,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
         pwotList.add(new PrescriptionsWithoutTime(activity, condition, state));
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showPrescriptionsListTime(){
         for(int i = 0; i < listpwtList.size(); ++i){
             View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
@@ -408,9 +448,15 @@ public class PrescriptionsActivity extends ActionBarActivity {
             TextView t_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_activity_id);
             ProgressBar l_progressBar = (ProgressBar)prescriptionListLayout.findViewById(R.id.list_progressBar_id);
 
+            int progress = listpwtList.get(i).getProgress();
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
+            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
+            l_progressBar.setProgressDrawable(pgDrawable);
+            l_progressBar.setProgress(progress);
 
-            l_progressBar.setProgress(listpwtList.get(i).getProgress());
-            t_time.setText(listpwtList.get(i).getTimeStart() + ", " + listpwtList.get(i).getTimeEnd());
+            String timeStart = listpwtList.get(i).getTimeStart();
+            String timeEnd = listpwtList.get(i).getTimeEnd();
+            t_time.setText(timeStart + (timeEnd.length() == 0 ? "" : ", ") + timeEnd);
             t_activity.setText(listpwtList.get(i).getDescription());
 
             if((i % 2) != 0) prescriptionListLayout.setBackgroundColor(getResources().getColor(R.color.lightblue));
@@ -418,6 +464,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
             listViewPrescription1.addView(prescriptionListLayout);
         }
     }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showPrescriptionsListConditioned(){
         for(int i = 0; i < listpwotList.size(); ++i){
             View withoutTimePrescriptionList = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
@@ -425,8 +472,12 @@ public class PrescriptionsActivity extends ActionBarActivity {
             TextView condition = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_time);
             ProgressBar l_progressBar = (ProgressBar)withoutTimePrescriptionList.findViewById(R.id.list_progressBar_id);
 
+            int progress = listpwotList.get(i).getProgress();
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
+            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
+            l_progressBar.setProgressDrawable(pgDrawable);
+            l_progressBar.setProgress(progress);
 
-            l_progressBar.setProgress(listpwotList.get(i).getProgress());
             activity.setText(listpwotList.get(i).getActivity());
             condition.setText(listpwotList.get(i).getCondition());
 
@@ -442,9 +493,52 @@ public class PrescriptionsActivity extends ActionBarActivity {
         listpwotList.add(new PListWithoutTime(activity, condition, progress));
     }
 
-    public void showDefaultContent(){
-        dailyButton.setPressed(true);
-        dailyButton.performClick();
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void showPrescriptionsHistoryTime(){
+        for(int i = 0; i < listpwtList.size(); ++i){
+            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            TextView t_time = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_time);
+            TextView t_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_activity_id);
+            ProgressBar l_progressBar = (ProgressBar)prescriptionListLayout.findViewById(R.id.list_progressBar_id);
+
+            int progress = listpwtList.get(i).getProgress();
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
+            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
+            l_progressBar.setProgressDrawable(pgDrawable);
+            l_progressBar.setProgress(progress);
+
+            String timeStart = listpwtList.get(i).getTimeStart();
+            String timeEnd = listpwtList.get(i).getTimeEnd();
+            t_time.setText(timeStart + (timeEnd.length() == 0 ? "" : ", ") + timeEnd);
+            t_activity.setText(listpwtList.get(i).getDescription());
+
+            if((i % 2) != 0) prescriptionListLayout.setBackgroundColor(getResources().getColor(R.color.lightblue));
+
+            historyViewPrescription1.addView(prescriptionListLayout);
+        }
+    }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void showPrescriptionsHistoryConditioned(){
+        for(int i = 0; i < listpwotList.size(); ++i){
+            View withoutTimePrescriptionList = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            TextView activity = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_activity_id);
+            TextView condition = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_time);
+            ProgressBar l_progressBar = (ProgressBar)withoutTimePrescriptionList.findViewById(R.id.list_progressBar_id);
+
+            int progress = listpwotList.get(i).getProgress();
+            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.daily_progress_progressbar);
+            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
+            l_progressBar.setProgressDrawable(pgDrawable);
+            l_progressBar.setProgress(progress);
+
+            activity.setText(listpwotList.get(i).getActivity());
+            condition.setText(listpwotList.get(i).getCondition());
+
+            if((i % 2) != 0) withoutTimePrescriptionList.setBackgroundColor(getResources().getColor(R.color.lightblue));
+
+            historyViewPrescription2.addView(withoutTimePrescriptionList);
+        }
     }
 
     public void doLeftClick(View view) {
@@ -452,7 +546,47 @@ public class PrescriptionsActivity extends ActionBarActivity {
     public void doRightClick(View view) {
     }
 
+    public int getColorForCurrentProgress(int progressPercentage){
+        int rColor = 255;
+        int gColor = 0;
 
+        Double resultPreColorValueDouble = (progressPercentage * 5.1);
+        int resultPreColorValue = resultPreColorValueDouble.intValue();
+
+        if(resultPreColorValue > 255) {
+            resultPreColorValue -= 255;
+            rColor -= resultPreColorValue;
+            gColor = 255;
+        } else {
+            rColor = 255;
+            gColor = resultPreColorValue;
+        }
+
+        String color = colorDecToHex(rColor, gColor, 0);
+        return Color.parseColor(color);
+    }
+    public static String colorDecToHex(int p_red, int p_green, int p_blue)
+    {
+        String red = Integer.toHexString(p_red);
+        String green = Integer.toHexString(p_green);
+        String blue = Integer.toHexString(p_blue);
+
+        if (red.length() == 1)
+        {
+            red = "0" + red;
+        }
+        if (green.length() == 1)
+        {
+            green = "0" + green;
+        }
+        if (blue.length() == 1)
+        {
+            blue = "0" + blue;
+        }
+
+        String colorHex = "#" + red + green + blue;
+        return colorHex;
+    }
 
 
 

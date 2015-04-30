@@ -20,7 +20,8 @@
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:progressDrawable="@drawable/list_progress_bar" />
+            android:progressDrawable="@drawable/list_progress_bar"
+            android:layout_marginLeft="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
