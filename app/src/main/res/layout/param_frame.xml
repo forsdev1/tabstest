@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parameter"
+            android:id="@+id/measure_param_id"
+            android:layout_gravity="left|center_vertical"
+            android:textSize="18dp"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80 kg"
+            android:id="@+id/measure_paramValue_id"
+            android:layout_gravity="right|center_vertical"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_margin="10dp" />
+    </FrameLayout>
+</LinearLayout>

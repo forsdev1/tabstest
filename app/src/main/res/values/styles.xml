@@ -54,7 +54,7 @@
     </style>
 
     <!--Color set-->
-    <color name="systemgray">#FFF5F5F5</color>
+    <color name="systemgray">#ffd0d0d0</color>
     <color name="darkred">#ffb30400</color>
     <color name="green">#ff04c600</color>
     <color name="lightblue">#ffefffff</color>

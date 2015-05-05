@@ -6,7 +6,8 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
-        android:background="#FFF5F5F5">
+        android:background="#FFF5F5F5"
+        android:id="@+id/date_id">
 
         <LinearLayout
             android:orientation="horizontal"

@@ -209,9 +209,6 @@ public class PrescriptionsActivity extends ActionBarActivity {
         }
     }
 
-    private static final String[] COUNTRIES = new String[] { "Belgium",
-            "France", "France_", "Italy", "Germany", "Spain" };
-
     public void onCreate(Bundle savedInstanceState) {
 
         //TODO try ViewFlipper;

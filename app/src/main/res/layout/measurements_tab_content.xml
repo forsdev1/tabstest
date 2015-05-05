@@ -1,12 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffffff">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Measurements"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Measurements"
+            android:id="@+id/measurements_textview_id"
+            android:textSize="25dp"
+            android:layout_gravity="center"
+            android:textColor="#ffff0000"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ Add"
+            android:id="@+id/measurements_add_button"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/presc_add_button_style"
+            android:textColor="#ff5a5a5a"
+            android:onClick="addPrescriptionItem" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="54dp"
+        android:background="#ffff0000">
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="≡"
+            android:id="@+id/button_measurements_list_id"
+            android:background="@drawable/buttons_style_rounded_left"
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/button_measurements_graphs_id"
+            android:layout_toStartOf="@+id/button_measurements_graphs_id"
+            android:layout_marginRight="-1dp" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="♯"
+            android:id="@+id/button_measurements_graphs_id"
+            android:background="@drawable/buttons_style_rounded_right"
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="10dp"
+            android:layout_alignTop="@+id/button_measurements_list_id"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:text="Show all measurements"
+            android:id="@+id/button_show_all"
+            android:background="@drawable/buttons_style_rounded_all"
+            android:textColor="@drawable/button_text_selector"
+            android:textSize="10dp"
+            android:layout_alignTop="@+id/button_measurements_list_id"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/presc_activity_container_id">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:id="@+id/prl_id_3"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="#FFF5F5F5"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FROM"
+                        android:id="@+id/textView5"
+                        android:layout_gravity="left|center_vertical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13/02/2015"
+                        android:id="@+id/textView9"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="#ffe11a00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TO"
+                        android:id="@+id/textView6"
+                        android:layout_gravity="right|center_vertical" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13/03/2015"
+                        android:id="@+id/textView8"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="6dp"
+                        android:textColor="#ffe11a00" />
+                </LinearLayout>
+
+            </FrameLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent">-->
+
+        <!--<include layout="@layout/measurements_frame_layout" android:id="@+id/measurements_frame_layout_id"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_marginTop="0dp" />-->
+    <!--</RelativeLayout>-->
+    <ScrollView
+        android:id="@+id/scrollView_measurements_id2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/measurements_list_id"
+                android:orientation="vertical" />
+        </RelativeLayout>
+    </ScrollView>
+
 </LinearLayout>
