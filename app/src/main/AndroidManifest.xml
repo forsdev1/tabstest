@@ -3,10 +3,10 @@
     package="uhuhuhu.tabtest" >
 
     <application
-        android:maxSdkVersion="22"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:maxSdkVersion="22"
         android:theme="@style/AppTheme" >
         <activity android:name=".HomeActivity" />
         <activity android:name=".PrescriptionsActivity" />
@@ -17,6 +17,7 @@
         <activity android:name=".DayActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".ListActivity" />
+        <activity android:name=".NewMeasurementActivity" android:noHistory="true"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

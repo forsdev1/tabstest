@@ -458,10 +458,8 @@ public class PrescriptionsActivity extends ActionBarActivity {
 
             int progress = listpwtList.get(i).getProgress();
             LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
-            //ShapeDrawable pgDrawable = new ShapeDrawable(new RoundRectShape(roundedCorners, null, null));
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
-            //l_progressBar.setBackgroundDrawable(getDrawable(R.drawable.prescription_progressbar));
             l_progressBar.setProgress(progress);
 
             String timeStart = listpwtList.get(i).getTimeStart();
@@ -484,7 +482,7 @@ public class PrescriptionsActivity extends ActionBarActivity {
 
             int progress = listpwotList.get(i).getProgress();
             LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
-            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.SRC_OVER);
+            pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
 
