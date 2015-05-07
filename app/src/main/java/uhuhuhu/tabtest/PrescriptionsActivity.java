@@ -364,25 +364,6 @@ public class PrescriptionsActivity extends ActionBarActivity {
         showPrescriptionsListConditioned();
     }
     public void loadTestHistoryData() {
-//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 40);
-//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 0);
-//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 1);
-//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 3);
-//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 10);
-//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 20);
-//        addPrescriptionHistoryTimedList("11:30", "16:30", "Blood pressure measurement", 67);
-//        addPrescriptionHistoryTimedList("15:30", "19:30", "Enalapril 5mg", 80);
-//        addPrescriptionHistoryTimedList("10:30", "12:30", "Morning walk", 40);
-//        addPrescriptionHistoryTimedList("11:30", "16:30", "Blood pressure measurement", 67);
-//        addPrescriptionHistoryTimedList("15:30", "19:30", "Enalapril 5mg", 80);
-//
-//        addPrescriptionHistoryConditionedList("Cycling", "Depending on weather", 100);
-//        addPrescriptionHistoryConditionedList("Ketorol", "In case of pain", 40);
-//        addPrescriptionHistoryConditionedList("Cycling", "Depending on weather", 100);
-//        addPrescriptionHistoryConditionedList("Ketorol", "In case of pain", 40);
-//        addPrescriptionHistoryConditionedList("Cycling", "Depending on weather", 100);
-//        addPrescriptionHistoryConditionedList("Ketorol", "In case of pain", 40);
-
         showPrescriptionsHistoryTime();
         showPrescriptionsHistoryConditioned();
     }

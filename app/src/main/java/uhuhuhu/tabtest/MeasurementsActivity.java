@@ -13,8 +13,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.echo.holographlibrary.Line;
+import com.echo.holographlibrary.LineGraph;
+import com.echo.holographlibrary.LinePoint;
 
 import java.util.ArrayList;
 
@@ -25,6 +30,11 @@ public class MeasurementsActivity extends Activity {
     private Button listButton = null;
     private Button graphButton = null;
     private Button measurementsAddButton = null;
+    private Button lastPressedButton = null;
+    private LinearLayout measurementListLayout = null;
+    private LinearLayout measurementGraphLayout = null;
+    private LineGraph chartLayout = null;
+
     private class MeasurementFrame {
         private String date;
         private String time;
@@ -122,23 +132,73 @@ public class MeasurementsActivity extends Activity {
         graphButton = (Button) findViewById(R.id.button_measurements_graphs_id);
         measurementsAddButton = (Button) findViewById(R.id.measurements_add_button);
 
-        listButton.setPressed(true);
+        measurementListLayout = (LinearLayout) findViewById(R.id.measurements_list_id);
+        measurementGraphLayout = (LinearLayout) findViewById(R.id.measurements_graph_id);
 
-        listButton.setOnTouchListener(new View.OnTouchListener(){
+        listButton.setPressed(true);
+        lastPressedButton = listButton;
+
+        listButton.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                lastPressedButton = (Button) view;
                 view.setPressed(true);
                 graphButton.setPressed(false);
+
+                measurementListLayout.setVisibility(View.VISIBLE);
+                measurementGraphLayout.setVisibility(View.GONE);
                 return true;
             }
         });
-        graphButton.setOnTouchListener(new View.OnTouchListener(){
+        graphButton.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                lastPressedButton = (Button) view;
                 view.setPressed(true);
                 listButton.setPressed(false);
+
+                measurementListLayout.setVisibility(View.GONE);
+                measurementGraphLayout.setVisibility(View.VISIBLE);
+
+                chartLayout = (LineGraph)findViewById(R.id.graph);
+                if(chartLayout != null) {
+                    chartLayout.setVisibility(View.VISIBLE);
+
+                    drawDelimNet(50, 5);
+
+                    Line l = new Line();
+                    plotLine(0, 5, l);
+                    plotLine(1, 6, l);
+                    plotLine(2, 7, l);
+                    plotLine(3, 8, l);
+                    plotLine(8, 9, l);
+                    plotLine(10, 4, l);
+                    plotLine(30, 34, l);
+                    l.setColor(Color.parseColor("#1C96FF"));
+
+                    Line l2 = new Line();
+                    plotLine(0, 2, l2);
+                    plotLine(4, 10, l2);
+                    plotLine(10, 7, l2);
+                    plotLine(15, 15, l2);
+                    l2.setColor(Color.parseColor("#FF0000"));
+
+                    Line l3 = new Line();
+                    plotLine(0, 2, l3);
+                    plotLine(6, 1, l3);
+                    plotLine(9, 9, l3);
+                    plotLine(12, 4, l3);
+                    l3.setColor(Color.parseColor("#00FF00"));
+
+                    chartLayout.addLine(l);
+                    chartLayout.addLine(l2);
+                    chartLayout.addLine(l3);
+                    chartLayout.setRangeY(0, 50);
+                    //li.setLineToFill(0);
+                }
+
                 return true;
             }
         });
@@ -146,7 +206,7 @@ public class MeasurementsActivity extends Activity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    Intent intent = new Intent(MeasurementsActivity.this, NewMeasurementActivity.class);
+                    Intent intent = new Intent(getBaseContext(), NewMeasurementActivity.class);
                     startActivity(intent);
                 }
                 return false;
@@ -159,6 +219,35 @@ public class MeasurementsActivity extends Activity {
         addMeasurement("Yesterday", "12.10", "After sauna", "65", "145", "70", "220", "10");
         addMeasurement("18/03/2015", "15.30", "", "63", "160", "67", "320", "90");
         showMeasurementFrames();
+    }
+
+    private void drawDelimNet(int xRange, int interval) {
+
+        for (int i = 0; i < interval * 10; i += interval) {
+            Line l = new Line();
+            plotLine(0, i, l);
+            plotLine(xRange, i, l);
+            l.setColor(Color.parseColor("#cacaca"));
+            l.setShowingPoints(false);
+            l.setStrokeWidth(1);
+            chartLayout.addLine(l);
+        }
+    }
+
+    public void plotLine(int x, int y, Line line) {
+        LinePoint point = new LinePoint();
+        point.setX(x);
+        point.setY(y);
+        line.addPoint(point);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle state) {
+        lastPressedButton.setPressed(true);
+    }
+    @Override
+    public void onRestoreInstanceState(Bundle state) {
+        lastPressedButton.setPressed(true);
     }
 
     private void showMeasurementFrames() {

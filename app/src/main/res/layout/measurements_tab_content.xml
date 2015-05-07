@@ -47,7 +47,7 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/button_measurements_graphs_id"
             android:layout_toStartOf="@+id/button_measurements_graphs_id"
-            android:layout_marginRight="-1dp" />
+            android:layout_marginRight="-1dp"/>
 
         <Button
             android:layout_width="50dp"
@@ -60,7 +60,7 @@
             android:layout_alignTop="@+id/button_measurements_list_id"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:layout_width="200dp"
@@ -159,15 +159,17 @@
             <!--android:layout_width="fill_parent"-->
             <!--android:layout_marginTop="0dp" />-->
     <!--</RelativeLayout>-->
+
     <ScrollView
         android:id="@+id/scrollView_measurements_id2"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:id="@+id/measurement_list_layout">
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -175,6 +177,122 @@
                 android:layout_gravity="center"
                 android:id="@+id/measurements_list_id"
                 android:orientation="vertical" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/measurements_graph_id"
+                android:orientation="vertical"
+                android:weightSum="1"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:visibility="gone">
+
+                <com.echo.holographlibrary.LineGraph
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:id="@+id/graph" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/lightblue">
+
+                    <RelativeLayout
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/relativeLayout4"
+                        android:background="@drawable/label_rounded_red"
+                        android:layout_margin="10dp"></RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weight, kg"
+                        android:id="@+id/textView10"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/relativeLayout4"
+                        android:layout_toEndOf="@+id/relativeLayout4" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Switch"
+                        android:id="@+id/switch1"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <RelativeLayout
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/label_rounded_blue"
+                        android:id="@+id/relativeLayout5"
+                        android:layout_margin="10dp"></RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heart rate, bpm"
+                        android:id="@+id/textView11"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/relativeLayout5"
+                        android:layout_toEndOf="@+id/relativeLayout5" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Switch"
+                        android:id="@+id/switch2"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/lightblue">
+
+                    <RelativeLayout
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/label_rounded_green"
+                        android:id="@+id/relativeLayout6"
+                        android:layout_margin="10dp"></RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Height, cm"
+                        android:id="@+id/textView12"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/relativeLayout6"
+                        android:layout_toEndOf="@+id/relativeLayout6" />
+
+                    <Switch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New Switch"
+                        android:id="@+id/switch3"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="10dp" />
+                </RelativeLayout>
+
+            </LinearLayout>
         </RelativeLayout>
     </ScrollView>
 

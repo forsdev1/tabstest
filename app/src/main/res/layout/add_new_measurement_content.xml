@@ -33,454 +33,481 @@
 
     </FrameLayout>
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="dateClicked">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date:"
-            android:id="@+id/new_measure_date"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737"
-            android:phoneNumber="false" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="11/12/15"
-            android:id="@+id/new_measure_date_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_date_value"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/datep_layout"
-        android:visibility="gone">
-        <NumberPicker
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/numberPicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="timeClicked">
+            android:layout_height="fill_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time:"
-            android:id="@+id/new_measure_time"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737" />
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="dateClicked">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15:12"
-            android:id="@+id/new_measure_time_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_time"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/timepicker_layout"
-        android:visibility="gone">
-        <NumberPicker
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/timePicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="10dp"
-        android:background="@drawable/upper_line_gray"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Date:"
+                    android:id="@+id/new_measure_date"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737"
+                    android:phoneNumber="false" />
 
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="weightClicked">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11/12/15"
+                    android:id="@+id/new_measure_date_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_date_value"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Weight:"
-            android:id="@+id/new_measure_weight"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/datep_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/numberPicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="62"
-            android:id="@+id/new_measure_weight_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_weight"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/weightpicker_layout"
-        android:visibility="gone">
-        <NumberPicker
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/weightPicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="heightClicked">
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="timeClicked">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Height:"
-            android:id="@+id/new_measure_height"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Time:"
+                    android:id="@+id/new_measure_time"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="170"
-            android:id="@+id/new_measure_height_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_height"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/heightpicker_layout"
-        android:visibility="gone">
-        <NumberPicker
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/heightPicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="hrClicked">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15:12"
+                    android:id="@+id/new_measure_time_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_time"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Heart rate:"
-            android:id="@+id/new_measure_hr"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/timepicker_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/timePicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="70"
-            android:id="@+id/new_measure_hr_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_hr"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/hrpicker_layout"
-        android:visibility="gone">
-        <NumberPicker
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/hrPicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="spClicked">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="10dp"
+                android:background="@drawable/upper_line_gray"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Systolic pressure:"
-            android:id="@+id/new_measure_sp"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737" />
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="weightClicked">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="120"
-            android:id="@+id/new_measure_sp_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_sp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/sppicker_layout"
-        android:visibility="gone">
-        <NumberPicker
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spPicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="dpClicked">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight:"
+                    android:id="@+id/new_measure_weight"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Diastolic pressure:"
-            android:id="@+id/new_measure_dp"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="62"
+                    android:id="@+id/new_measure_weight_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_weight"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="80"
-            android:id="@+id/new_measure_dp_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/dppicker_layout"
-        android:visibility="gone">
-        <NumberPicker
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/dpPicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:background="@drawable/bottom_line_gray"
-        android:clickable="true"
-        android:onClick="tempClicked">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/weightpicker_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/weightPicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Temperature:"
-            android:id="@+id/new_measure_temp"
-            android:textSize="25dp"
-            android:gravity="top|bottom|center|center_horizontal"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentTop="true"
-            android:textColor="#ff373737" />
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="heightClicked">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/new_measure_temp_value"
-            android:textSize="23dp"
-            android:gravity="center_vertical|right"
-            android:layout_marginRight="26dp"
-            android:layout_alignTop="@+id/new_measure_temp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="26dp"
-            android:layout_alignParentBottom="true"
-            android:textColor="#ff373737" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/temppicker_layout"
-        android:visibility="gone">
-        <NumberPicker
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tempPicker"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-    </RelativeLayout>
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="40dp"
-        android:background="@drawable/upper_line_gray">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Height:"
+                    android:id="@+id/new_measure_height"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Provide comments about measurements"
-            android:id="@+id/textView11"
-            android:layout_gravity="center"
-            android:gravity="fill_horizontal|center_vertical|center|fill_vertical|center_horizontal"
-            android:layout_alignParentLeft="false"
-            android:layout_marginLeft="0dp"
-            android:layout_alignParentTop="false"
-            android:layout_marginTop="0dp"
-            android:layout_centerInParent="true"
-            android:textColor="#ff3f3f3f" />
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="170"
+                    android:id="@+id/new_measure_height_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_height"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/heightpicker_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/heightPicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="hrClicked">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Heart rate:"
+                    android:id="@+id/new_measure_hr"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="70"
+                    android:id="@+id/new_measure_hr_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_hr"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/hrpicker_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/hrPicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="spClicked">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Systolic pressure:"
+                    android:id="@+id/new_measure_sp"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="120"
+                    android:id="@+id/new_measure_sp_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sppicker_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spPicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="dpClicked">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diastolic pressure:"
+                    android:id="@+id/new_measure_dp"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="80"
+                    android:id="@+id/new_measure_dp_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dppicker_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpPicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/bottom_line_gray"
+                android:clickable="true"
+                android:onClick="tempClicked">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Temperature:"
+                    android:id="@+id/new_measure_temp"
+                    android:textSize="25dp"
+                    android:gravity="top|bottom|center|center_horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="#ff373737" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/new_measure_temp_value"
+                    android:textSize="23dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_marginRight="26dp"
+                    android:layout_alignTop="@+id/new_measure_temp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="26dp"
+                    android:layout_alignParentBottom="true"
+                    android:textColor="#ff373737" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/temppicker_layout"
+                android:visibility="gone">
+                <NumberPicker
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tempPicker"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/upper_line_gray">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provide comments about measurements"
+                    android:id="@+id/textView11"
+                    android:layout_gravity="center"
+                    android:gravity="fill_horizontal|center_vertical|center|fill_vertical|center_horizontal"
+                    android:layout_alignParentLeft="false"
+                    android:layout_marginLeft="0dp"
+                    android:layout_alignParentTop="false"
+                    android:layout_marginTop="0dp"
+                    android:layout_centerInParent="true"
+                    android:textColor="#ff3f3f3f" />
+            </RelativeLayout>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
