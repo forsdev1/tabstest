@@ -54,6 +54,10 @@
     </style>
 
     <!--Color set-->
+    <color name="yellow">#ffccd000</color>
+    <color name="blue">#ff2394d0</color>
+    <color name="orange">#ffd08509</color>
+    <color name="sky">#ff1dd5ff</color>
     <color name="black">#000000</color>
     <color name="systemgray">#d0d0d0</color>
     <color name="darkred">#b30400</color>

@@ -1,12 +1,18 @@
 package uhuhuhu.tabtest;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -19,34 +25,84 @@ public class JournalActivity extends Activity {
     private TabHost tabHost = null;
     private LinearLayout journalListLayout = null;
     private ArrayList<JournalItem> journalList = new ArrayList<>();
+    private Button addButton = null;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.journal_tab_content);
         tabHost = (TabHost) getParent().findViewById(android.R.id.tabhost);
 
+        addButton = (Button) findViewById(R.id.journal_add_button);
         journalListLayout = (LinearLayout) findViewById(R.id.journal_list_layout);
         loadTestListData();
+
+        addButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    startActivityForResult(new Intent(getBaseContext(), NewJournalActivity.class), 1);
+                }
+                return false;
+            }
+        });
     }
-    public void addJournalItem(final Drawable drawable, final String date, final String time, String comment) {
-        journalList.add(new JournalItem(drawable, date, time, comment));
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void addJournalItem(final String drawable, final String date, final String time, String comment) {
+        Drawable dr = getDrawable(R.drawable.label_rounded_green);
+        switch(drawable){
+            case "red":
+                dr = getDrawable(R.drawable.label_rounded_red);
+                break;
+            case "orange":
+                dr = getDrawable(R.drawable.label_rounded_orange);
+                break;
+            case "yellow":
+                dr = getDrawable(R.drawable.label_rounded_yellow);
+                break;
+            case "green":
+                dr = getDrawable(R.drawable.label_rounded_green);
+                break;
+            case "sky":
+                dr = getDrawable(R.drawable.label_rounded_sky);
+                break;
+            case "blue":
+                dr = getDrawable(R.drawable.label_rounded_blue);
+                break;
+        }
+        journalList.add(new JournalItem(dr, date, time, comment));
     }
     public void loadTestListData() {
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_blue), "Today", "15:30", "Nice day");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_red), "Yesterday", "11:30", "Bad day");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_green), "18/14/15", "18:10", "Awesome day");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_yellow), "18/14/15", "18:10", "............Magnificent special omnipresent caturday");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_blue), "Today", "15:30", "Nice day");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_red), "Yesterday", "11:30", "Bad day");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_blue), "Today", "15:30", "Nice day");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_green), "18/14/15", "18:10", "Awesome day");
-        addJournalItem(getResources().getDrawable(R.drawable.label_rounded_red), "Yesterday", "11:30", "Bad day");
+        addJournalItem("blue", "Today", "15:30", "Nice day");
+        addJournalItem("red", "Yesterday", "11:30", "Bad day");
+        addJournalItem("sky", "18/14/15", "18:10", "Awesome day");
+        addJournalItem("green", "18/14/15", "18:10",
+                "............Magnificent special omnipresent long caturday");
+        addJournalItem("orange", "Today", "15:30", "Nice day");
+        addJournalItem("red", "Yesterday", "11:30", "Bad day");
+        addJournalItem("blue", "Today", "15:30", "Nice day");
+        addJournalItem("green", "18/14/15", "18:10", "Awesome day");
+        addJournalItem("sky", "Yesterday", "11:30", "Bad day");
 
         showJournalItems();
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                addJournalItem(data.getStringExtra("drawable"),
+                                data.getStringExtra("date"),
+                                data.getStringExtra("time"),
+                                data.getStringExtra("comment") );
+                showJournalItems();
+            }
+        }
+    }
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void showJournalItems() {
-        for(int i = 0; i < journalList.size(); ++i){
+        journalListLayout.removeViews(0, journalListLayout.getChildCount());
+        for(int i = journalList.size() - 1; i >= 0; --i){
             View itemView = LayoutInflater.from(this).inflate(R.layout.journal_list_item, null);
             RelativeLayout icon = (RelativeLayout) itemView.findViewById(R.id.journal_item_icon);
             TextView date = (TextView) itemView.findViewById(R.id.journal_item_date);
