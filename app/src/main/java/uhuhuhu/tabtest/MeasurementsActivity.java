@@ -61,10 +61,6 @@ public class MeasurementsActivity extends Activity {
             return date;
         }
 
-        public void setDate(String date) {
-            this.date = date;
-        }
-
         public String getTime() {
             return time;
         }
@@ -77,48 +73,24 @@ public class MeasurementsActivity extends Activity {
             return spec;
         }
 
-        public void setSpec(String spec) {
-            this.spec = spec;
-        }
-
         public String getHeight() {
             return height;
-        }
-
-        public void setHeight(String height) {
-            this.height = height;
         }
 
         public String getWeight() {
             return weight;
         }
 
-        public void setWeight(String weight) {
-            this.weight = weight;
-        }
-
         public String getHeartRate() {
             return heartRate;
-        }
-
-        public void setHeartRate(String heartRate) {
-            this.heartRate = heartRate;
         }
 
         public String getbPressure1() {
             return bPressure1;
         }
 
-        public void setbPressure1(String bPressure1) {
-            this.bPressure1 = bPressure1;
-        }
-
         public String getbPressure2() {
             return bPressure2;
-        }
-
-        public void setbPressure2(String bPressure2) {
-            this.bPressure2 = bPressure2;
         }
     }
 
@@ -249,6 +221,28 @@ public class MeasurementsActivity extends Activity {
         lastPressedButton.setPressed(true);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private View addParameter(String weight, String value, int color, int index) {
+        View pFrame = LayoutInflater.from(this).inflate(R.layout.param_frame, null);
+        TextView parameterName = (TextView) pFrame.findViewById(R.id.measure_param_id);
+        TextView parameterValue = (TextView) pFrame.findViewById(R.id.measure_paramValue_id);
+
+        if((index % 2) != 0) pFrame.setBackgroundColor(getResources().getColor(R.color.lightblue));
+
+        parameterValue.setBackgroundResource(R.drawable.colored_style_rounded_all);
+        Drawable drawable = parameterValue.getBackground();
+        drawable.setColorFilter(color, PorterDuff.Mode.SRC_OVER);
+
+        parameterName.setText(weight);
+        parameterValue.setText(value);
+
+        return pFrame;
+    }
+
+    private void addMeasurement(String date, String time, String spec, String weight, String height,
+                                String heartRate, String bPressure1, String bPressure2) {
+        measurementFrames.add(new MeasurementFrame(date, time, spec, weight, height, heartRate, bPressure1, bPressure2));
+    }
     private void showMeasurementFrames() {
 
         for(int i = 0; i < measurementFrames.size(); ++i) {
@@ -280,30 +274,6 @@ public class MeasurementsActivity extends Activity {
             measurementList.addView(mFrame);
         }
     }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private View addParameter(String weight, String value, int color, int index) {
-        View pFrame = LayoutInflater.from(this).inflate(R.layout.param_frame, null);
-        TextView parameterName = (TextView) pFrame.findViewById(R.id.measure_param_id);
-        TextView parameterValue = (TextView) pFrame.findViewById(R.id.measure_paramValue_id);
-
-        if((index % 2) != 0) pFrame.setBackgroundColor(getResources().getColor(R.color.lightblue));
-
-        parameterValue.setBackgroundResource(R.drawable.colored_style_rounded_all);
-        Drawable drawable = parameterValue.getBackground();
-        drawable.setColorFilter(color, PorterDuff.Mode.SRC_OVER);
-
-        parameterName.setText(weight);
-        parameterValue.setText(value);
-
-        return pFrame;
-    }
-
-    private void addMeasurement(String date, String time, String spec, String weight, String height,
-                                String heartRate, String bPressure1, String bPressure2) {
-        measurementFrames.add(new MeasurementFrame(date, time, spec, weight, height, heartRate, bPressure1, bPressure2));
-    }
-
     public int getColorForCurrentProgress(int progressPercentage){
         int rColor = 255;
         int gColor = 0;
@@ -323,7 +293,6 @@ public class MeasurementsActivity extends Activity {
         String color = colorDecToHex(rColor, gColor, 0);
         return Color.parseColor(color);
     }
-
     public static String colorDecToHex(int p_red, int p_green, int p_blue)
     {
         String red = Integer.toHexString(p_red);

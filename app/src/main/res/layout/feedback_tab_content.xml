@@ -1,12 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffffff">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Feedback"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bottom_line_red">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feedback"
+            android:id="@+id/feedback_textview_id"
+            android:textSize="25sp"
+            android:layout_gravity="center"
+            android:textColor="#ff0000"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
+    </FrameLayout>
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#FFF5F5F5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/feedback_datetext_id"
+            android:layout_gravity="center"
+            android:text="TODAY"
+            android:textColor="#ff000000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="&lt;"
+            android:id="@+id/textView2_list"
+            android:layout_gravity="left|center_vertical"
+            android:clickable="true"
+            android:textSize="30dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="doLeftClick"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=">"
+            android:id="@+id/textView3_list"
+            android:layout_gravity="right|center_vertical"
+            android:textSize="30dp"
+            android:layout_marginRight="10dp"
+            android:onClick="doRightClick"/>
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView2" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/feedback_list_layout"></LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -2,18 +2,14 @@ package uhuhuhu.tabtest;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.Timer;
 
 public class NewJournalActivity extends Activity{
     private Button redButton = null;
@@ -62,7 +58,7 @@ public class NewJournalActivity extends Activity{
 
     public void done(View view) {
         Intent intent = new Intent();
-        switch(view.getId()){
+        switch(pressedButton.getId()){
             case R.id.red_button_id:
                 intent.putExtra("drawable", "red");
                 break;
