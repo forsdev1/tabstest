@@ -64,7 +64,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737"
+                    android:textColor="@color/textColor1"
                     android:phoneNumber="false" />
 
                 <TextView
@@ -80,7 +80,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -119,7 +119,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -179,7 +179,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -194,7 +194,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -233,7 +233,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -287,7 +287,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -302,7 +302,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -341,7 +341,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -356,7 +356,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -395,7 +395,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -410,7 +410,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -449,7 +449,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentTop="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -464,7 +464,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="26dp"
                     android:layout_alignParentBottom="true"
-                    android:textColor="#ff373737" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -500,7 +500,7 @@
                     android:layout_alignParentTop="false"
                     android:layout_marginTop="0dp"
                     android:layout_centerInParent="true"
-                    android:textColor="#ff3f3f3f" />
+                    android:textColor="@color/textColor1" />
             </RelativeLayout>
 
             <EditText

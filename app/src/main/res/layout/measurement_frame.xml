@@ -7,7 +7,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|top"
-        android:background="@color/systemgray"
+        android:background="#ffe6e6e6"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
         android:id="@+id/relativeLayout"
@@ -27,7 +27,8 @@
             android:layout_alignParentRight="false"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/textColor1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,7 +41,8 @@
             android:layout_toEndOf="@+id/measure_date_id"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="6dp"
-            android:layout_marginBottom="6dp" />
+            android:layout_marginBottom="6dp"
+            android:textColor="@color/textColor1" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +53,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:gravity="center"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/textColor1"
+            android:layout_marginBottom="2dp" />
     </RelativeLayout>
 
     <LinearLayout

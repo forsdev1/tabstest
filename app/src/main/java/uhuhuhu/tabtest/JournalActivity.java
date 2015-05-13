@@ -99,6 +99,7 @@ public class JournalActivity extends Activity {
             }
         }
     }
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private void showJournalItems() {
         journalListLayout.removeViews(0, journalListLayout.getChildCount());

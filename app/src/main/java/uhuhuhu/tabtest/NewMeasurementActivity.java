@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -154,17 +155,12 @@ public class NewMeasurementActivity extends Activity {
     public void slidePicker(RelativeLayout picker){
         if (picker.getVisibility() == View.GONE) {
             picker.setVisibility(View.VISIBLE);
-            TranslateAnimation slide = new TranslateAnimation(0, 0, 0, 100);
-            slide.setDuration(500);
-            slide.setFillAfter(true);
-            picker.startAnimation(slide);
+            picker.setAlpha(0.0f);
+            picker.animate().translationY(0.5f).alpha(1.0f);
         }
         else {
-            TranslateAnimation slide = new TranslateAnimation(0, 0, 100, 0 );
-            slide.setDuration(100);
-            slide.setFillAfter(false);
-            picker.startAnimation(slide);
             picker.setVisibility(View.GONE);
+            picker.animate().translationY(0.0f).alpha(0.0f);
         }
     }
 }

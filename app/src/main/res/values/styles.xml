@@ -1,5 +1,14 @@
 <resources>
 
+    <!--Transparent background-->
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
@@ -54,15 +63,17 @@
     </style>
 
     <!--Color set-->
+    <color name="textColor1">#ff575757</color>
     <color name="yellow">#ffccd000</color>
     <color name="blue">#ff2394d0</color>
     <color name="orange">#ffd08509</color>
     <color name="sky">#ff1dd5ff</color>
     <color name="black">#000000</color>
-    <color name="systemgray">#d0d0d0</color>
+    <color name="systemgray">#ffe0e0e0</color>
+    <color name="systemgray_pressed">#ff919191</color>
     <color name="darkred">#b30400</color>
-    <color name="green">#04c600</color>
-    <color name="lightblue">#efffff</color>
+    <color name="green">#43d95d</color>
+    <color name="lightblue">#fff5f5f5</color>
     <color name="red">#FF0000</color>
     <color name="white">#FFFFFF</color>
     <color name="tab_selected">#FF0000</color>

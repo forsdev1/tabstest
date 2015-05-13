@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
@@ -27,13 +28,18 @@ public class MeasurementsActivity extends Activity {
     private TabHost tabHost = null;
     private ArrayList<MeasurementFrame> measurementFrames = new ArrayList<>();
     private LinearLayout measurementList = null;
-    private Button listButton = null;
-    private Button graphButton = null;
+    private ImageButton selectorButton = null;
     private Button measurementsAddButton = null;
-    private Button lastPressedButton = null;
+    private Button measurementSelectorButton = null;
+    //private ImageButton lastPressedButton = null;
     private LinearLayout measurementListLayout = null;
     private LinearLayout measurementGraphLayout = null;
     private LineGraph chartLayout = null;
+
+    private boolean showWeight = true;
+    private boolean showHeight = true;
+    private boolean showBloodPressure = true;
+    private boolean showHeartRate = true;
 
     private class MeasurementFrame {
         private String date;
@@ -100,94 +106,92 @@ public class MeasurementsActivity extends Activity {
         setContentView(R.layout.measurements_tab_content);
         tabHost = (TabHost) getParent().findViewById(android.R.id.tabhost);
 
-        listButton = (Button) findViewById(R.id.button_measurements_list_id);
-        graphButton = (Button) findViewById(R.id.button_measurements_graphs_id);
+        selectorButton = (ImageButton) findViewById(R.id.button_measurement_selector_id);
         measurementsAddButton = (Button) findViewById(R.id.measurements_add_button);
+        measurementSelectorButton = (Button) findViewById(R.id.button_show_all);
 
         measurementListLayout = (LinearLayout) findViewById(R.id.measurements_list_id);
         measurementGraphLayout = (LinearLayout) findViewById(R.id.measurements_graph_id);
 
-        listButton.setPressed(true);
-        lastPressedButton = listButton;
-
-        listButton.setOnTouchListener(new View.OnTouchListener() {
+        selectorButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                lastPressedButton = (Button) view;
-                view.setPressed(true);
-                graphButton.setPressed(false);
+            public void onClick(View view) {
+                if (measurementListLayout.getVisibility() == View.GONE) {
+                    ((ImageButton) view).setImageResource(R.drawable.measurements_tabs_1);
 
-                measurementListLayout.setVisibility(View.VISIBLE);
-                measurementGraphLayout.setVisibility(View.GONE);
-                return true;
-            }
-        });
-        graphButton.setOnTouchListener(new View.OnTouchListener() {
+                    measurementListLayout.setVisibility(View.VISIBLE);
+                    measurementGraphLayout.setVisibility(View.GONE);
+                } else {
+                    ((ImageButton) view).setImageResource(R.drawable.measurements_tabs_2);
 
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                lastPressedButton = (Button) view;
-                view.setPressed(true);
-                listButton.setPressed(false);
+                    measurementListLayout.setVisibility(View.GONE);
+                    measurementGraphLayout.setVisibility(View.VISIBLE);
 
-                measurementListLayout.setVisibility(View.GONE);
-                measurementGraphLayout.setVisibility(View.VISIBLE);
+                    chartLayout = (LineGraph) findViewById(R.id.graph);
+                    if (chartLayout != null) {
+                        chartLayout.setVisibility(View.VISIBLE);
 
-                chartLayout = (LineGraph)findViewById(R.id.graph);
-                if(chartLayout != null) {
-                    chartLayout.setVisibility(View.VISIBLE);
+                        drawDelimNet(50, 5);
 
-                    drawDelimNet(50, 5);
+                        Line l = new Line();
+                        plotLine(0, 5, l);
+                        plotLine(1, 6, l);
+                        plotLine(2, 7, l);
+                        plotLine(3, 8, l);
+                        plotLine(8, 9, l);
+                        plotLine(10, 4, l);
+                        plotLine(30, 34, l);
+                        l.setColor(Color.parseColor("#1C96FF"));
 
-                    Line l = new Line();
-                    plotLine(0, 5, l);
-                    plotLine(1, 6, l);
-                    plotLine(2, 7, l);
-                    plotLine(3, 8, l);
-                    plotLine(8, 9, l);
-                    plotLine(10, 4, l);
-                    plotLine(30, 34, l);
-                    l.setColor(Color.parseColor("#1C96FF"));
+                        Line l2 = new Line();
+                        plotLine(0, 2, l2);
+                        plotLine(4, 10, l2);
+                        plotLine(10, 7, l2);
+                        plotLine(15, 15, l2);
+                        l2.setColor(Color.parseColor("#FF0000"));
 
-                    Line l2 = new Line();
-                    plotLine(0, 2, l2);
-                    plotLine(4, 10, l2);
-                    plotLine(10, 7, l2);
-                    plotLine(15, 15, l2);
-                    l2.setColor(Color.parseColor("#FF0000"));
+                        Line l3 = new Line();
+                        plotLine(0, 2, l3);
+                        plotLine(6, 1, l3);
+                        plotLine(9, 9, l3);
+                        plotLine(12, 4, l3);
+                        l3.setColor(Color.parseColor("#00FF00"));
 
-                    Line l3 = new Line();
-                    plotLine(0, 2, l3);
-                    plotLine(6, 1, l3);
-                    plotLine(9, 9, l3);
-                    plotLine(12, 4, l3);
-                    l3.setColor(Color.parseColor("#00FF00"));
-
-                    chartLayout.addLine(l);
-                    chartLayout.addLine(l2);
-                    chartLayout.addLine(l3);
-                    chartLayout.setRangeY(0, 50);
-                    //li.setLineToFill(0);
+                        chartLayout.addLine(l);
+                        chartLayout.addLine(l2);
+                        chartLayout.addLine(l3);
+                        chartLayout.setRangeY(0, 50);
+                        //li.setLineToFill(0);
+                    }
                 }
-
-                return true;
             }
         });
         measurementsAddButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    startActivity(new Intent(getBaseContext(), NewMeasurementActivity.class));
+                    startActivityForResult(new Intent(getBaseContext(), NewMeasurementActivity.class), 1);
                 }
                 return false;
+            }
+        });
+        measurementSelectorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), MeasurementsSelector.class);
+                intent.putExtra("ShowWeight", showWeight);
+                intent.putExtra("ShowHeight", showHeight);
+                intent.putExtra("ShowBloodPressure", showBloodPressure);
+                intent.putExtra("ShowHeartRate", showHeartRate);
+                startActivityForResult(intent, 2);
             }
         });
 
         measurementList = (LinearLayout) findViewById(R.id.measurements_list_id);
 
-        addMeasurement("Today", "18.40", "", "69", "400", "72", "", "");
-        addMeasurement("Yesterday", "12.10", "After sauna", "65", "145", "70", "220", "10");
+        addMeasurement("TODAY", "18.40", "", "69", "400", "72", "", "");
+        addMeasurement("YESTERDAY", "12.10", "After sauna", "65", "145", "70", "220", "10");
         addMeasurement("18/03/2015", "15.30", "", "63", "160", "67", "320", "90");
         showMeasurementFrames();
     }
@@ -213,12 +217,19 @@ public class MeasurementsActivity extends Activity {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle state) {
-        lastPressedButton.setPressed(true);
-    }
-    @Override
-    public void onRestoreInstanceState(Bundle state) {
-        lastPressedButton.setPressed(true);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+        } else if (requestCode == 2) {
+            if (resultCode == RESULT_OK) {
+                showWeight = data.getBooleanExtra("ShowWeight", false);
+                showHeight = data.getBooleanExtra("ShowHeight", false);
+                showBloodPressure = data.getBooleanExtra("ShowBloodPressure", false);
+                showHeartRate = data.getBooleanExtra("ShowHeartRate", false);
+
+                measurementList.removeAllViews();
+                showMeasurementFrames();
+            }
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -265,13 +276,15 @@ public class MeasurementsActivity extends Activity {
             dateTV.setText(date);
             timeTV.setText(time);
             specTV.setText(spec);
-            if(!weight.isEmpty()) mFrameParams.addView(addParameter("Weight", weight, getColorForCurrentProgress(Integer.parseInt(weight)/5), 0));
-            if(!height.isEmpty()) mFrameParams.addView(addParameter("Height", height, getColorForCurrentProgress(Integer.parseInt(height)/5), 1));
-            if(!heartRate.isEmpty()) mFrameParams.addView(addParameter("Heart Rate", heartRate, getColorForCurrentProgress(Integer.parseInt(heartRate)/5), 2));
-            if(!bPressure1.isEmpty() && !bPressure2.isEmpty())
-                mFrameParams.addView(addParameter("Blood pressure", bPressure1 + "\\" + bPressure2, getColorForCurrentProgress(Integer.parseInt(bPressure1)/5), 3));
+            boolean showFlag = false;
+            if(!weight.isEmpty() && showWeight) { mFrameParams.addView(addParameter("Weight", weight, getColorForCurrentProgress(Integer.parseInt(weight)/5), 0)); showFlag = true;}
+            if(!height.isEmpty() && showHeight) {mFrameParams.addView(addParameter("Height", height, getColorForCurrentProgress(Integer.parseInt(height)/5), 1)); showFlag = true;}
+            if(!heartRate.isEmpty() && showHeartRate) {mFrameParams.addView(addParameter("Heart Rate", heartRate, getColorForCurrentProgress(Integer.parseInt(heartRate)/5), 2)); showFlag = true; }
+            if(!bPressure1.isEmpty() && !bPressure2.isEmpty() && showBloodPressure)
+    { mFrameParams.addView(addParameter("Blood pressure", bPressure1 + "\\" + bPressure2, getColorForCurrentProgress(Integer.parseInt(bPressure1)/5), 3)); showFlag = true;}
 
-            measurementList.addView(mFrame);
+            if(showFlag)
+                measurementList.addView(mFrame);
         }
     }
     public int getColorForCurrentProgress(int progressPercentage){

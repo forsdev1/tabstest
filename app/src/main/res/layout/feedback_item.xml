@@ -4,29 +4,109 @@
     android:layout_height="match_parent"
     android:id="@+id/feedback_parent_layout">
 
-    <FrameLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/feedback_slider_layout"
+        android:layout_below="@+id/frameLayout6"
+        android:layout_alignRight="@+id/frameLayout6"
+        android:layout_alignEnd="@+id/frameLayout6"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/fb_slider"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_below="@+id/frameLayout6"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/feedback_seekBar"
+                android:max="10"
+                android:indeterminate="false"
+                android:layout_below="@+id/feedback_parent_layout"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="center"
+                android:progressDrawable="@drawable/seekbar_progress"
+                android:thumb="@drawable/slider_48"
+                android:minHeight="3dip"
+                android:maxHeight="3dip"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:thumbOffset="4dp" />
+
+        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/fb_slider"
+            android:layout_alignLeft="@+id/fb_slider"
+            android:layout_alignStart="@+id/fb_slider"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="Bad"
+                android:id="@+id/textView14"
+                android:layout_gravity="left|bottom"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Good"
+                android:id="@+id/textView16"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Excellent"
+                android:id="@+id/textView17"
+                android:layout_gravity="right|bottom"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="5dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/frameLayout6"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:clickable="true"
         android:onClick="showSlider">
 
         <TextView
-            android:layout_width="280dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="How do you feel today in general?22222222222222222222222222222222222222222222222222222"
+            android:text="How do you feel today in general?"
             android:id="@+id/feedback_question_id"
             android:layout_gravity="left|center_vertical"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:layout_weight="23.70"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp" />
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/textColor1" />
 
         <TextView
             android:layout_width="40dp"
@@ -36,66 +116,16 @@
             android:textSize="20dp"
             android:background="@drawable/label_rounded_feedback"
             android:gravity="center_vertical|center|center_horizontal"
-            android:layout_alignTop="@+id/feedback_question_id"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
             android:layout_gravity="right|center_vertical"
             android:textColor="#FFFFFF"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:id="@+id/feedback_slider_layout"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_below="@+id/frameLayout6"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/feedback_seekBar"
-            android:max="10"
-            android:indeterminate="false"
-            android:layout_below="@+id/feedback_parent_layout"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:progressDrawable="@drawable/seekbar_progress"
-            android:thumb="@drawable/slider_48"
-            android:minHeight="3dip"
-            android:maxHeight="3dip"
-            android:thumbTint="#fff0f0f0" />
+            android:layout_alignParentEnd="false"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/textView14"
-            android:layout_gravity="left|bottom" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"
-            android:id="@+id/textView16"
-            android:layout_gravity="center_horizontal|bottom" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="10"
-            android:id="@+id/textView17"
-            android:layout_gravity="right|bottom" />
-    </FrameLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

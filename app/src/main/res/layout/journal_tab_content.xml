@@ -28,7 +28,7 @@
             android:id="@+id/journal_add_button"
             android:layout_gravity="right|center_vertical"
             android:background="@drawable/presc_add_button_style"
-            android:textColor="#5a5a5a" />
+            android:textColor="@color/textColor1" />
 
     </FrameLayout>
     <FrameLayout
@@ -50,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:text="FROM"
                 android:id="@+id/journal_textView_from_date"
-                android:layout_gravity="left|center_vertical" />
+                android:layout_gravity="left|center_vertical"
+                android:textColor="@color/textColor1" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:text="TO"
                 android:id="@+id/journal_textView_to_date"
-                android:layout_gravity="right|center_vertical" />
+                android:layout_gravity="right|center_vertical"
+                android:textColor="@color/textColor1" />
 
             <TextView
                 android:layout_width="wrap_content"

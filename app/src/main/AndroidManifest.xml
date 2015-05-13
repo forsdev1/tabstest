@@ -17,8 +17,9 @@
         <activity android:name=".DayActivity" />
         <activity android:name=".HistoryActivity" />
         <activity android:name=".ListActivity" />
-        <activity android:name=".NewMeasurementActiv" android:noHistory="true"/>
+        <activity android:name=".NewMeasurementActivity" android:noHistory="true"/>
         <activity android:name=".NewJournalActivity" android:noHistory="true"/>
+        <activity android:name=".MeasurementsSelector" android:noHistory="true" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

@@ -21,7 +21,8 @@
                 android:id="@+id/measure_param_id"
                 android:layout_gravity="left|center_vertical"
                 android:textSize="18dp"
-                android:layout_margin="10dp" />
+                android:layout_margin="10dp"
+                android:textColor="@color/textColor1" />
         </RelativeLayout>
 
     <TextView
