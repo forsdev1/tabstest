@@ -178,7 +178,7 @@ public class MeasurementsActivity extends Activity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    //startActivity(new Intent(getBaseContext(), NewMeasurementActivity.class));
+                    startActivity(new Intent(getBaseContext(), NewMeasurementActivity.class));
                 }
                 return false;
             }

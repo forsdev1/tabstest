@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
-public class NewMeasurementActivity extends Activity {
+public class NewMeasurementActiv extends Activity {
 
     private RelativeLayout datepLayout = null;
     private RelativeLayout timepLayout = null;
