@@ -36,7 +36,7 @@ public class NewJournalActivity extends Activity{
         dateTV.setText(String.valueOf(c.get(Calendar.DAY_OF_MONTH)) +
                  "/" + String.valueOf(c.get(Calendar.MONTH)) +
                  "/" + String.valueOf(c.get(Calendar.YEAR)));
-        timeTV.setText(String.valueOf(c.get(Calendar.HOUR)) + ":" + String.valueOf(c.get(Calendar.MINUTE)));
+        timeTV.setText(String.valueOf(c.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(c.get(Calendar.MINUTE)));
 
         redButton = (Button) findViewById(R.id.red_button_id);
         orangeButton = (Button) findViewById(R.id.orange_button_id);

@@ -67,7 +67,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="9dp"
-                    android:layout_alignTop="@+id/textView23" />
+                    android:layout_alignTop="@+id/textView23"
+                    android:button="@android:drawable/btn_star" />
             </RelativeLayout>
 
             <RelativeLayout

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import com.echo.holographlibrary.Line;
 import com.echo.holographlibrary.LineGraph;
 import com.echo.holographlibrary.LinePoint;
+import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.ArrayList;
 
@@ -28,18 +30,42 @@ public class MeasurementsActivity extends Activity {
     private TabHost tabHost = null;
     private ArrayList<MeasurementFrame> measurementFrames = new ArrayList<>();
     private LinearLayout measurementList = null;
-    private ImageButton selectorButton = null;
-    private Button measurementsAddButton = null;
-    private Button measurementSelectorButton = null;
-    //private ImageButton lastPressedButton = null;
-    private LinearLayout measurementListLayout = null;
     private LinearLayout measurementGraphLayout = null;
     private LineGraph chartLayout = null;
-
+    private Button showAllButton = null;
     private boolean showWeight = true;
     private boolean showHeight = true;
     private boolean showBloodPressure = true;
     private boolean showHeartRate = true;
+
+    private class PositionXY {
+        int x;
+        int y;
+
+        public PositionXY(int x, int y) {
+            this.y = y;
+            this.x = x;
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+    }
+    private ArrayList<PositionXY> weightPointList = new ArrayList<>();
+    private ArrayList<PositionXY> heightPointList = new ArrayList<>();
+    private ArrayList<PositionXY> heartRatePointList = new ArrayList<>();
+
+    private SwitchButton weightSwitch = null;
+    private SwitchButton heightSwitch = null;
+    private SwitchButton heartRateSwitch = null;
+
+    public int weightColor = R.color.red;
+    public int heightColor = R.color.green;
+    public int heartRateColor = R.color.blue;
 
     private class MeasurementFrame {
         private String date;
@@ -106,64 +132,38 @@ public class MeasurementsActivity extends Activity {
         setContentView(R.layout.measurements_tab_content);
         tabHost = (TabHost) getParent().findViewById(android.R.id.tabhost);
 
-        selectorButton = (ImageButton) findViewById(R.id.button_measurement_selector_id);
-        measurementsAddButton = (Button) findViewById(R.id.measurements_add_button);
-        measurementSelectorButton = (Button) findViewById(R.id.button_show_all);
+        ImageButton selectorButton = (ImageButton) findViewById(R.id.button_measurement_selector_id);
+        Button measurementsAddButton = (Button) findViewById(R.id.measurements_add_button);
+        showAllButton = (Button) findViewById(R.id.button_show_all);
 
-        measurementListLayout = (LinearLayout) findViewById(R.id.measurements_list_id);
+        measurementList = (LinearLayout) findViewById(R.id.measurements_list_layout_id);
         measurementGraphLayout = (LinearLayout) findViewById(R.id.measurements_graph_id);
+        chartLayout = (LineGraph) findViewById(R.id.graph);
+
+        weightSwitch = (SwitchButton) findViewById(R.id.switch1);
+        heightSwitch = (SwitchButton) findViewById(R.id.switch3);
+        heartRateSwitch = (SwitchButton) findViewById(R.id.switch2);
+
+        weightSwitch.setChecked(true);
+        heightSwitch.setChecked(true);
+        heartRateSwitch.setChecked(true);
+
+        fillChartData();
 
         selectorButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                if (measurementListLayout.getVisibility() == View.GONE) {
+                if (measurementList.getVisibility() == View.GONE) {
                     ((ImageButton) view).setImageResource(R.drawable.measurements_tabs_1);
 
-                    measurementListLayout.setVisibility(View.VISIBLE);
+                    measurementList.setVisibility(View.VISIBLE);
                     measurementGraphLayout.setVisibility(View.GONE);
                 } else {
                     ((ImageButton) view).setImageResource(R.drawable.measurements_tabs_2);
 
-                    measurementListLayout.setVisibility(View.GONE);
-                    measurementGraphLayout.setVisibility(View.VISIBLE);
-
-                    chartLayout = (LineGraph) findViewById(R.id.graph);
-                    if (chartLayout != null) {
-                        chartLayout.setVisibility(View.VISIBLE);
-
-                        drawDelimNet(50, 5);
-
-                        Line l = new Line();
-                        plotLine(0, 5, l);
-                        plotLine(1, 6, l);
-                        plotLine(2, 7, l);
-                        plotLine(3, 8, l);
-                        plotLine(8, 9, l);
-                        plotLine(10, 4, l);
-                        plotLine(30, 34, l);
-                        l.setColor(Color.parseColor("#1C96FF"));
-
-                        Line l2 = new Line();
-                        plotLine(0, 2, l2);
-                        plotLine(4, 10, l2);
-                        plotLine(10, 7, l2);
-                        plotLine(15, 15, l2);
-                        l2.setColor(Color.parseColor("#FF0000"));
-
-                        Line l3 = new Line();
-                        plotLine(0, 2, l3);
-                        plotLine(6, 1, l3);
-                        plotLine(9, 9, l3);
-                        plotLine(12, 4, l3);
-                        l3.setColor(Color.parseColor("#00FF00"));
-
-                        chartLayout.addLine(l);
-                        chartLayout.addLine(l2);
-                        chartLayout.addLine(l3);
-                        chartLayout.setRangeY(0, 50);
-                        //li.setLineToFill(0);
-                    }
+                    measurementList.setVisibility(View.GONE);
+                    showChart(weightColor, heightColor, heartRateColor);
                 }
             }
         });
@@ -176,7 +176,7 @@ public class MeasurementsActivity extends Activity {
                 return false;
             }
         });
-        measurementSelectorButton.setOnClickListener(new View.OnClickListener() {
+        showAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), MeasurementsSelector.class);
@@ -188,7 +188,36 @@ public class MeasurementsActivity extends Activity {
             }
         });
 
-        measurementList = (LinearLayout) findViewById(R.id.measurements_list_id);
+        weightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    setWeightColor(R.color.red);
+                } else {
+                    setWeightColor(R.color.red_faded);
+                }
+                showChart(weightColor, heightColor, heartRateColor);
+            }
+        });
+        heightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    setHeightColor(R.color.green);
+                } else {
+                    setHeightColor(R.color.green_faded);
+                }
+                showChart(weightColor, heightColor, heartRateColor);
+            }
+        });
+        heartRateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    setHRColor(R.color.blue);
+                } else {
+                    setHRColor(R.color.blue_faded);
+                }
+                showChart(weightColor, heightColor, heartRateColor);
+            }
+        });
 
         addMeasurement("TODAY", "18.40", "", "69", "400", "72", "", "");
         addMeasurement("YESTERDAY", "12.10", "After sauna", "65", "145", "70", "220", "10");
@@ -196,6 +225,109 @@ public class MeasurementsActivity extends Activity {
         showMeasurementFrames();
     }
 
+    public void setWeightColor(int color) {
+        weightColor = color;
+    }
+    public void setHeightColor(int color) {
+        heightColor = color;
+    }
+    public void setHRColor(int color) {
+        heartRateColor = color;
+    }
+    private void showChart(int weightColor, int heightColor, int heartRateColor) {
+        chartLayout.removeAllLines();
+        int maxY = findMaxY() + 10;
+        drawDelimNet(maxY, 5);
+
+        RelativeLayout weightLayout = (RelativeLayout) findViewById(R.id.measurement_weight_layout);
+        RelativeLayout heightLayout = (RelativeLayout) findViewById(R.id.measurement_height_layout);
+        RelativeLayout heartRateLayout = (RelativeLayout) findViewById(R.id.measurement_heartrate_layout);
+
+        if (showWeight) {
+            weightLayout.setVisibility(View.VISIBLE);
+            drawWeight(weightColor);
+        } else {
+            weightLayout.setVisibility(View.GONE);
+        }
+        if (showHeight) {
+            heightLayout.setVisibility(View.VISIBLE);
+            drawHeight(heightColor);
+        } else {
+            heightLayout.setVisibility(View.GONE);
+        }
+        if (showHeartRate) {
+            heartRateLayout.setVisibility(View.VISIBLE);
+            drawHeartRate(heartRateColor);
+        } else {
+            heartRateLayout.setVisibility(View.GONE);
+        }
+        chartLayout.setRangeY(0, maxY);
+        //li.setLineToFill(0);
+
+        measurementGraphLayout.setVisibility(View.VISIBLE);
+    }
+    private void fillChartData() {
+
+        weightPointList.add(new PositionXY(0, 5));
+        weightPointList.add(new PositionXY(1, 6));
+        weightPointList.add(new PositionXY(2, 7));
+        weightPointList.add(new PositionXY(3, 8));
+        weightPointList.add(new PositionXY(8, 9));
+        weightPointList.add(new PositionXY(10, 4));
+        weightPointList.add(new PositionXY(30, 34));
+
+        heightPointList.add(new PositionXY(0, 2));
+        heightPointList.add(new PositionXY(4, 10));
+        heightPointList.add(new PositionXY(10, 7));
+        heightPointList.add(new PositionXY(15, 15));
+
+        heartRatePointList.add(new PositionXY(0, 2));
+        heartRatePointList.add(new PositionXY(6, 1));
+        heartRatePointList.add(new PositionXY(9, 9));
+        heartRatePointList.add(new PositionXY(15, 15));
+    }
+    public int findMaxY() {
+        int max = 0;
+        int y = 0;
+
+        for(PositionXY point : weightPointList) {
+            y = point.getY();
+            if(y > max) max = y;
+        }
+        for(PositionXY point : heightPointList) {
+            y = point.getY();
+            if(y > max) max = y;
+        }
+        for(PositionXY point : heartRatePointList) {
+            y = point.getY();
+            if(y > max) max = y;
+        }
+        return max;
+    }
+    public void drawWeight(int color) {
+        Line l = new Line();
+        for(PositionXY point : weightPointList) {
+            plotLine(point.getX(), point.getY(), l);
+        }
+        l.setColor(getResources().getColor(color));
+        chartLayout.addLine(l);
+    }
+    public void drawHeight(int color) {
+        Line l = new Line();
+        for(PositionXY point : heightPointList) {
+            plotLine(point.getX(), point.getY(), l);
+        }
+        l.setColor(getResources().getColor(color));
+        chartLayout.addLine(l);
+    }
+    public void drawHeartRate(int color) {
+        Line l = new Line();
+        for(PositionXY point : heartRatePointList) {
+            plotLine(point.getX(), point.getY(), l);
+        }
+        l.setColor(getResources().getColor(color));
+        chartLayout.addLine(l);
+    }
     private void drawDelimNet(int xRange, int interval) {
 
         for (int i = 0; i < interval * 10; i += interval) {
@@ -208,7 +340,6 @@ public class MeasurementsActivity extends Activity {
             chartLayout.addLine(l);
         }
     }
-
     public void plotLine(int x, int y, Line line) {
         LinePoint point = new LinePoint();
         point.setX(x);
@@ -219,6 +350,17 @@ public class MeasurementsActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                addMeasurement(data.getStringExtra("Date"),
+                        data.getStringExtra("Time"),
+                        data.getStringExtra("Comment"),
+                        data.getStringExtra("Weight"),
+                        data.getStringExtra("Height"),
+                        data.getStringExtra("Heart rate"),
+                        data.getStringExtra("Systolic pressure"),
+                        data.getStringExtra("Diastolic pressure"));
+                showMeasurementFrames();
+            }
         } else if (requestCode == 2) {
             if (resultCode == RESULT_OK) {
                 showWeight = data.getBooleanExtra("ShowWeight", false);
@@ -226,8 +368,45 @@ public class MeasurementsActivity extends Activity {
                 showBloodPressure = data.getBooleanExtra("ShowBloodPressure", false);
                 showHeartRate = data.getBooleanExtra("ShowHeartRate", false);
 
-                measurementList.removeAllViews();
+                String buttonText = "Show: ";
+
+                if(showWeight &&
+                        showHeight &&
+                        showBloodPressure &&
+                        showHeartRate)
+                    buttonText += "all";
+                else if(!(showWeight ||
+                        showHeight ||
+                        showBloodPressure ||
+                        showHeartRate))
+                    buttonText += "none";
+                else {
+                    if(showWeight) {
+                        buttonText += "weight";
+                    }
+                    if(showHeight) {
+                        if(buttonText.length() > 7)
+                            buttonText += ", height";
+                        else
+                            buttonText += "height";
+                    }
+                    if(showBloodPressure) {
+                        if(buttonText.length() > 7)
+                            buttonText += ", blood pressure";
+                        else
+                            buttonText += "blood pressure";
+                    }
+                    if(showHeartRate) {
+                        if (buttonText.length() > 7)
+                            buttonText += ", heart rate";
+                        else
+                            buttonText += "heart rate";
+                    }
+                }
+
+                showAllButton.setText(buttonText);
                 showMeasurementFrames();
+                showChart(weightColor, heightColor, heartRateColor);
             }
         }
     }
@@ -256,7 +435,8 @@ public class MeasurementsActivity extends Activity {
     }
     private void showMeasurementFrames() {
 
-        for(int i = 0; i < measurementFrames.size(); ++i) {
+        measurementList.removeAllViews();
+        for(int i = measurementFrames.size() - 1; i >= 0; --i) {
             View mFrame = LayoutInflater.from(this).inflate(R.layout.measurement_frame, null);
 
             TextView dateTV = (TextView) mFrame.findViewById(R.id.measure_date_id);
@@ -277,11 +457,24 @@ public class MeasurementsActivity extends Activity {
             timeTV.setText(time);
             specTV.setText(spec);
             boolean showFlag = false;
-            if(!weight.isEmpty() && showWeight) { mFrameParams.addView(addParameter("Weight", weight, getColorForCurrentProgress(Integer.parseInt(weight)/5), 0)); showFlag = true;}
-            if(!height.isEmpty() && showHeight) {mFrameParams.addView(addParameter("Height", height, getColorForCurrentProgress(Integer.parseInt(height)/5), 1)); showFlag = true;}
-            if(!heartRate.isEmpty() && showHeartRate) {mFrameParams.addView(addParameter("Heart Rate", heartRate, getColorForCurrentProgress(Integer.parseInt(heartRate)/5), 2)); showFlag = true; }
+            if(spec.isEmpty()) specTV.setVisibility(View.GONE);
+            if(!weight.isEmpty() && showWeight) {
+                mFrameParams.addView(addParameter("Weight", weight, getColorForCurrentProgress(Integer.parseInt(weight)/5), 0));
+                showFlag = true;
+            }
+            if(!height.isEmpty() && showHeight) {
+                mFrameParams.addView(addParameter("Height", height, getColorForCurrentProgress(Integer.parseInt(height)/5), 1));
+                showFlag = true;
+            }
+            if(!heartRate.isEmpty() && showHeartRate) {
+                mFrameParams.addView(addParameter("Heart Rate", heartRate, getColorForCurrentProgress(Integer.parseInt(heartRate)/5), 2));
+                showFlag = true;
+            }
             if(!bPressure1.isEmpty() && !bPressure2.isEmpty() && showBloodPressure)
-    { mFrameParams.addView(addParameter("Blood pressure", bPressure1 + "\\" + bPressure2, getColorForCurrentProgress(Integer.parseInt(bPressure1)/5), 3)); showFlag = true;}
+            {
+                mFrameParams.addView(addParameter("Blood pressure", bPressure1 + "\\" + bPressure2, getColorForCurrentProgress(Integer.parseInt(bPressure1)/5), 3));
+                showFlag = true;
+            }
 
             if(showFlag)
                 measurementList.addView(mFrame);

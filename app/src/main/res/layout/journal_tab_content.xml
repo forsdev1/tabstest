@@ -6,7 +6,7 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/bottom_line_red">
 
@@ -17,18 +17,17 @@
             android:id="@+id/journal_textview_id"
             android:textSize="25sp"
             android:layout_gravity="center"
-            android:textColor="#ff0000"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp" />
+            android:textColor="#ff0000" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
             android:text="+ Add"
             android:id="@+id/journal_add_button"
             android:layout_gravity="right|center_vertical"
             android:background="@drawable/presc_add_button_style"
-            android:textColor="@color/textColor1" />
+            android:textColor="@color/textColor1"
+            android:layout_marginRight="5dp" />
 
     </FrameLayout>
     <FrameLayout

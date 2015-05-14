@@ -5,7 +5,7 @@
     android:background="#ffffffff">
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/bottom_line_red"
         android:layout_alignParentLeft="true"
@@ -21,13 +21,11 @@
             android:id="@+id/new_journal_textview_id"
             android:textSize="23sp"
             android:layout_gravity="center"
-            android:textColor="#ff0000"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp" />
+            android:textColor="#ff0000" />
 
         <Button
-            android:layout_width="71dp"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
             android:text="Done"
             android:id="@+id/journal_add_button"
             android:layout_gravity="right|center_vertical"

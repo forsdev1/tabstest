@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -25,6 +26,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class HomeActivity extends Activity {
 
@@ -135,11 +138,19 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.home_content);
 
         dateBox = (TextView)findViewById(R.id.dateTextView_id);
-        setDate("APRIL <b>13</b>");
+        Calendar calendar = Calendar.getInstance();
+        setDate(new StringBuilder().append(String.format(Locale.US, "%tB", calendar))
+        .append(" <b>")
+        .append(calendar.get(Calendar.DAY_OF_MONTH))
+        .append("</b>").toString());
 
         listView = (ListView) findViewById(R.id.prescription_list_id);
         listAdapter = new PrescriptionsAdapter();
         listView.setAdapter(listAdapter);
+        addPrescription("10:30", "You missed prescription:", "Measurable Pressure", R.drawable.alert_icon1_48);
+        addPrescription("09:43", "Prescription added:", "Aspirin twice a day", R.drawable.presc_added);
+        addPrescription("09:30", "Prescription canceled:", "Aspirin twice a day", R.drawable.presc_canceled);
+        addPrescription("09:30", "Prescription added:", "Aspirin twice a day", R.drawable.alert_icon4_48);
         addPrescription("10:30", "You missed prescription:", "Measurable Pressure", R.drawable.alert_icon1_48);
         addPrescription("09:43", "Prescription added:", "Aspirin twice a day", R.drawable.presc_added);
         addPrescription("09:30", "Prescription canceled:", "Aspirin twice a day", R.drawable.presc_canceled);
