@@ -13,10 +13,13 @@
         <activity android:name=".MeasurementsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".JournalActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".FeedbackActivity" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".MoreActivity" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".MoreActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name=".DayActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".HistoryActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".ListActivity" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".PatientMessages" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".PatientSettings" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".PatientProfile" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".NewMeasurementActivity" android:noHistory="true"/>
         <activity android:name=".NewJournalActivity" android:noHistory="true" android:theme="@android:style/Theme.NoTitleBar"/>
         <!--<activity android:name=".MeasurementsSelector" android:noHistory="true" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>-->

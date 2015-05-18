@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <attr format="reference" name="drawerArrowStyle"/>
     <attr format="dimension" name="height"/>
@@ -23,10 +23,10 @@
     <color name="background_floating_material_light">#ffeeeeee</color>
     <color name="background_material_dark">#ff303030</color>
     <color name="background_material_light">#ffeeeeee</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/colors.xml -->
     <eat-comment/>
     <color name="blue">#FF0000FF</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
@@ -40,11 +40,11 @@
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/colors.xml -->
     <eat-comment/>
     <color name="green">#FF00FF00</color>
     <color name="green_light">#FF99CC00</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
@@ -57,10 +57,10 @@
     <color name="material_blue_grey_950">#ff21272b</color>
     <color name="material_deep_teal_200">#ff80cbc4</color>
     <color name="material_deep_teal_500">#ff009688</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/colors.xml -->
     <eat-comment/>
     <color name="orange">#FFFFBB33</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="primary_dark_material_dark">#ff000000</color>
     <color name="primary_dark_material_light">#ff757575</color>
@@ -70,11 +70,11 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/colors.xml -->
     <eat-comment/>
     <color name="purple">#FFAA66CC</color>
     <color name="red">#FFFF0000</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <color name="ripple_material_dark">#4dffffff</color>
     <color name="ripple_material_light">#1f000000</color>
@@ -86,7 +86,7 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/colors.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/colors.xml -->
     <eat-comment/>
     <color name="transparent_blue">#800000FF</color>
     <color name="transparent_orange">#80FFBB33</color>
@@ -118,7 +118,7 @@
     <declare-styleable name="Toolbar"><attr format="reference" name="titleTextAppearance"/><attr format="reference" name="subtitleTextAppearance"/><attr name="title"/><attr name="subtitle"/><attr name="android:gravity"/><attr format="dimension" name="titleMargins"/><attr format="dimension" name="titleMarginStart"/><attr format="dimension" name="titleMarginEnd"/><attr format="dimension" name="titleMarginTop"/><attr format="dimension" name="titleMarginBottom"/><attr name="contentInsetStart"/><attr name="contentInsetEnd"/><attr name="contentInsetLeft"/><attr name="contentInsetRight"/><attr format="dimension" name="maxButtonHeight"/><attr format="reference" name="collapseIcon"/><attr format="string" name="collapseContentDescription"/><attr name="popupTheme"/><attr format="reference" name="navigationIcon"/><attr format="string" name="navigationContentDescription"/><attr name="android:minHeight"/></declare-styleable>
     <declare-styleable name="View"><attr format="dimension" name="paddingStart"/><attr format="dimension" name="paddingEnd"/><attr name="android:focusable"/><attr format="reference" name="theme"/><attr name="android:theme"/><attr format="color" name="backgroundTint"/><attr name="backgroundTintMode"><enum name="src_over" value="3"/><enum name="src_in" value="5"/><enum name="src_atop" value="9"/><enum name="multiply" value="14"/><enum name="screen" value="15"/></attr></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_default_height_material">56dp</dimen>
@@ -180,12 +180,12 @@
     <dimen name="abc_text_size_subtitle_material_toolbar">16dp</dimen>
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/dimens.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="default_margin">12dip</dimen>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <item name="dialog_fixed_height_major" type="dimen">80%</item>
     <item name="dialog_fixed_height_minor" type="dimen">100%</item>
@@ -222,23 +222,23 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/strings.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">HoloGraphLibrarySample</string>
     <string name="bar">Bar</string>
     <string name="line">Line</string>
     <string name="pie">Pie</string>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
     <style name="Animation.AppCompat.DropDownUp" parent="Base.Animation.AppCompat.DropDownUp"/>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/res/values/styles.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/res/values/styles.xml -->
     <eat-comment/>
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light">
     </style>
-    <!-- From: file:/C:/Users/kirill.saveliev/AndroidStudioProjects/tabstest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
+    <!-- From: file:/C:/Users/cora32/AndroidStudioProjects/TabTest/HoloGraphLibrarySample/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.0/res/values/values.xml -->
     <eat-comment/>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
