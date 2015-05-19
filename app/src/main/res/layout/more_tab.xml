@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:weightSum="1"
-    android:background="@drawable/tab_background_selector">
+    android:background="@drawable/tab_background_selector"
+    android:clickable="false">
 
     <FrameLayout
         android:layout_width="match_parent"

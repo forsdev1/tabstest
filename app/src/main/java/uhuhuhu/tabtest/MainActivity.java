@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 
 public class MainActivity extends TabActivity {
 
@@ -16,7 +17,7 @@ public class MainActivity extends TabActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        TabHost tabHost = getTabHost();
+        final TabHost tabHost = getTabHost();
         tabHost.getTabWidget().setStripEnabled(true);
         addTab(tabHost, "Home", R.layout.home_tab, HomeActivity.class);
         addTab(tabHost, "Prescriptions", R.layout.prescriptions_tab, PrescriptionsActivity.class);
@@ -25,19 +26,26 @@ public class MainActivity extends TabActivity {
         addTab(tabHost, "Feedback", R.layout.feedback_tab, FeedbackActivity.class);
         addTab(tabHost, "More", R.layout.more_tab, MoreActivity.class);
 
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                int tabIndex = getTabHost().getCurrentTab();
+                if (tabIndex == 5) {
+                    tabHost.getTabWidget().getChildTabViewAt(tabIndex).setEnabled(false);
+                }
+            }
+        });
     }
-
     private void addTab(final TabHost tabHost,
                         final String tabName, final int tabLayout, final Class activity) {
 
         //Create tab content
         View view = LayoutInflater.from(tabHost.getContext()).inflate(tabLayout, null);
         //If no tabs created yet, create faketab with home activity content and hide it from tabwidget.
+        TabHost.TabSpec tab = tabHost.newTabSpec(tabName);
         if(tabHost.getTabWidget().getChildCount() == 0) {
             view.setVisibility(View.GONE);
         }
-        //Create tab
-        TabHost.TabSpec tab = tabHost.newTabSpec(tabName);
         tab.setIndicator(view);
         //Set tab content
         Intent intent = new Intent(this, activity);
