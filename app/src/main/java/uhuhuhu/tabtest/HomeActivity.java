@@ -2,27 +2,17 @@ package uhuhuhu.tabtest;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,7 +20,11 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class HomeActivity extends Activity {
-
+    private RelativeLayout prescriptionTab = null;
+    private RelativeLayout measurementsTab = null;
+    private RelativeLayout journalTab = null;
+    private RelativeLayout feedbackTab = null;
+    private RelativeLayout moreTab = null;
     private TextView dateBox;
     private ListView listView;
     ArrayList<PrescriptionListItem> prescriptionList = new ArrayList<>();
@@ -137,6 +131,44 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_content);
 
+        View tabView = findViewById(R.id.tab_layout);
+        prescriptionTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_1);
+        measurementsTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_2);
+        journalTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_3);
+        feedbackTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_4);
+        moreTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_5);
+
+        prescriptionTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), PrescriptionsActivity.class));
+            }
+        });
+        measurementsTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), MeasurementsActivity.class));
+            }
+        });
+        journalTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), JournalActivity.class));
+            }
+        });
+        feedbackTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), FeedbackActivity.class));
+            }
+        });
+        moreTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), MoreActivity.class));
+            }
+        });
+
         dateBox = (TextView)findViewById(R.id.dateTextView_id);
         Calendar calendar = Calendar.getInstance();
         setDate(new StringBuilder().append(String.format(Locale.US, "%tB", calendar))
@@ -144,7 +176,7 @@ public class HomeActivity extends Activity {
         .append(calendar.get(Calendar.DAY_OF_MONTH))
         .append("</b>").toString());
 
-        listView = (ListView) findViewById(R.id.prescription_list_id);
+       // listView = (ListView) findViewById(R.id.prescription_list_id);
         listAdapter = new PrescriptionsAdapter();
         listView.setAdapter(listAdapter);
         addPrescription("10:30", "You missed prescription:", "Measurable Pressure", R.drawable.alert_icon1_48);
@@ -155,6 +187,15 @@ public class HomeActivity extends Activity {
         addPrescription("09:43", "Prescription added:", "Aspirin twice a day", R.drawable.presc_added);
         addPrescription("09:30", "Prescription canceled:", "Aspirin twice a day", R.drawable.presc_canceled);
         addPrescription("09:30", "Prescription added:", "Aspirin twice a day", R.drawable.alert_icon4_48);
+    }
+
+    public void onResume() {
+        super.onResume();
+        prescriptionTab.setSelected(false);
+        measurementsTab.setSelected(false);
+        journalTab.setSelected(false);
+        feedbackTab.setSelected(false);
+        moreTab.setSelected(false);
     }
 
     public void setDate(String dateStr) {

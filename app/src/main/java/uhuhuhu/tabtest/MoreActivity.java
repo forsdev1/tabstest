@@ -5,23 +5,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TabHost;
 
 public class MoreActivity extends Activity {
-    private RelativeLayout moreParentLayout = null;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.more_tab_content);
 
-        moreParentLayout = (RelativeLayout) findViewById(R.id.more_parent_layout);
 
-        moreParentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+//        moreParentLayout = (RelativeLayout) findViewById(R.id.more_parent_layout);
+//
+//        moreParentLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
     }
 
     public void onHomeClick(View view) {

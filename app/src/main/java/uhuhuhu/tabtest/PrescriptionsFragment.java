@@ -2,6 +2,7 @@ package uhuhuhu.tabtest;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -12,6 +13,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -25,7 +27,8 @@ import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.ArrayList;
 
-public class PrescriptionsActivity extends Activity {
+
+public class PrescriptionsFragment extends Fragment {
     private RelativeLayout prescriptionTab = null;
     private RelativeLayout measurementsTab = null;
     private RelativeLayout journalTab = null;
@@ -166,100 +169,61 @@ public class PrescriptionsActivity extends Activity {
         }
     }
 
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.prescriptions_content, container, false);
 
-        //TODO try ViewFlipper;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.prescriptions_content);
-
-        View tabView = findViewById(R.id.tab_layout);
-        prescriptionTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_1);
-        measurementsTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_2);
-        journalTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_3);
-        feedbackTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_4);
-        moreTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_5);
-
-        setSelectedTab(prescriptionTab);
-
-        prescriptionTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), PrescriptionsActivity.class));
-            }
-        });
-        measurementsTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), MeasurementsActivity.class));
-            }
-        });
-        journalTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), JournalActivity.class));
-            }
-        });
-        feedbackTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), FeedbackActivity.class));
-            }
-        });
-        moreTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), MoreActivity.class));
-            }
-        });
-
-        Layout1 = (RelativeLayout)findViewById(R.id.prl_id_1);
-        Layout2 = (RelativeLayout)findViewById(R.id.prl_id_2);
-        Layout3 = (RelativeLayout)findViewById(R.id.prl_id_3);
+        Layout1 = (RelativeLayout)view.findViewById(R.id.prl_id_1);
+        Layout2 = (RelativeLayout)view.findViewById(R.id.prl_id_2);
+        Layout3 = (RelativeLayout)view.findViewById(R.id.prl_id_3);
         Layout1.setVisibility(View.VISIBLE);
         Layout2.setVisibility(View.GONE);
         Layout3.setVisibility(View.GONE);
 
-        dailyButton = (Button) findViewById(R.id.button_daily_id);
-        listButton = (Button) findViewById(R.id.button_list_id);
-        historyButton = (Button) findViewById(R.id.button_history_id);
-        addButton = (Button) findViewById(R.id.presc_add_button);
+        dailyButton = (Button) view.findViewById(R.id.button_daily_id);
+        listButton = (Button) view.findViewById(R.id.button_list_id);
+        historyButton = (Button) view.findViewById(R.id.button_history_id);
+        addButton = (Button) view.findViewById(R.id.presc_add_button);
         addButton.setVisibility(View.GONE);
 
-        setupDayLayout();
-        setupListLayout();
-        setupHistoryLayout();
+        setupDayLayout(view);
+        setupListLayout(view);
+        setupHistoryLayout(view);
+
+        return view;
     }
 
-    public void setupDayLayout() {
+    public void setupDayLayout(View view) {
         dailyButton.setOnTouchListener(new View.OnTouchListener(){
 
-        @Override
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            view.setPressed(true);
-            listButton.setPressed(false);
-            historyButton.setPressed(false);
-            Layout1.setVisibility(View.VISIBLE);
-            Layout2.setVisibility(View.GONE);
-            Layout3.setVisibility(View.GONE);
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                view.setPressed(true);
+                listButton.setPressed(false);
+                historyButton.setPressed(false);
+                Layout1.setVisibility(View.VISIBLE);
+                Layout2.setVisibility(View.GONE);
+                Layout3.setVisibility(View.GONE);
 
-            addButton.setVisibility(View.GONE);
-            return true;
-        }
-    });
+                addButton.setVisibility(View.GONE);
+                return true;
+            }
+        });
 
         dailyButton.setPressed(true);
         Layout1.setVisibility(View.VISIBLE);
         Layout2.setVisibility(View.GONE);
         Layout3.setVisibility(View.GONE);
-        ScrollView sv = (ScrollView)findViewById(R.id.scrollView_daily_id);
+        ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_daily_id);
         sv.setVerticalScrollBarEnabled(false);
 
-        dayViewPrescription1 = (LinearLayout) findViewById(R.id.presc_t_list_id);
-        dayViewPrescription2 = (LinearLayout) findViewById(R.id.presc_wt_list_id);
+        dayViewPrescription1 = (LinearLayout) view.findViewById(R.id.presc_t_list_id);
+        dayViewPrescription2 = (LinearLayout) view.findViewById(R.id.presc_wt_list_id);
 
         loadTestDayData();
     }
-    public void setupListLayout() {
+    public void setupListLayout(View view) {
         listButton.setOnTouchListener(new View.OnTouchListener(){
 
             @Override
@@ -275,18 +239,18 @@ public class PrescriptionsActivity extends Activity {
             }
         });
 
-        ScrollView sv = (ScrollView)findViewById(R.id.scrollView_list_id);
+        ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_list_id);
         sv.setVerticalScrollBarEnabled(false);
 
-        listViewPrescription1 = (LinearLayout) findViewById(R.id.list_t_list_id);
-        listViewPrescription2 = (LinearLayout) findViewById(R.id.list_wt_list_id);
+        listViewPrescription1 = (LinearLayout) view.findViewById(R.id.list_t_list_id);
+        listViewPrescription2 = (LinearLayout) view.findViewById(R.id.list_wt_list_id);
 
-        historyViewPrescription1 = (LinearLayout) findViewById(R.id.list_t_history_id);
-        historyViewPrescription2 = (LinearLayout) findViewById(R.id.list_wt_history_id);
+        historyViewPrescription1 = (LinearLayout) view.findViewById(R.id.list_t_history_id);
+        historyViewPrescription2 = (LinearLayout) view.findViewById(R.id.list_wt_history_id);
 
         loadTestListData();
     }
-    public void setupHistoryLayout() {
+    public void setupHistoryLayout(View view) {
         historyButton.setOnTouchListener(new View.OnTouchListener(){
 
             @Override
@@ -302,11 +266,11 @@ public class PrescriptionsActivity extends Activity {
             }
         });
 
-        ScrollView sv = (ScrollView)findViewById(R.id.scrollView_history_id);
+        ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_history_id);
         sv.setVerticalScrollBarEnabled(false);
 
-        historyViewPrescription1 = (LinearLayout) findViewById(R.id.list_t_history_id);
-        historyViewPrescription2 = (LinearLayout) findViewById(R.id.list_wt_history_id);
+        historyViewPrescription1 = (LinearLayout) view.findViewById(R.id.list_t_history_id);
+        historyViewPrescription2 = (LinearLayout) view.findViewById(R.id.list_wt_history_id);
 
         loadTestHistoryData();
     }
@@ -367,7 +331,7 @@ public class PrescriptionsActivity extends Activity {
 
     public void showPrescriptionsDayTime(){
         for(int i = 0; i < pwtList.size(); ++i){
-            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_timed_listitem_layout, null);
+            View prescriptionListLayout = LayoutInflater.from(getActivity()).inflate(R.layout.prescription_timed_listitem_layout, null);
             TextView t_time = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_time_id);
             TextView t_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_activity_id);
             FrameLayout t_fl = (FrameLayout)prescriptionListLayout.findViewById(R.id.presc_t_layout_id);
@@ -393,7 +357,7 @@ public class PrescriptionsActivity extends Activity {
     }
     public void showPrescriptionsDayConditioned(){
         for(int i = 0; i < pwotList.size(); ++i){
-            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_without_time_listitem_layout, null);
+            View prescriptionListLayout = LayoutInflater.from(getActivity()).inflate(R.layout.prescription_without_time_listitem_layout, null);
             TextView wt_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_wt_activity_id);
             TextView wt_condition = (TextView)prescriptionListLayout.findViewById(R.id.presc_wt_condition_id);
             FrameLayout t_fl = (FrameLayout)prescriptionListLayout.findViewById(R.id.presc_wt_layout_id);
@@ -427,13 +391,13 @@ public class PrescriptionsActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showPrescriptionsListTime(){
         for(int i = 0; i < listpwtList.size(); ++i){
-            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            View prescriptionListLayout = LayoutInflater.from(getActivity()).inflate(R.layout.prescription_list_timed_listitem, null);
             TextView t_time = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_time);
             TextView t_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_activity_id);
             ProgressBar l_progressBar = (ProgressBar)prescriptionListLayout.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwtList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
+            LayerDrawable pgDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.prescription_progressbar);
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
@@ -451,13 +415,13 @@ public class PrescriptionsActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showPrescriptionsListConditioned(){
         for(int i = 0; i < listpwotList.size(); ++i){
-            View withoutTimePrescriptionList = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            View withoutTimePrescriptionList = LayoutInflater.from(getActivity()).inflate(R.layout.prescription_list_timed_listitem, null);
             TextView activity = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_activity_id);
             TextView condition = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_time);
             ProgressBar l_progressBar = (ProgressBar)withoutTimePrescriptionList.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwotList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
+            LayerDrawable pgDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.prescription_progressbar);
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
@@ -481,13 +445,13 @@ public class PrescriptionsActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showPrescriptionsHistoryTime(){
         for(int i = 0; i < listpwtList.size(); ++i){
-            View prescriptionListLayout = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            View prescriptionListLayout = LayoutInflater.from(getActivity()).inflate(R.layout.prescription_list_timed_listitem, null);
             TextView t_time = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_time);
             TextView t_activity = (TextView)prescriptionListLayout.findViewById(R.id.presc_t_list_activity_id);
             ProgressBar l_progressBar = (ProgressBar)prescriptionListLayout.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwtList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
+            LayerDrawable pgDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.prescription_progressbar);
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
@@ -505,13 +469,13 @@ public class PrescriptionsActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void showPrescriptionsHistoryConditioned(){
         for(int i = 0; i < listpwotList.size(); ++i){
-            View withoutTimePrescriptionList = LayoutInflater.from(this).inflate(R.layout.prescription_list_timed_listitem, null);
+            View withoutTimePrescriptionList = LayoutInflater.from(getActivity()).inflate(R.layout.prescription_list_timed_listitem, null);
             TextView activity = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_activity_id);
             TextView condition = (TextView)withoutTimePrescriptionList.findViewById(R.id.presc_t_list_time);
             ProgressBar l_progressBar = (ProgressBar)withoutTimePrescriptionList.findViewById(R.id.list_progressBar_id);
 
             int progress = listpwotList.get(i).getProgress();
-            LayerDrawable pgDrawable = (LayerDrawable) getDrawable(R.drawable.prescription_progressbar);
+            LayerDrawable pgDrawable = (LayerDrawable) getResources().getDrawable(R.drawable.prescription_progressbar);
             pgDrawable.setColorFilter(getColorForCurrentProgress(progress), PorterDuff.Mode.MULTIPLY);
             l_progressBar.setProgressDrawable(pgDrawable);
             l_progressBar.setProgress(progress);
@@ -578,11 +542,6 @@ public class PrescriptionsActivity extends Activity {
 
 
 
-    @Override
-    public void onBackPressed()
-    {
-        finish();
-    }
     public void setSelectedTab(View selectedTab) {
         prescriptionTab.setSelected(false);
         measurementsTab.setSelected(false);

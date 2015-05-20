@@ -1,7 +1,6 @@
 package uhuhuhu.tabtest;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
@@ -18,12 +17,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FeedbackActivity extends Activity {
-    private RelativeLayout prescriptionTab = null;
-    private RelativeLayout measurementsTab = null;
-    private RelativeLayout journalTab = null;
-    private RelativeLayout feedbackTab = null;
-    private RelativeLayout moreTab = null;
+public class FeedbackFragment extends Fragment {
     private LinearLayout fListLayout = null;
     private ArrayList<QuestionItem> questions = new ArrayList<>();
 
@@ -53,57 +47,21 @@ public class FeedbackActivity extends Activity {
         }
     }
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.feedback_tab_content);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.feedback_tab_content, container, false);
 
-        View tabView = findViewById(R.id.tab_layout);
-        prescriptionTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_1);
-        measurementsTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_2);
-        journalTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_3);
-        feedbackTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_4);
-        moreTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_5);
-
-        setSelectedTab(feedbackTab);
-
-        prescriptionTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), PrescriptionsActivity.class));
-            }
-        });
-        measurementsTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), MeasurementsActivity.class));
-            }
-        });
-        journalTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), JournalActivity.class));
-            }
-        });
-        feedbackTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), FeedbackActivity.class));
-            }
-        });
-        moreTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), MoreActivity.class));
-            }
-        });
-
-        fListLayout = (LinearLayout) findViewById(R.id.feedback_list_layout);
+        fListLayout = (LinearLayout) view.findViewById(R.id.feedback_list_layout);
 
         addFeedbackQuestion("How do you feel today in general?", "");
         addFeedbackQuestion("how do u smthng 1?", "4");
         addFeedbackQuestion("how do u smthng 2?", "8");
         addFeedbackQuestion("how u smthng 3?", "");
         showQuestions();
+
+        return view;
     }
 
     private void addFeedbackQuestion(String question, String value) {
@@ -112,8 +70,14 @@ public class FeedbackActivity extends Activity {
     private void showQuestions() {
 
         for(int i = 0; i < questions.size(); ++i) {
-            View fFrame = LayoutInflater.from(this).inflate(R.layout.feedback_item, null);
+            View fFrame = LayoutInflater.from(getActivity()).inflate(R.layout.feedback_item, null);
 
+            fFrame.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showSlider(view);
+                }
+            });
             TextView questionTV = (TextView) fFrame.findViewById(R.id.feedback_question_id);
             final TextView valueTV = (TextView) fFrame.findViewById(R.id.feedback_value_id);
             final SeekBar feedbackFD = (SeekBar) fFrame.findViewById(R.id.feedback_seekBar);
@@ -217,20 +181,5 @@ public class FeedbackActivity extends Activity {
             childLayout.setAlpha(0.0f);
             childLayout.animate().translationY(0.5f).alpha(1.0f);
         }
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        finish();
-    }
-    public void setSelectedTab(View selectedTab) {
-        prescriptionTab.setSelected(false);
-        measurementsTab.setSelected(false);
-        journalTab.setSelected(false);
-        feedbackTab.setSelected(false);
-        moreTab.setSelected(false);
-        selectedTab.setSelected(true);
-        selectedTab.setEnabled(false);
     }
 }
