@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="debug"><source path="C:\Users\cora32\AndroidStudioProjects\TabTest\HoloGraphLibrary\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="C:\Users\cora32\AndroidStudioProjects\TabTest\HoloGraphLibrary\src\androidTest\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="debug"><source path="C:\Users\kirill.saveliev\AndroidStudioProjects\tabstest\HoloGraphLibrary\build\intermediates\bundles\debug\assets"/></dataSet><dataSet config="main"><source path="C:\Users\kirill.saveliev\AndroidStudioProjects\tabstest\HoloGraphLibrary\src\androidTest\assets"/></dataSet></merger>

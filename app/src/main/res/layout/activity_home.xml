@@ -8,12 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity"
     android:gravity="bottom|center_horizontal"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="1">
 
     <TabHost
         android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
@@ -23,7 +24,7 @@
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
             </FrameLayout>
@@ -38,8 +39,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/tab_background_selector"
-                    android:gravity="bottom"
-                    android:layout_margin="1dp">
+                    android:gravity="bottom">
                 </TabWidget>
             </RelativeLayout>
 

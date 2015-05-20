@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -26,16 +27,20 @@ public class MainActivity extends TabActivity {
         addTab(tabHost, "Feedback", R.layout.feedback_tab, FeedbackActivity.class);
         addTab(tabHost, "More", R.layout.more_tab, MoreActivity.class);
 
-        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+        //Set listener on "More" tab
+        tabHost.getTabWidget().getChildTabViewAt(5).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onTabChanged(String tabId) {
-                int tabIndex = getTabHost().getCurrentTab();
-                if (tabIndex == 5) {
-                    tabHost.getTabWidget().getChildTabViewAt(tabIndex).setEnabled(false);
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    startActivity(new Intent(getBaseContext(), MoreActivity.class));
+                    //view.setPressed(true);
+                    view.setSelected(true);
                 }
+                return true;
             }
         });
     }
+
     private void addTab(final TabHost tabHost,
                         final String tabName, final int tabLayout, final Class activity) {
 
