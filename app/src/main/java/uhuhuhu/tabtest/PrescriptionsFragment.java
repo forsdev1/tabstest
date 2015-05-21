@@ -1,9 +1,7 @@
 package uhuhuhu.tabtest;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.content.Intent;
+import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -19,7 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.kyleduo.switchbutton.Configuration;
@@ -42,7 +39,6 @@ public class PrescriptionsFragment extends Fragment {
     private RelativeLayout Layout1 = null;
     private RelativeLayout Layout2 = null;
     private RelativeLayout Layout3 = null;
-
 
     private LinearLayout dayViewPrescription1 = null;
     private LinearLayout dayViewPrescription2 = null;
@@ -215,8 +211,8 @@ public class PrescriptionsFragment extends Fragment {
         Layout1.setVisibility(View.VISIBLE);
         Layout2.setVisibility(View.GONE);
         Layout3.setVisibility(View.GONE);
-        ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_daily_id);
-        sv.setVerticalScrollBarEnabled(false);
+        //ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_daily_id);
+        //sv.setVerticalScrollBarEnabled(false);
 
         dayViewPrescription1 = (LinearLayout) view.findViewById(R.id.presc_t_list_id);
         dayViewPrescription2 = (LinearLayout) view.findViewById(R.id.presc_wt_list_id);
@@ -239,8 +235,8 @@ public class PrescriptionsFragment extends Fragment {
             }
         });
 
-        ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_list_id);
-        sv.setVerticalScrollBarEnabled(false);
+        //ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_list_id);
+        //sv.setVerticalScrollBarEnabled(false);
 
         listViewPrescription1 = (LinearLayout) view.findViewById(R.id.list_t_list_id);
         listViewPrescription2 = (LinearLayout) view.findViewById(R.id.list_wt_list_id);
@@ -266,8 +262,8 @@ public class PrescriptionsFragment extends Fragment {
             }
         });
 
-        ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_history_id);
-        sv.setVerticalScrollBarEnabled(false);
+        //ScrollView sv = (ScrollView)view.findViewById(R.id.scrollView_history_id);
+        //sv.setVerticalScrollBarEnabled(false);
 
         historyViewPrescription1 = (LinearLayout) view.findViewById(R.id.list_t_history_id);
         historyViewPrescription2 = (LinearLayout) view.findViewById(R.id.list_wt_history_id);

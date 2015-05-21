@@ -1,12 +1,13 @@
 package uhuhuhu.tabtest;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,13 @@ import android.widget.RelativeLayout;
 public class TabFragment extends Fragment{
     private FragmentActivity myContext = null;
 
+    private Fragment tabFragment = null;
     private RelativeLayout prescriptionTab = null;
     private RelativeLayout measurementsTab = null;
     private RelativeLayout journalTab = null;
     private RelativeLayout feedbackTab = null;
     private RelativeLayout moreTab = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -33,85 +36,90 @@ public class TabFragment extends Fragment{
         feedbackTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_4);
         moreTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_5);
 
+        final FragmentManager fm = getFragmentManager();
+
         prescriptionTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrescriptionsFragment prescriptionsFragment = new PrescriptionsFragment();
-                FragmentManager fragManager = myContext.getSupportFragmentManager();
-                FragmentTransaction transaction = fragManager.beginTransaction();
-                transaction.replace(R.id.container_fragment, prescriptionsFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
+                ft.replace(R.id.content_fragment, new PrescriptionsFragment());
+                ft.commit();
             }
         });
         measurementsTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MeasurementsFragment measurementsFragment = new MeasurementsFragment();
-                FragmentManager fragManager = myContext.getSupportFragmentManager();
-                FragmentTransaction transaction = fragManager.beginTransaction();
-                transaction.replace(R.id.container_fragment, measurementsFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
+                ft.replace(R.id.content_fragment, new MeasurementsFragment());
+                ft.commit();
             }
         });
         journalTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                JournalFragment journalFragment = new JournalFragment();
-                FragmentManager fragManager = myContext.getSupportFragmentManager();
-                FragmentTransaction transaction = fragManager.beginTransaction();
-                transaction.replace(R.id.container_fragment, journalFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
+                ft.replace(R.id.content_fragment, new JournalFragment());
+                ft.commit();
             }
         });
         feedbackTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FeedbackFragment feedbackFragment = new FeedbackFragment();
-                FragmentManager fragManager = myContext.getSupportFragmentManager();
-                FragmentTransaction transaction = fragManager.beginTransaction();
-                transaction.replace(R.id.container_fragment, feedbackFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
+                ft.replace(R.id.content_fragment, new FeedbackFragment());
+                ft.commit();
             }
         });
         moreTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                MoreFragment moreFragment = new MoreFragment();
-//                FragmentManager fragManager = myContext.getSupportFragmentManager();
-//                fragManager.beginTransaction()
-//                        .remove(fragManager.findFragmentById(R.id.more_fragment))
-//                        .commit();
-                        //.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
-
-//                if (moreFragment.isHidden()) {
-//                    ft.show(moreFragment);
+                startActivity(new Intent(getActivity(), MoreActivity.class));
+//                Fragment fragment = new MoreFragment();
+//                FragmentTransaction ft = fm.beginTransaction();
+//                ft.replace(R.id.content_fragment, fragment);
+//
+//                if (fragment.isVisible()) {
+//                    //ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
+//                    ft.show(fragment);
 //                } else {
-//                    ft.hide(moreFragment);
+//                    //ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
+//                    ft.hide(fragment);
 //                }
-                //ft.commit();
-//                FragmentManager fragManager = myContext.getSupportFragmentManager();
-//                FragmentTransaction transaction = fragManager.beginTransaction();
-//
-//// Replace whatever is in the fragment_container view with this fragment,
-//// and add the transaction to the back stack so the user can navigate back
-//                transaction.replace(R.id.more_fragment, newFragment);
-//                transaction.addToBackStack(null);
-//
-//// Commit the transaction
-//                transaction.commit();
-                //startActivity(new Intent(getActivity(), MoreActivity.class));
+//                ft.commit();
             }
         });
 
         return view;
     }
-    @Override
-    public void onAttach(Activity activity) {
-        myContext = (FragmentActivity) activity;
-        super.onAttach(activity);
+
+    private void showFragment(Fragment fragment) {
+//        FragmentManager fm = getFragmentManager();
+//
+//        Fragment frag = fm.findFragmentById(R.id.prescriptions_fragment);
+//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
+//
+//        frag = fm.findFragmentById(R.id.measurements_fragment);
+//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
+//
+//        frag = fm.findFragmentById(R.id.journal_fragment);
+//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
+//
+//        frag = fm.findFragmentById(R.id.feedback_fragment);
+//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
+//
+//        frag = fm.findFragmentById(R.id.more_fragment);
+//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
+//
+//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).show(fragment).commit();
     }
+
+//    @Override
+//    public void onAttach(Activity activity) {
+//        //myContext = (FragmentActivity) activity;
+//        super.onAttach(activity);
+//    }
 }

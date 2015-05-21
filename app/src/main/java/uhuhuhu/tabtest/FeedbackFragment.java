@@ -1,6 +1,6 @@
 package uhuhuhu.tabtest;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;

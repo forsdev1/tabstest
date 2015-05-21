@@ -1,115 +1,117 @@
 package uhuhuhu.tabtest;
 
-import android.support.v4.app.FragmentActivity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import java.util.Calendar;
-import java.util.Locale;
 
 public class MainActivity extends FragmentActivity {
 
+    private HomeFragment homeFragment = null;
+    private PrescriptionsFragment prescriptionsFragment = null;
+    private MeasurementsFragment measurementsFragment = null;
+    private JournalFragment journalFragment = null;
+    private FeedbackFragment feedbackFragment = null;
+    private MoreFragment moreFragment = null;
     private RelativeLayout prescriptionTab = null;
     private RelativeLayout measurementsTab = null;
     private RelativeLayout journalTab = null;
     private RelativeLayout feedbackTab = null;
     private RelativeLayout moreTab = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        if(findViewById(R.id.container_fragment) != null) {
+        if(findViewById(R.id.content_fragment) != null) {
             if (savedInstanceState != null) {
                 return;
             }
-
-
-            HomeFragment homeFragment = new HomeFragment();
-            //Calendar calendar = Calendar.getInstance();
-
-//            dateBox = (TextView)homeFragment.findViewById(R.id.dateTextView_id);
-//            setDate(new StringBuilder().append(String.format(Locale.US, "%tB", calendar))
-//                    .append(" <b>")
-//                    .append(calendar.get(Calendar.DAY_OF_MONTH))
-//                    .append("</b>").toString());
-
-            getSupportFragmentManager().beginTransaction().add(R.id.container_fragment, homeFragment).commit();
-//            homeFragment.setDate(new StringBuilder().append(String.format(Locale.US, "%tB", calendar))
-//                    .append(" <b>")
-//                    .append(calendar.get(Calendar.DAY_OF_MONTH))
-//                    .append("</b>").toString());
+            loadAllFragments();
 
         }
-//        View tabView = findViewById(R.id.tab_layout_id);
-//        RelativeLayout prescriptionTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_1);
-//        RelativeLayout measurementsTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_2);
-//        RelativeLayout journalTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_3);
-//        RelativeLayout feedbackTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_4);
-//        RelativeLayout moreTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_5);
-//
-//        prescriptionTab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getBaseContext(), PrescriptionsActivity.class));
-//                view.setSelected(true);
-//            }
-//        });
-//        measurementsTab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getBaseContext(), MeasurementsActivity.class));
-//                view.setSelected(true);
-//            }
-//        });
-//        journalTab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getBaseContext(), JournalActivity.class));
-//                view.setSelected(true);
-//            }
-//        });
-//        feedbackTab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getBaseContext(), FeedbackActivity.class));
-//                view.setSelected(true);
-//            }
-//        });
-//        moreTab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getBaseContext(), MoreActivity.class));
-//                view.setSelected(true);
-//            }
-//        });
-
-//        final TabHost tabHost = getTabHost();
-//        tabHost.getTabWidget().setStripEnabled(true);
-//        addTab(tabHost, "Home", R.layout.home_tab, HomeActivity.class);
-//        addTab(tabHost, "Prescriptions", R.layout.prescriptions_tab, PrescriptionsActivity.class);
-//        addTab(tabHost, "Measurements", R.layout.measurements_tab, MeasurementsActivity.class);
-//        addTab(tabHost, "Journal", R.layout.journal_tab, JournalActivity.class);
-//        addTab(tabHost, "Feedback", R.layout.feedback_tab, FeedbackActivity.class);
-//        addTab(tabHost, "More", R.layout.more_tab, MoreActivity.class);
-//
-//        //Set listener on "More" tab
-//        tabHost.getTabWidget().getChildTabViewAt(5).setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-//                    startActivity(new Intent(getBaseContext(), MoreActivity.class));
-//                    //view.setPressed(true);
-//                    view.setSelected(true);
-//                }
-//                return true;
-//            }
-//        });
     }
+
+    private void loadAllFragments() {
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction t = fm.beginTransaction();
+
+        if(homeFragment == null) {
+            homeFragment = new HomeFragment();
+        }
+        t.add(R.id.content_fragment, homeFragment);
+
+
+//        if (prescriptionsFragment == null) {
+//            prescriptionsFragment = new PrescriptionsFragment();
+//        }
+//        if(!prescriptionsFragment.isAdded()) {
+//           t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+//                    .add(R.id.prescriptions_fragment, prescriptionsFragment)
+//                    .hide(fm.findFragmentById(R.id.prescriptions_fragment));
+//        }
+//
+//
+//        if (measurementsFragment == null) {
+//            measurementsFragment = new MeasurementsFragment();
+//        }
+//        if(!measurementsFragment.isAdded()) {
+//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+//                    .add(R.id.measurements_fragment, measurementsFragment)
+//                    .hide(fm.findFragmentById(R.id.measurements_fragment));
+//        }
+//
+//
+//        if (journalFragment == null) {
+//            journalFragment = new JournalFragment();
+//        }
+//        if(!journalFragment.isAdded()) {
+//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+//                    .add(R.id.journal_fragment, journalFragment)
+//                    .hide(fm.findFragmentById(R.id.journal_fragment));
+//        }
+//
+//
+//        if (feedbackFragment == null) {
+//            feedbackFragment = new FeedbackFragment();
+//        }
+//        if(!feedbackFragment.isAdded()) {
+//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+//                    .add(R.id.feedback_fragment, feedbackFragment)
+//                    .hide(fm.findFragmentById(R.id.feedback_fragment));
+//        }
+//
+//
+//        if (moreFragment == null) {
+//            moreFragment = new MoreFragment();
+//        }
+//        if(!moreFragment.isAdded()) {
+//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+//                    .add(R.id.more_fragment, moreFragment)
+//                    .hide(fm.findFragmentById(R.id.more_fragment));
+//        }
+//
+//        Fragment y = fm.findFragmentById(R.id.more_fragment);
+//        y.startActivity(new Intent(this, MoreActivity.class));
+//        if (moreFragment == null) {
+//            moreFragment = new MoreFragment();
+//        }
+//        if(!moreFragment.isAdded()) {
+//                    t.add(R.id.more_fragment, moreFragment)
+//                    .hide(fm.findFragmentById(R.id.more_fragment))
+//                            .show(fm.findFragmentById(R.id.more_fragment));
+//        }
+
+        t.commit();
+    }
+
     public void showSlider(View view) {
         ViewGroup p1View = (ViewGroup) view.getParent();
         ViewGroup p2View = (ViewGroup) p1View.getParent();
@@ -126,6 +128,11 @@ public class MainActivity extends FragmentActivity {
             childLayout.setAlpha(0.0f);
             childLayout.animate().translationY(0.5f).alpha(1.0f);
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+
     }
 
 //    private void addTab(final TabHost tabHost,
