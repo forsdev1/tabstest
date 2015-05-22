@@ -9,7 +9,7 @@
         android:maxSdkVersion="22"
         android:theme="@style/AppTheme" >
         <activity android:name=".HomeActivity" android:theme="@android:style/Theme.NoTitleBar"/>
-        <activity android:name=".PrescriptionsActivity"/>
+        <activity android:name=".PrescriptionsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".MeasurementsActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".JournalActivity" android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".FeedbackActivity" android:theme="@android:style/Theme.NoTitleBar"/>

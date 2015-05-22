@@ -8,16 +8,24 @@ import android.widget.RelativeLayout;
 import android.widget.TabHost;
 
 public class MoreActivity extends Activity {
-    private TabHost tabHost = null;
+    private RelativeLayout moreParentLayout = null;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.more_tab_content);
-        tabHost = (TabHost) getParent().findViewById(android.R.id.tabhost);
+
+        moreParentLayout = (RelativeLayout) findViewById(R.id.more_parent_layout);
+
+        moreParentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     public void onHomeClick(View view) {
-        tabHost.setCurrentTab(0);
+        finish();
     }
     public void onProfileClick(View view) {
         startActivity(new Intent(getBaseContext(), PatientProfile.class));
@@ -32,6 +40,6 @@ public class MoreActivity extends Activity {
     @Override
     public void onBackPressed()
     {
-        tabHost.setCurrentTab(0);
+        finish();
     }
 }
