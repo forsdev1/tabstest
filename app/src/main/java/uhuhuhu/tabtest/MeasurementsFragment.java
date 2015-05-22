@@ -1,7 +1,7 @@
 package uhuhuhu.tabtest;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -25,12 +26,8 @@ import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.ArrayList;
 
-public class MeasurementsActivity extends Activity {
-    private RelativeLayout prescriptionTab = null;
-    private RelativeLayout measurementsTab = null;
-    private RelativeLayout journalTab = null;
-    private RelativeLayout feedbackTab = null;
-    private RelativeLayout moreTab = null;
+public class MeasurementsFragment extends Fragment {
+
     private ArrayList<MeasurementFrame> measurementFrames = new ArrayList<>();
     private LinearLayout measurementList = null;
     private LinearLayout measurementGraphLayout = null;
@@ -130,61 +127,22 @@ public class MeasurementsActivity extends Activity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.measurements_tab_content);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        final View inflateView = inflater.inflate(R.layout.measurements_tab_content, container, false);
 
-        View tabView = findViewById(R.id.tab_layout);
-        prescriptionTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_1);
-        measurementsTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_2);
-        journalTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_3);
-        feedbackTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_4);
-        moreTab = (RelativeLayout) tabView.findViewById(R.id.tab_layout_5);
+        ImageButton selectorButton = (ImageButton) inflateView.findViewById(R.id.button_measurement_selector_id);
+        Button measurementsAddButton = (Button) inflateView.findViewById(R.id.measurements_add_button);
+        showAllButton = (Button) inflateView.findViewById(R.id.button_show_all);
 
-        setSelectedTab(measurementsTab);
+        measurementList = (LinearLayout) inflateView.findViewById(R.id.measurements_list_layout_id);
+        measurementGraphLayout = (LinearLayout) inflateView.findViewById(R.id.measurements_graph_id);
+        chartLayout = (LineGraph) inflateView.findViewById(R.id.graph);
 
-        prescriptionTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), PrescriptionsActivity.class));
-            }
-        });
-        measurementsTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), MeasurementsActivity.class));
-            }
-        });
-        journalTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), JournalActivity.class));
-            }
-        });
-        feedbackTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), FeedbackActivity.class));
-            }
-        });
-        moreTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), MoreActivity.class));
-            }
-        });
-
-        ImageButton selectorButton = (ImageButton) findViewById(R.id.button_measurement_selector_id);
-        Button measurementsAddButton = (Button) findViewById(R.id.measurements_add_button);
-        showAllButton = (Button) findViewById(R.id.button_show_all);
-
-        measurementList = (LinearLayout) findViewById(R.id.measurements_list_layout_id);
-        measurementGraphLayout = (LinearLayout) findViewById(R.id.measurements_graph_id);
-        chartLayout = (LineGraph) findViewById(R.id.graph);
-
-        weightSwitch = (SwitchButton) findViewById(R.id.switch1);
-        heightSwitch = (SwitchButton) findViewById(R.id.switch3);
-        heartRateSwitch = (SwitchButton) findViewById(R.id.switch2);
+        weightSwitch = (SwitchButton) inflateView.findViewById(R.id.switch1);
+        heightSwitch = (SwitchButton) inflateView.findViewById(R.id.switch3);
+        heartRateSwitch = (SwitchButton) inflateView.findViewById(R.id.switch2);
 
         weightSwitch.setChecked(true);
         heightSwitch.setChecked(true);
@@ -205,7 +163,7 @@ public class MeasurementsActivity extends Activity {
                     ((ImageButton) view).setImageResource(R.drawable.measurements_tabs_2);
 
                     measurementList.setVisibility(View.GONE);
-                    showChart(weightColor, heightColor, heartRateColor);
+                    showChart(weightColor, heightColor, heartRateColor, inflateView);
                 }
             }
         });
@@ -213,7 +171,7 @@ public class MeasurementsActivity extends Activity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    startActivityForResult(new Intent(getBaseContext(), NewMeasurementActivity.class), 1);
+                    startActivityForResult(new Intent(getActivity(), NewMeasurementActivity.class), 1);
                 }
                 return false;
             }
@@ -221,7 +179,7 @@ public class MeasurementsActivity extends Activity {
         showAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MeasurementsSelector.class);
+                Intent intent = new Intent(getActivity(), MeasurementsSelector.class);
                 intent.putExtra("ShowWeight", showWeight);
                 intent.putExtra("ShowHeight", showHeight);
                 intent.putExtra("ShowBloodPressure", showBloodPressure);
@@ -237,7 +195,7 @@ public class MeasurementsActivity extends Activity {
                 } else {
                     setWeightColor(R.color.red_faded);
                 }
-                showChart(weightColor, heightColor, heartRateColor);
+                showChart(weightColor, heightColor, heartRateColor, inflateView);
             }
         });
         heightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -247,17 +205,17 @@ public class MeasurementsActivity extends Activity {
                 } else {
                     setHeightColor(R.color.green_faded);
                 }
-                showChart(weightColor, heightColor, heartRateColor);
+                showChart(weightColor, heightColor, heartRateColor, inflateView);
             }
         });
         heartRateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     setHRColor(R.color.blue);
                 } else {
                     setHRColor(R.color.blue_faded);
                 }
-                showChart(weightColor, heightColor, heartRateColor);
+                showChart(weightColor, heightColor, heartRateColor, inflateView);
             }
         });
 
@@ -265,6 +223,8 @@ public class MeasurementsActivity extends Activity {
         addMeasurement("YESTERDAY", "12.10", "After sauna", "65", "145", "70", "220", "10");
         addMeasurement("18/03/2015", "15.30", "", "63", "160", "67", "320", "90");
         showMeasurementFrames();
+
+        return inflateView;
     }
 
     public void setWeightColor(int color) {
@@ -276,14 +236,14 @@ public class MeasurementsActivity extends Activity {
     public void setHRColor(int color) {
         heartRateColor = color;
     }
-    private void showChart(int weightColor, int heightColor, int heartRateColor) {
+    private void showChart(int weightColor, int heightColor, int heartRateColor, View view) {
         chartLayout.removeAllLines();
         int maxY = findMaxY() + 10;
         drawDelimNet(maxY, 5);
 
-        RelativeLayout weightLayout = (RelativeLayout) findViewById(R.id.measurement_weight_layout);
-        RelativeLayout heightLayout = (RelativeLayout) findViewById(R.id.measurement_height_layout);
-        RelativeLayout heartRateLayout = (RelativeLayout) findViewById(R.id.measurement_heartrate_layout);
+        RelativeLayout weightLayout = (RelativeLayout) view.findViewById(R.id.measurement_weight_layout);
+        RelativeLayout heightLayout = (RelativeLayout) view.findViewById(R.id.measurement_height_layout);
+        RelativeLayout heartRateLayout = (RelativeLayout) view.findViewById(R.id.measurement_heartrate_layout);
 
         if (showWeight) {
             weightLayout.setVisibility(View.VISIBLE);
@@ -392,7 +352,7 @@ public class MeasurementsActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == -1) {
                 addMeasurement(data.getStringExtra("Date"),
                         data.getStringExtra("Time"),
                         data.getStringExtra("Comment"),
@@ -404,7 +364,7 @@ public class MeasurementsActivity extends Activity {
                 showMeasurementFrames();
             }
         } else if (requestCode == 2) {
-            if (resultCode == RESULT_OK) {
+            if (resultCode == -1) {
                 showWeight = data.getBooleanExtra("ShowWeight", false);
                 showHeight = data.getBooleanExtra("ShowHeight", false);
                 showBloodPressure = data.getBooleanExtra("ShowBloodPressure", false);
@@ -448,14 +408,16 @@ public class MeasurementsActivity extends Activity {
 
                 showAllButton.setText(buttonText);
                 showMeasurementFrames();
-                showChart(weightColor, heightColor, heartRateColor);
+                showChart(weightColor, heightColor, heartRateColor, getView());
             }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private View addParameter(String weight, String value, int color, int index) {
-        View pFrame = LayoutInflater.from(this).inflate(R.layout.param_frame, null);
+        View pFrame = LayoutInflater.from(getActivity()).inflate(R.layout.param_frame, null);
         TextView parameterName = (TextView) pFrame.findViewById(R.id.measure_param_id);
         TextView parameterValue = (TextView) pFrame.findViewById(R.id.measure_paramValue_id);
 
@@ -479,7 +441,7 @@ public class MeasurementsActivity extends Activity {
 
         measurementList.removeAllViews();
         for(int i = measurementFrames.size() - 1; i >= 0; --i) {
-            View mFrame = LayoutInflater.from(this).inflate(R.layout.measurement_frame, null);
+            View mFrame = LayoutInflater.from(getActivity()).inflate(R.layout.measurement_frame, null);
 
             TextView dateTV = (TextView) mFrame.findViewById(R.id.measure_date_id);
             TextView timeTV = (TextView) mFrame.findViewById(R.id.measure_time_id);
@@ -564,18 +526,5 @@ public class MeasurementsActivity extends Activity {
         return colorHex;
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        finish();
-    }
-    public void setSelectedTab(View selectedTab) {
-        prescriptionTab.setSelected(false);
-        measurementsTab.setSelected(false);
-        journalTab.setSelected(false);
-        feedbackTab.setSelected(false);
-        moreTab.setSelected(false);
-        selectedTab.setSelected(true);
-        selectedTab.setEnabled(false);
-    }
 }
+

@@ -8,23 +8,15 @@
     android:gravity="bottom"
     android:id="@+id/more_parent_layout">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="247dp"
-        android:id="@+id/linearLayout3"></LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-        android:gravity="bottom"
         android:id="@+id/linearLayout2"
-        android:layout_below="@+id/linearLayout3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="17dp"
-        android:layout_marginRight="17dp">
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_above="@+id/relativeLayout20">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -34,7 +26,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="false"
                 android:clickable="true"
-                android:onClick="onHomeClick">
+                android:onClick="onHomeClick"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:id="@+id/relativeLayout18">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -63,11 +58,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/more_tab_bg_selector_pink"
-                android:layout_above="@+id/relativeLayout16"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:clickable="true"
-                android:onClick="onProfileClick">
+                android:onClick="onProfileClick"
+                android:layout_marginLeft="0dp"
+                android:layout_below="@+id/relativeLayout18"
+                android:id="@+id/relativeLayout19">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -97,11 +94,11 @@
                 android:layout_height="60dp"
                 android:background="@drawable/more_tab_bg_selector_red"
                 android:id="@+id/relativeLayout16"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:clickable="true"
-                android:onClick="onMessagesClick">
+                android:onClick="onMessagesClick"
+                android:layout_below="@+id/relativeLayout19"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -131,11 +128,11 @@
                 android:layout_height="60dp"
                 android:background="@drawable/more_tab_bg_selector_pink"
                 android:id="@+id/relativeLayout17"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
                 android:clickable="true"
-                android:onClick="onSettingsClick">
+                android:onClick="onSettingsClick"
+                android:layout_below="@+id/relativeLayout16"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
 
                 <ImageView
                     android:layout_width="40dp"
@@ -160,6 +157,28 @@
                     android:layout_marginLeft="10dp" />
             </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:minHeight="80dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/relativeLayout20"
+        android:background="#00ff4941"></RelativeLayout>
+
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:id="@+id/relativeLayout26">-->
+
+    <!--<include layout="@layout/tab_layout" android:id="@+id/tab_layout_id"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="fill_parent" />-->
+<!--</RelativeLayout>-->
 
 </RelativeLayout>

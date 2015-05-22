@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/tab_layout"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:minHeight="60dp">
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:background="@drawable/tab_background_selector"
+            android:id="@+id/tab_layout_1">
+            <ImageView android:id="@+id/prescriptions_imageView_id"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/tab_prescriptions_icon_selector"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tab_prescriptions_textView"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textSize="10sp"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="prescriptionsTag"
+                android:text="Prescriptions"
+                android:textColor="@drawable/tab_text_selector"
+                android:layout_below="@+id/prescriptions_imageView_id"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/tab_background_selector"
+            android:id="@+id/tab_layout_2"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tab_layout_1"
+            android:layout_toEndOf="@+id/tab_layout_1">
+            <ImageView android:id="@+id/measurements_imageView_id"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/tab_measurements_icon_selector"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tab_measurements_textView"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textSize="10dp"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="measurementsTag"
+                android:text="Measurements"
+                android:textColor="@drawable/tab_text_selector"
+                android:layout_below="@+id/measurements_imageView_id"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/tab_background_selector"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tab_layout_2"
+            android:layout_toEndOf="@+id/tab_layout_2"
+            android:id="@+id/tab_layout_3" >
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/tab_journal_icon_selector"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/textView30"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textSize="10dp"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Journal"
+                android:textColor="@drawable/tab_text_selector"
+                android:layout_below="@+id/imageView5"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/tab_background_selector"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tab_layout_3"
+            android:layout_toEndOf="@+id/tab_layout_3"
+            android:id="@+id/tab_layout_4" >
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/tab_feedback_icon_selector"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textSize="10dp"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feedback"
+                android:textColor="@drawable/tab_text_selector"
+                android:layout_below="@+id/imageView6"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/tab_background_selector"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/tab_layout_4"
+            android:layout_toEndOf="@+id/tab_layout_4"
+            android:id="@+id/tab_layout_5">
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/tab_more_icon_selector"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_gravity="center_horizontal|bottom"
+                android:textSize="10dp"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="More"
+                android:textColor="@drawable/tab_text_selector"
+                android:layout_below="@+id/imageView7"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>
