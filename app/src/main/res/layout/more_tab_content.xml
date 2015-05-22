@@ -16,7 +16,7 @@
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="false"
-        android:layout_above="@+id/relativeLayout20">
+        android:layout_alignParentBottom="true">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -158,14 +158,6 @@
             </RelativeLayout>
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:minHeight="80dp"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/relativeLayout20"
-        android:background="#00ff4941"></RelativeLayout>
 
     <!--<RelativeLayout-->
     <!--android:layout_width="match_parent"-->

@@ -14,9 +14,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 public class TabFragment extends Fragment{
-    private FragmentActivity myContext = null;
+    Fragment prescriptionsFragment = null;
+    Fragment measurementsFragment = null;
+    Fragment journalFragment = null;
+    Fragment feedbackFragment = null;
+    Fragment moreFragment = null;
 
-    private Fragment tabFragment = null;
     private RelativeLayout prescriptionTab = null;
     private RelativeLayout measurementsTab = null;
     private RelativeLayout journalTab = null;
@@ -26,7 +29,6 @@ public class TabFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_layout, container, false);
 
         View tabView = view.findViewById(R.id.tab_layout);
@@ -42,84 +44,97 @@ public class TabFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
-                ft.replace(R.id.content_fragment, new PrescriptionsFragment());
-                ft.commit();
+                if (prescriptionsFragment == null) {
+                    prescriptionsFragment = new PrescriptionsFragment();
+                    ft.add(R.id.content_fragment, prescriptionsFragment).commit();
+                } else {
+                    if (prescriptionsFragment.isHidden() || moreFragment != null) {
+                        hideAll();
+                        ft.show(prescriptionsFragment).commit();
+                    } else {
+                        ft.hide(prescriptionsFragment).commit();
+                    }
+                }
             }
         });
         measurementsTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
-                ft.replace(R.id.content_fragment, new MeasurementsFragment());
-                ft.commit();
+                if (measurementsFragment == null) {
+                    measurementsFragment = new MeasurementsFragment();
+                    ft.add(R.id.content_fragment, measurementsFragment).commit();
+                } else {
+                    if (measurementsFragment.isHidden() || moreFragment != null) {
+                        hideAll();
+                        ft.show(measurementsFragment).commit();
+                    } else {
+                        ft.hide(measurementsFragment).commit();
+                    }
+                }
             }
         });
         journalTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
-                ft.replace(R.id.content_fragment, new JournalFragment());
-                ft.commit();
+                if (journalFragment == null) {
+                    journalFragment = new JournalFragment();
+                    ft.add(R.id.content_fragment, journalFragment).commit();
+                } else {
+                    if (journalFragment.isHidden() || moreFragment != null) {
+                        hideAll();
+                        ft.show(journalFragment).commit();
+                    } else {
+                        ft.hide(journalFragment).commit();
+                    }
+                }
             }
         });
         feedbackTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
-                ft.replace(R.id.content_fragment, new FeedbackFragment());
-                ft.commit();
+                if (feedbackFragment == null) {
+                    feedbackFragment = new FeedbackFragment();
+                    ft.add(R.id.content_fragment, feedbackFragment).commit();
+                } else {
+                    if (feedbackFragment.isHidden() || moreFragment != null) {
+                        hideAll();
+                        ft.show(feedbackFragment).commit();
+                    } else {
+                        ft.hide(feedbackFragment).commit();
+                    }
+                }
             }
         });
         moreTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MoreActivity.class));
-//                Fragment fragment = new MoreFragment();
-//                FragmentTransaction ft = fm.beginTransaction();
-//                ft.replace(R.id.content_fragment, fragment);
-//
-//                if (fragment.isVisible()) {
-//                    //ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
-//                    ft.show(fragment);
-//                } else {
-//                    //ft.setCustomAnimations(R.animator.slide_out, R.animator.slide_in);
-//                    ft.hide(fragment);
-//                }
-//                ft.commit();
+                FragmentTransaction ft = fm.beginTransaction();
+                if(moreFragment == null ) {
+                    moreFragment = new MoreFragment();
+                    ft.add(R.id.content_fragment, moreFragment).commit();
+                } else {
+                    ft.remove(moreFragment).commit();
+                    moreFragment = null;
+                }
             }
         });
 
         return view;
     }
 
-    private void showFragment(Fragment fragment) {
-//        FragmentManager fm = getFragmentManager();
-//
-//        Fragment frag = fm.findFragmentById(R.id.prescriptions_fragment);
-//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
-//
-//        frag = fm.findFragmentById(R.id.measurements_fragment);
-//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
-//
-//        frag = fm.findFragmentById(R.id.journal_fragment);
-//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
-//
-//        frag = fm.findFragmentById(R.id.feedback_fragment);
-//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
-//
-//        frag = fm.findFragmentById(R.id.more_fragment);
-//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).hide(frag).commit();
-//
-//        fm.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).show(fragment).commit();
+    private void hideAll() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        if (prescriptionsFragment != null) ft.hide(prescriptionsFragment);
+        if (measurementsFragment != null) ft.hide(measurementsFragment);
+        if (journalFragment != null) ft.hide(journalFragment);
+        if (feedbackFragment != null) ft.hide(feedbackFragment);
+        if (moreFragment != null) {
+            ft.remove(moreFragment);
+            moreFragment = null;
+        }
+        ft.commit();
     }
-
-//    @Override
-//    public void onAttach(Activity activity) {
-//        //myContext = (FragmentActivity) activity;
-//        super.onAttach(activity);
-//    }
 }

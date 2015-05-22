@@ -19,7 +19,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="false"
             android:background="@drawable/tab_background_selector"
-            android:id="@+id/tab_layout_1">
+            android:id="@+id/tab_layout_1"
+            android:tag="prescriptions_tag">
             <ImageView android:id="@+id/prescriptions_imageView_id"
                 android:layout_gravity="center"
                 android:layout_width="25dp"
@@ -49,7 +50,8 @@
             android:id="@+id/tab_layout_2"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_1"
-            android:layout_toEndOf="@+id/tab_layout_1">
+            android:layout_toEndOf="@+id/tab_layout_1"
+            android:tag="measurements_tag">
             <ImageView android:id="@+id/measurements_imageView_id"
                 android:layout_gravity="center"
                 android:layout_width="25dp"
@@ -79,7 +81,8 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_2"
             android:layout_toEndOf="@+id/tab_layout_2"
-            android:id="@+id/tab_layout_3" >
+            android:id="@+id/tab_layout_3"
+            android:tag="journal_tag">
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_gravity="center"
@@ -109,7 +112,8 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_3"
             android:layout_toEndOf="@+id/tab_layout_3"
-            android:id="@+id/tab_layout_4" >
+            android:id="@+id/tab_layout_4"
+            android:tag="feedback_tag">
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_gravity="center"
@@ -139,7 +143,8 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_4"
             android:layout_toEndOf="@+id/tab_layout_4"
-            android:id="@+id/tab_layout_5">
+            android:id="@+id/tab_layout_5"
+            android:tag="more_tag">
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_gravity="center"
