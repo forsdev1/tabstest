@@ -165,10 +165,15 @@ public class PrescriptionsFragment extends Fragment {
         }
     }
 
+    private View tabView = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.prescriptions_content, container, false);
+
+        tabView = getFragmentManager().findFragmentById(R.id.tab_fragment).getView().findViewById(R.id.tab_layout);
+        FragmentHolder.setActualFragment(this);
+        tabView.findViewById(R.id.tab_layout_1).setSelected(true);
 
         Layout1 = (RelativeLayout)view.findViewById(R.id.prl_id_1);
         Layout2 = (RelativeLayout)view.findViewById(R.id.prl_id_2);
@@ -190,8 +195,19 @@ public class PrescriptionsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden) {
+            FragmentHolder.setActualFragment(this);
+            tabView.findViewById(R.id.tab_layout_1).setSelected(true);
+        } else {
+            tabView.findViewById(R.id.tab_layout_1).setSelected(false);
+        }
+    }
+
     public void setupDayLayout(View view) {
-        dailyButton.setOnTouchListener(new View.OnTouchListener(){
+        dailyButton.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -490,10 +506,6 @@ public class PrescriptionsFragment extends Fragment {
     public void doRightClick(View view) {
     }
 
-    public void addPrescriptionItem(View view) {
-
-    }
-
     public int getColorForCurrentProgress(int progressPercentage){
         int rColor = 255;
         int gColor = 0;
@@ -534,17 +546,5 @@ public class PrescriptionsFragment extends Fragment {
 
         String colorHex = "#" + red + green + blue;
         return colorHex;
-    }
-
-
-
-    public void setSelectedTab(View selectedTab) {
-        prescriptionTab.setSelected(false);
-        measurementsTab.setSelected(false);
-        journalTab.setSelected(false);
-        feedbackTab.setSelected(false);
-        moreTab.setSelected(false);
-        selectedTab.setSelected(true);
-        selectedTab.setEnabled(false);
     }
 }

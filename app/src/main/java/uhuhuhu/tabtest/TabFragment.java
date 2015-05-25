@@ -47,18 +47,20 @@ public class TabFragment extends Fragment{
                 if (prescriptionsFragment == null) {
                     hideAll();
                     prescriptionsFragment = new PrescriptionsFragment();
-                    ft.add(R.id.content_fragment, prescriptionsFragment).commit();
-                    prescriptionTab.setSelected(true);
+                    ft.add(R.id.content_fragment, prescriptionsFragment);
+                    if(fm.getBackStackEntryCount() == 0) {
+                        ft.addToBackStack("Prescription");
+                    }
                 } else {
-                    if (prescriptionsFragment.isHidden() || moreFragment != null) {
+                    if (prescriptionsFragment.isHidden() ||
+                            (moreFragment != null && moreFragment.isVisible())) {
                         hideAll();
-                        ft.show(prescriptionsFragment).commit();
-                        prescriptionTab.setSelected(true);
+                        ft.show(prescriptionsFragment);
                     } else {
-                        ft.hide(prescriptionsFragment).commit();
-                        prescriptionTab.setSelected(false);
+                        ft.hide(prescriptionsFragment);
                     }
                 }
+                ft.commit();
             }
         });
         measurementsTab.setOnClickListener(new View.OnClickListener() {
@@ -68,18 +70,20 @@ public class TabFragment extends Fragment{
                 if (measurementsFragment == null) {
                     hideAll();
                     measurementsFragment = new MeasurementsFragment();
-                    ft.add(R.id.content_fragment, measurementsFragment).commit();
-                    measurementsTab.setSelected(true);
+                    ft.add(R.id.content_fragment, measurementsFragment);
+                    if(fm.getBackStackEntryCount() == 0) {
+                        ft.addToBackStack("Measurements");
+                    }
                 } else {
-                    if (measurementsFragment.isHidden() || moreFragment != null) {
+                    if (measurementsFragment.isHidden() ||
+                            (moreFragment != null && moreFragment.isVisible())) {
                         hideAll();
-                        ft.show(measurementsFragment).commit();
-                        measurementsTab.setSelected(true);
+                        ft.show(measurementsFragment);
                     } else {
-                        ft.hide(measurementsFragment).commit();
-                        measurementsTab.setSelected(false);
+                        ft.hide(measurementsFragment);
                     }
                 }
+                ft.commit();
             }
         });
         journalTab.setOnClickListener(new View.OnClickListener() {
@@ -89,18 +93,20 @@ public class TabFragment extends Fragment{
                 if (journalFragment == null) {
                     hideAll();
                     journalFragment = new JournalFragment();
-                    ft.add(R.id.content_fragment, journalFragment).commit();
-                    journalTab.setSelected(true);
+                    ft.add(R.id.content_fragment, journalFragment);
+                    if(fm.getBackStackEntryCount() == 0) {
+                        ft.addToBackStack("Journal");
+                    }
                 } else {
-                    if (journalFragment.isHidden() || moreFragment != null) {
+                    if (journalFragment.isHidden() ||
+                            (moreFragment != null && moreFragment.isVisible())) {
                         hideAll();
-                        ft.show(journalFragment).commit();
-                        journalTab.setSelected(true);
+                        ft.show(journalFragment);
                     } else {
-                        ft.hide(journalFragment).commit();
-                        journalTab.setSelected(false);
+                        ft.hide(journalFragment);
                     }
                 }
+                ft.commit();
             }
         });
         feedbackTab.setOnClickListener(new View.OnClickListener() {
@@ -110,37 +116,31 @@ public class TabFragment extends Fragment{
                 if (feedbackFragment == null) {
                     hideAll();
                     feedbackFragment = new FeedbackFragment();
-                    ft.add(R.id.content_fragment, feedbackFragment).commit();
-                    feedbackTab.setSelected(true);
+                    ft.add(R.id.content_fragment, feedbackFragment);
+                    if(fm.getBackStackEntryCount() == 0) {
+                        ft.addToBackStack("Feedback");
+                    }
                 } else {
-                    if (feedbackFragment.isHidden() || moreFragment != null) {
+                    if (feedbackFragment.isHidden() ||
+                            (moreFragment != null && moreFragment.isVisible())) {
                         hideAll();
-                        ft.show(feedbackFragment).commit();
-                        feedbackTab.setSelected(true);
+                        ft.show(feedbackFragment);
                     } else {
-                        ft.hide(feedbackFragment).commit();
-                        feedbackTab.setSelected(false);
+                        ft.hide(feedbackFragment);
                     }
                 }
+                ft.commit();
             }
         });
         moreTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentTransaction ft = fm.beginTransaction();
-                if(moreFragment == null ) {
-                    prescriptionTab.setSelected(false);
-                    measurementsTab.setSelected(false);
-                    journalTab.setSelected(false);
-                    feedbackTab.setSelected(false);
-
+                if(fm.findFragmentById(R.id.content_fragment) != moreFragment ) {
                     moreFragment = new MoreFragment();
-                    ft.add(R.id.content_fragment, moreFragment).commit();
-                    moreTab.setSelected(true);
+                    ft.add(R.id.content_fragment, moreFragment).addToBackStack(null).commit();
                 } else {
                     ft.remove(moreFragment).commit();
-                    moreTab.setSelected(false);
-                    moreFragment = null;
                 }
             }
         });
@@ -149,21 +149,17 @@ public class TabFragment extends Fragment{
     }
 
     private void hideAll() {
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        if (moreFragment != null) ft.remove(moreFragment);
         if (prescriptionsFragment != null) ft.hide(prescriptionsFragment);
         if (measurementsFragment != null) ft.hide(measurementsFragment);
         if (journalFragment != null) ft.hide(journalFragment);
         if (feedbackFragment != null) ft.hide(feedbackFragment);
-        if (moreFragment != null) {
-            ft.remove(moreFragment);
-            moreFragment = null;
-        }
-
+        ft.commit();
         prescriptionTab.setSelected(false);
         measurementsTab.setSelected(false);
         journalTab.setSelected(false);
         feedbackTab.setSelected(false);
-        moreTab.setSelected(false);
-        ft.commit();
     }
 }

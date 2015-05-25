@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:minHeight="60dp"
-        android:background="#FFFFFFFF">
+        android:background="@drawable/upper_line_gray">
 
         <RelativeLayout
             android:layout_width="wrap_content"

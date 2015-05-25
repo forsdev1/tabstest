@@ -126,11 +126,16 @@ public class MeasurementsFragment extends Fragment {
         }
     }
 
+    private View tabView = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View inflateView = inflater.inflate(R.layout.measurements_tab_content, container, false);
+
+        tabView = getFragmentManager().findFragmentById(R.id.tab_fragment).getView().findViewById(R.id.tab_layout);
+        FragmentHolder.setActualFragment(this);
+        tabView.findViewById(R.id.tab_layout_2).setSelected(true);
 
         ImageButton selectorButton = (ImageButton) inflateView.findViewById(R.id.button_measurement_selector_id);
         Button measurementsAddButton = (Button) inflateView.findViewById(R.id.measurements_add_button);
@@ -526,5 +531,15 @@ public class MeasurementsFragment extends Fragment {
         return colorHex;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden) {
+            FragmentHolder.setActualFragment(this);
+            tabView.findViewById(R.id.tab_layout_2).setSelected(true);
+        } else {
+            tabView.findViewById(R.id.tab_layout_2).setSelected(false);
+        }
+    }
 }
 

@@ -47,11 +47,21 @@ public class FeedbackFragment extends Fragment {
         }
     }
 
+    private View tabView = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.feedback_tab_content, container, false);
+
+
+        tabView = getFragmentManager().findFragmentById(R.id.tab_fragment).getView().findViewById(R.id.tab_layout);
+
+        FragmentHolder.setActualFragment(this);
+        tabView.findViewById(R.id.tab_layout_4).setSelected(true);
+
+        FragmentHolder.setActualFragment(this);
+        tabView.findViewById(R.id.tab_layout_4).setSelected(true);
 
         fListLayout = (LinearLayout) view.findViewById(R.id.feedback_list_layout);
 
@@ -180,6 +190,17 @@ public class FeedbackFragment extends Fragment {
             childLayout.setVisibility(View.VISIBLE);
             childLayout.setAlpha(0.0f);
             childLayout.animate().translationY(0.5f).alpha(1.0f);
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden) {
+            FragmentHolder.setActualFragment(this);
+            tabView.findViewById(R.id.tab_layout_4).setSelected(true);
+        } else {
+            tabView.findViewById(R.id.tab_layout_4).setSelected(false);
         }
     }
 }

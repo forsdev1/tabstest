@@ -80,6 +80,7 @@
     <color name="blue_faded">#232394d0</color>
     <color name="green_faded">#2843d95d</color>
     <color name="white">#FFFFFF</color>
+    <color name="tab_unfocused">#6fff0000</color>
     <color name="tab_selected">#FF0000</color>
     <color name="tab_unselected">#FFFFFF</color>
     <color name="tab_unselected_2">#F5F5F5</color>

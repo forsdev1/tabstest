@@ -22,11 +22,17 @@ public class JournalFragment extends Fragment {
     private ArrayList<JournalItem> journalList = new ArrayList<>();
     private Button addButton = null;
 
+    private View tabView = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.journal_tab_content, container, false);
+
+        tabView = getFragmentManager().findFragmentById(R.id.tab_fragment).getView().findViewById(R.id.tab_layout);
+
+        FragmentHolder.setActualFragment(this);
+        tabView.findViewById(R.id.tab_layout_3).setSelected(true);
 
         addButton = (Button) view.findViewById(R.id.journal_add_button);
         journalListLayout = (LinearLayout) view.findViewById(R.id.journal_list_layout);
@@ -163,6 +169,18 @@ public class JournalFragment extends Fragment {
 
         public void setComment(String comment) {
             this.comment = comment;
+        }
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden) {
+            FragmentHolder.setActualFragment(this);
+            tabView.findViewById(R.id.tab_layout_3).setSelected(true);
+        } else {
+            tabView.findViewById(R.id.tab_layout_3).setSelected(false);
         }
     }
 }

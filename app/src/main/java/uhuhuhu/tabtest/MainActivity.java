@@ -1,5 +1,6 @@
 package uhuhuhu.tabtest;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -11,16 +12,6 @@ import android.widget.RelativeLayout;
 public class MainActivity extends FragmentActivity {
 
     private HomeFragment homeFragment = null;
-    private PrescriptionsFragment prescriptionsFragment = null;
-    private MeasurementsFragment measurementsFragment = null;
-    private JournalFragment journalFragment = null;
-    private FeedbackFragment feedbackFragment = null;
-    private MoreFragment moreFragment = null;
-    private RelativeLayout prescriptionTab = null;
-    private RelativeLayout measurementsTab = null;
-    private RelativeLayout journalTab = null;
-    private RelativeLayout feedbackTab = null;
-    private RelativeLayout moreTab = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,68 +35,6 @@ public class MainActivity extends FragmentActivity {
             homeFragment = new HomeFragment();
         }
         t.add(R.id.content_fragment, homeFragment);
-
-
-//        if (prescriptionsFragment == null) {
-//            prescriptionsFragment = new PrescriptionsFragment();
-//        }
-//        if(!prescriptionsFragment.isAdded()) {
-//           t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .add(R.id.prescriptions_fragment, prescriptionsFragment)
-//                    .hide(fm.findFragmentById(R.id.prescriptions_fragment));
-//        }
-//
-//
-//        if (measurementsFragment == null) {
-//            measurementsFragment = new MeasurementsFragment();
-//        }
-//        if(!measurementsFragment.isAdded()) {
-//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .add(R.id.measurements_fragment, measurementsFragment)
-//                    .hide(fm.findFragmentById(R.id.measurements_fragment));
-//        }
-//
-//
-//        if (journalFragment == null) {
-//            journalFragment = new JournalFragment();
-//        }
-//        if(!journalFragment.isAdded()) {
-//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .add(R.id.journal_fragment, journalFragment)
-//                    .hide(fm.findFragmentById(R.id.journal_fragment));
-//        }
-//
-//
-//        if (feedbackFragment == null) {
-//            feedbackFragment = new FeedbackFragment();
-//        }
-//        if(!feedbackFragment.isAdded()) {
-//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .add(R.id.feedback_fragment, feedbackFragment)
-//                    .hide(fm.findFragmentById(R.id.feedback_fragment));
-//        }
-//
-//
-//        if (moreFragment == null) {
-//            moreFragment = new MoreFragment();
-//        }
-//        if(!moreFragment.isAdded()) {
-//            t.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
-//                    .add(R.id.more_fragment, moreFragment)
-//                    .hide(fm.findFragmentById(R.id.more_fragment));
-//        }
-//
-//        Fragment y = fm.findFragmentById(R.id.more_fragment);
-//        y.startActivity(new Intent(this, MoreActivity.class));
-//        if (moreFragment == null) {
-//            moreFragment = new MoreFragment();
-//        }
-//        if(!moreFragment.isAdded()) {
-//                    t.add(R.id.more_fragment, moreFragment)
-//                    .hide(fm.findFragmentById(R.id.more_fragment))
-//                            .show(fm.findFragmentById(R.id.more_fragment));
-//        }
-
         t.commit();
     }
 
@@ -128,47 +57,17 @@ public class MainActivity extends FragmentActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
+        FragmentManager fm = getFragmentManager();
+        Fragment currentFragment = fm.findFragmentById(R.id.content_fragment);
 
+        if (currentFragment instanceof MoreFragment) {
+            fm.beginTransaction().remove(currentFragment).commit();
+            fm.popBackStack();
+        } else if (currentFragment instanceof HomeFragment) {
+            finish();
+        } else {
+            fm.beginTransaction().hide(FragmentHolder.getActualFragment()).commit();
+        }
     }
-
-//    private void addTab(final TabHost tabHost,
-//                        final String tabName, final int tabLayout, final Class activity) {
-//
-//        //Create tab content
-//        View view = LayoutInflater.from(tabHost.getContext()).inflate(tabLayout, null);
-//        //If no tabs created yet, create faketab with home activity content and hide it from tabwidget.
-//        TabHost.TabSpec tab = tabHost.newTabSpec(tabName);
-//        if(tabHost.getTabWidget().getChildCount() == 0) {
-//            view.setVisibility(View.GONE);
-//        }
-//        tab.setIndicator(view);
-//        //Set tab content
-//        Intent intent = new Intent(this, activity);
-//        tab.setContent(intent);
-//        //Add tab
-//        tabHost.addTab(tab);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }
