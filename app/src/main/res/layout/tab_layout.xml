@@ -11,16 +11,18 @@
         android:layout_weight="1"
         android:layout_gravity="center"
         android:gravity="center"
-        android:minHeight="60dp">
+        android:minHeight="60dp"
+        android:background="#FFFFFFFF">
 
         <RelativeLayout
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="false"
             android:background="@drawable/tab_background_selector"
             android:id="@+id/tab_layout_1"
-            android:tag="prescriptions_tag">
+            android:tag="prescriptions_tag"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:minWidth="75dp">
             <ImageView android:id="@+id/prescriptions_imageView_id"
                 android:layout_gravity="center"
                 android:layout_width="25dp"
@@ -40,18 +42,21 @@
                 android:text="Prescriptions"
                 android:textColor="@drawable/tab_text_selector"
                 android:layout_below="@+id/prescriptions_imageView_id"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/tab_background_selector"
+            android:background="@drawable/tab_background_selector_2"
             android:id="@+id/tab_layout_2"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_1"
             android:layout_toEndOf="@+id/tab_layout_1"
-            android:tag="measurements_tag">
+            android:tag="measurements_tag"
+            android:minWidth="75dp">
             <ImageView android:id="@+id/measurements_imageView_id"
                 android:layout_gravity="center"
                 android:layout_width="25dp"
@@ -71,18 +76,21 @@
                 android:text="Measurements"
                 android:textColor="@drawable/tab_text_selector"
                 android:layout_below="@+id/measurements_imageView_id"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/tab_background_selector"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_2"
             android:layout_toEndOf="@+id/tab_layout_2"
             android:id="@+id/tab_layout_3"
-            android:tag="journal_tag">
+            android:tag="journal_tag"
+            android:minWidth="75dp">
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_gravity="center"
@@ -102,18 +110,21 @@
                 android:text="Journal"
                 android:textColor="@drawable/tab_text_selector"
                 android:layout_below="@+id/imageView5"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/tab_background_selector"
+            android:background="@drawable/tab_background_selector_2"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_3"
             android:layout_toEndOf="@+id/tab_layout_3"
             android:id="@+id/tab_layout_4"
-            android:tag="feedback_tag">
+            android:tag="feedback_tag"
+            android:minWidth="75dp">
             <ImageView
                 android:id="@+id/imageView6"
                 android:layout_gravity="center"
@@ -133,18 +144,22 @@
                 android:text="Feedback"
                 android:textColor="@drawable/tab_text_selector"
                 android:layout_below="@+id/imageView6"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/tab_background_selector"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/tab_layout_4"
-            android:layout_toEndOf="@+id/tab_layout_4"
             android:id="@+id/tab_layout_5"
-            android:tag="more_tag">
+            android:tag="more_tag"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:minWidth="75dp">
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_gravity="center"
@@ -164,7 +179,9 @@
                 android:text="More"
                 android:textColor="@drawable/tab_text_selector"
                 android:layout_below="@+id/imageView7"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

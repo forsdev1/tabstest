@@ -11,41 +11,6 @@
         android:layout_height="match_parent"
         tools:layout="@layout/home_content"
         android:layout_above="@+id/tab_fragment" />
-    <!--<fragment android:name="uhuhuhu.tabtest.PrescriptionsFragment"-->
-        <!--android:id="@+id/prescriptions_fragment"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/prescriptions_content"-->
-        <!--android:layout_above="@+id/tab_fragment" />-->
-    <!--<fragment android:name="uhuhuhu.tabtest.MeasurementsFragment"-->
-        <!--android:id="@+id/measurements_fragment"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/measurements_tab_content"-->
-        <!--android:layout_above="@+id/tab_fragment" />-->
-    <!--<fragment android:name="uhuhuhu.tabtest.JournalFragment"-->
-        <!--android:id="@+id/journal_fragment"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/journal_tab_content"-->
-        <!--android:layout_above="@+id/tab_fragment" />-->
-    <!--<fragment android:name="uhuhuhu.tabtest.FeedbackFragment"-->
-        <!--android:id="@+id/feedback_fragment"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout="@layout/feedback_tab_content"-->
-        <!--android:layout_above="@+id/tab_fragment" />-->
-    <!--<fragment android:name="uhuhuhu.tabtest.MoreFragment"-->
-        <!--android:id="@+id/more_fragment"-->
-        <!--android:layout_weight="1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--tools:layout="@layout/more_tab_content"-->
-        <!--android:layout_above="@+id/tab_fragment" />-->
 
     <fragment android:name="uhuhuhu.tabtest.TabFragment"
         android:id="@+id/tab_fragment"
@@ -54,6 +19,7 @@
         tools:layout="@layout/tab_layout"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
