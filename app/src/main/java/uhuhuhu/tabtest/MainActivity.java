@@ -5,9 +5,12 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import java.io.IOException;
 
 public class MainActivity extends FragmentActivity {
 
@@ -58,6 +61,7 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
+
         FragmentManager fm = getFragmentManager();
         Fragment currentFragment = fm.findFragmentById(R.id.content_fragment);
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.app.FragmentManager;
@@ -12,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import java.io.IOException;
 
 public class TabFragment extends Fragment{
     Fragment prescriptionsFragment = null;
@@ -25,6 +28,46 @@ public class TabFragment extends Fragment{
     private RelativeLayout journalTab = null;
     private RelativeLayout feedbackTab = null;
     private RelativeLayout moreTab = null;
+
+
+    private String mainPage = "http://iapp.vyatka.mosfile.ru/";
+    private String xmlSelector = "http://iapp.vyatka.mosfile.ru/index/setxml";
+    private String jsonSelector = "http://iapp.vyatka.mosfile.ru/index/setjson";
+
+    //    POST:
+//    p_username=ivanov_ii
+//    p_password=12345
+    private String loginPage = "http://iapp.vyatka.mosfile.ru/index/login";
+    private String logoutPage = "http://iapp.vyatka.mosfile.ru/index/logout";
+
+    private String profile = "http://iapp.vyatka.mosfile.ru/profile";
+    private String classifiers = "http://iapp.vyatka.mosfile.ru/index/classifiers";
+    private String contacts = "http://iapp.vyatka.mosfile.ru/profile/contacts";
+    private String prescriptions = "http://iapp.vyatka.mosfile.ru/prscr";
+
+    private TestAsync testAsync = null;
+    private class TestAsync extends AsyncTask<Void, Void, Boolean> {
+
+        private String url = "";
+        private String data = "";
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            try {
+                String output = ConMgr.connect(url, data);
+                Log.d("Output:", output);
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.d("Output:", e.getMessage());
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            testAsync = null;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +86,13 @@ public class TabFragment extends Fragment{
         prescriptionTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(testAsync != null) {
+                    return;
+                }
+                testAsync = new TestAsync();
+                testAsync.url = loginPage;
+                testAsync.data = "p_username=ivanov_ii&p_password=12345";
+                testAsync.execute();
                 FragmentTransaction ft = fm.beginTransaction();
                 if (prescriptionsFragment == null) {
                     hideAll();
